@@ -28,6 +28,7 @@ public class Formule {
 
     @NotBlank
     @Length(min = 12, max = 1000)
+    @Column(columnDefinition = "LONGTEXT")
     private String Description;
     @NotNull
     private BigDecimal prix;

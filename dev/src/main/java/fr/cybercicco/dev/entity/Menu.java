@@ -26,6 +26,7 @@ public class Menu {
 
     @NotBlank
     @Length(min = 12, max = 2000)
+    @Column(columnDefinition = "LONGTEXT")
     private String description;
 
     @OneToMany(mappedBy = "menu")

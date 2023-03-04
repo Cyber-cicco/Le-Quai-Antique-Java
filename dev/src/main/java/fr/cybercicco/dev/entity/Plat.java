@@ -26,7 +26,8 @@ public class Plat {
     private String nomPlat;
 
     @NotBlank
-    @Length(min = 12, max = 255)
+    @Length(min = 12, max = 2000)
+    @Column(columnDefinition = "LONGTEXT")
     private String description;
 
     @NotBlank

@@ -28,6 +28,10 @@ public class Restaurant {
             inverseJoinColumns = @JoinColumn(name = "horaire_id", referencedColumnName = "id")
     )
     private List<Horaire> horaires;
+    @NotBlank
+    @Length(min = 12, max = 2000)
+    @Column(columnDefinition = "LONGTEXT")
+    private String description;
 
     @OneToMany(mappedBy = "restaurant")
     private List<Place> tables;
