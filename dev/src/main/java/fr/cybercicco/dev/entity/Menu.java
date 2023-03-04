@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -21,8 +23,11 @@ public class Menu {
     @Length(min = 2, max = 255)
     @Column(unique = true)
     private String nomMenu;
+
     @NotBlank
     @Length(min = 12, max = 2000)
     private String description;
 
+    @OneToMany(mappedBy = "menu")
+    private List<Formule> formules;
 }

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,5 +31,15 @@ public class Formule {
     private String Description;
     @NotNull
     private BigDecimal prix;
+    @ManyToMany
+    @JoinTable(name="composition_formule",
+            joinColumns = @JoinColumn(name = "formule_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "plat_id", referencedColumnName = "id")
+    )
+    private List<Plat> plats;
+
+    @ManyToOne
+    @JoinColumn(name = "menu_id")
+    private Menu menu;
 
 }

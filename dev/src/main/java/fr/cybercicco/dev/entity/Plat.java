@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -30,4 +32,17 @@ public class Plat {
     @NotBlank
     @Pattern(regexp = "(entree)|(plat)|(dessert)")
     private String typePlat;
+
+    @ManyToMany
+    @JoinTable(name="plat_allergene",
+            joinColumns = @JoinColumn(name = "plat_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "allergene_id", referencedColumnName = "id")
+    )
+    private List<Allergene> allergenes;
+    @ManyToMany
+    @JoinTable(name="composition_formule",
+            joinColumns = @JoinColumn(name = "plat_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "formule_id", referencedColumnName = "id")
+    )
+    private List<Formule> formules;
 }
