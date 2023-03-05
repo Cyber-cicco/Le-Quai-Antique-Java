@@ -4,16 +4,26 @@
     <div class="title">Profil</div>
   </section>
   <section class="profilSection">
-    <ng-form class="form">
+    <ng-form [formGroup]="formConnexion" class="form">
       <div class="title">Se connecter</div>
       <div class="input-container ic1">
         <label for="name">Votre nom :</label>
-        <input id="name" class="input" type="text" placeholder=" " />
+        <input formControlName="nom" id="name" class="input" type="text" placeholder=" " />
+        <div class="cut"></div>
+      </div>
+      <div class="input-container ic1">
+        <label for="first">Votre prénom :</label>
+        <input formControlName="prenom" id="first" class="input" type="text" placeholder=" " />
+        <div class="cut"></div>
+      </div>
+      <div class="input-container ic1">
+        <label for="name">Votre mail :</label>
+        <input formControlName="email" id="mail" class="input" type="text" placeholder=" " />
         <div class="cut"></div>
       </div>
       <div class="input-container ic1">
         <label for="mdp">Votre mot de passe :</label>
-        <input id="mdp" class="input" type="password" placeholder=" " />
+        <input formControlName="password" id="mdp" class="input" type="password" placeholder=" " />
         <div class="cut"></div>
       </div>
       <div class="btn-container icl">
