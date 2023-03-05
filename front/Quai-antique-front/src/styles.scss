@@ -1,1 +1,476 @@
 /* You can add global styles to this file, and also import other style files */
+//fonts
+@font-face {
+  font-family: montserat;
+  src: url("assets/fonts/Montserrat-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: coromorant;
+  src: url("assets/fonts/CormorantGaramond-Medium.ttf");
+}
+
+@mixin button($btnColor, $btnPadding, $btnRadius, $btnMargin){
+  background-color: $btnColor;
+  border-radius: $btnRadius;
+  padding: $btnPadding;
+  margin: $btnMargin;
+}
+$btnColor : black;
+$btnBasicHeight : 50px;
+$navBarSize : 65px;
+
+$montserat : montserat,
+system-ui,
+-apple-system,
+BlinkMacSystemFont,
+'Segoe UI',
+Roboto,
+Oxygen,
+Ubuntu,
+Cantarell,
+'Open Sans',
+'Helvetica Neue',
+sans-serif;
+
+$coromorant : coromorant,
+system-ui,
+-apple-system,
+BlinkMacSystemFont,
+'Segoe UI',
+Roboto,
+Oxygen,
+Ubuntu,
+Cantarell,
+'Open Sans',
+'Helvetica Neue',
+sans-serif;
+
+//potentially used colors
+$navBar : #102837;
+$section2 : #174345;
+$section1 : #CCA466;
+$whiteBackground : #f5f8eb;
+$btnColor2 : black;
+
+//sizes
+$inputBasicHeight : 75px;
+$inputFontSize : 25px;
+
+
+
+html,
+body {
+  font-family: $montserat;
+  color: $navBar;
+  margin: 0%;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 15px;
+  @media screen and (max-width : 1020px) {
+    font-size: 12px;
+  }
+  @media screen and (max-width : 400px) {
+    font-size: 10px;
+  }
+}
+
+
+//mixin for the background of every section
+@mixin mainSection($color1, $color2, $flexDirection, $gradientDirection, $percentGradient) {
+  display: flex;
+  flex-direction: $flexDirection;
+  background: linear-gradient(to $gradientDirection, $color1 $percentGradient, $color2);
+
+}
+
+@mixin reservSection() {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0);
+  justify-content: center;
+}
+
+@mixin title($fontSize) {
+  color: $whiteBackground;
+  font-family: $coromorant;
+  font-size: $fontSize;
+  padding: 15px;
+  width: 100%;
+  text-align: center;
+  @media screen and (max-width : 1000px) {
+    font-size: calc($fontSize / 1.2);
+  }
+}
+
+@mixin inputContainer($height) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: $height;
+  margin-top: 40px;
+  @media screen and (max-width : 1000px) {
+    margin-top: 40px;
+    height: $height/2;
+    font-size: 1em;
+    width: 92%;
+  }
+}
+
+.background {
+  background-image: url("assets/images/leQuaiAntique.png");
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+
+  section.headSection {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: $section2;
+    justify-content: center;
+
+    .date {
+      z-index: 2;
+      margin: 10px;
+    }
+  }
+
+  section.menuSectionOne {
+    @include mainSection($section1 , $whiteBackground, row, left, 45%);
+    @media screen and (max-width : 1000px) {
+      flex-direction: column;;
+      width: 100%;
+      align-items: center;
+    }
+  }
+
+  section.menuSectionTwo {
+    @include mainSection($section1 , $whiteBackground, row-reverse, right, 45%);
+    @media screen and (max-width : 1000px) {
+      flex-direction: column;
+      width: 100%;
+      align-items: center;
+    }
+  }
+
+  section.reservSection {
+    @include reservSection();
+
+    .slogan {
+      padding: 30px
+    }
+
+    .btnRes {
+      margin: 5px;
+      height: 50px;
+      text-align: center;
+      font-size: 1em;
+      display: flex;
+      justify-content: center;
+      @media screen and (max-width : 1000px) {
+        height: 120px;
+        margin:20px;
+        font-size: 2em;
+        padding: 50px;
+      }
+    }
+  }
+
+  section.profilSection {
+    @include reservSection();
+
+    .title {
+      @include title(3rem);
+
+    }
+    @media screen and (max-width : 1000px) {
+      .title{
+        @include title(5.5rem)
+      }
+    }
+  }
+}
+
+.form {
+  width: 420px;
+  @media screen and (max-width : 1000px) {
+    width: 90%;
+    margin-top: 50px;
+    margin-bottom: 75px+50px;
+    font-size: 1.3rem;
+  }
+
+  height: 100%;
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: $section2;
+  border-radius: 20px;
+  padding: 20px;
+  align-items: center;
+  color: white;
+  margin-bottom: 20px;
+}
+
+a{
+  color :inherit;
+  text-decoration: inherit;
+}
+
+.subtitle {
+  color: #eee;
+  font-family: sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+label {
+  color: white;
+  padding-bottom: 10px;
+  @media screen and (max-width : 1000px) {
+    padding-bottom: 10px;
+    font-size: 1.2em;
+  }
+}
+
+.input-container {
+  @include inputContainer($inputBasicHeight);
+}
+
+.input-container-textarea {
+  @include inputContainer($inputBasicHeight*3)
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 55%;
+  min-width: 200px;
+  @media screen and (max-width : 1000px) {
+    height: 100px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+  }
+}
+
+.resContainer {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  @media screen and (max-width : 1000px) {
+    width: 90%;
+    margin-top: 100px;
+    margin-bottom: 50px;
+  }
+
+  .btnContainer {
+    display: flex;
+    min-width: 200px;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+.input {
+  display: flex;
+  background-color: lighten($color: $section2, $amount: 10);
+  border-radius: 12px;
+  border: 0;
+  height: 75px;
+  box-sizing: border-box;
+  color: #eee;
+  font-size: $inputFontSize;
+  height: 100%;
+  outline: 0;
+  padding: 4px 20px 0;
+  width: 100%;
+  @media screen and (max-width : 1000px) {
+    font-size: $inputFontSize*0.75;
+    padding: 12px 10px 12px;
+  }
+}
+
+.input-textarea {
+  display: flex;
+  background-color: lighten($color: $section2, $amount: 10);
+  border-radius: 12px;
+  border: 0;
+  height: 100%;
+  box-sizing: border-box;
+  color: #eee;
+  font-size: 18px;
+  height: 100%;
+  outline: 0;
+  padding: 4px 20px 0;
+  width: 100%;
+}
+
+
+
+.resButtons {
+  display: flex;
+  flex-direction: row;
+  max-width: 50%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+a.link {
+  color: $section1;
+}
+
+
+.title {
+  @include title(5.5rem);
+}
+
+.transition {
+  height: 150px;
+  opacity: 0;
+}
+
+div.description {
+  display: flex;
+  width: 50%;
+  height: 100%;
+  font-size: 1.5rem;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding-right: 50px;
+  text-align: center;
+  @media screen and (max-width : 1000px) {
+    width: 100%;
+    padding: 0;
+  }
+
+  .btnCenter {
+    display: flex;
+    justify-content: center;
+  }
+
+  .openHours {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 55%;
+
+    .tabSquare {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-bottom: 15px;
+
+      .weekDay {
+        display: flex;
+        width: 50%;
+        font-family: $coromorant;
+        font-size: 1.3em;
+      }
+    }
+  }
+}
+
+.slogan {
+  font-family: $coromorant;
+  font-size: 3.3rem;
+  font-weight: lighter;
+  text-align: center;
+}
+
+
+button {
+  display: flex;
+  height: $btnBasicHeight;
+  font-size: 1.2em;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+  color: $whiteBackground;
+  border-style: none;
+  cursor: pointer;
+  border-color: $whiteBackground;
+  @include button($btnColor,15px ,15px ,30px);
+}
+
+.profile{
+  @include button($whiteBackground, 15px, 50%, 0);
+}
+
+.btnProfile{
+  @include button(darken($section2, 7), 15px, 15px, 30px);
+  @media screen and (max-width : 1000px) {
+    @include button(darken($section2, 7),15px ,15px ,10px )
+  }
+}
+
+div.Carousel {
+  display: flex;
+  width: 50%;
+  @media screen and (max-width : 1000px) {
+    width: 100%;
+  }
+
+  //gonna be filled with the carousel animation
+}
+div.photoHandler {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  img {
+    max-width: 80%;
+    max-height: 550px;
+  }
+}
+
+.link-container{
+  @media screen and (max-width : 1000px) {
+    font-size: 1.2em;
+    margin-top: 0px;
+    margin-bottom: 30px;
+  }
+}
+
+footer{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  z-index: 5;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  height: 25px;
+  background-color: black;
+  color : white;
+  font-size: 1rem;
+  align-items: center;
+  @media screen and (max-width : 1000px) {
+    height: 25px*3.4;
+    font-size: 1.3em;
+  }
+}
+.navBarBuffer{
+  display: flex;
+  height: $navBarSize;
+  @media screen and (max-width : 1000px) {
+    height: $navBarSize*1.5;
+  }
+}

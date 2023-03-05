@@ -1,0 +1,32 @@
+@import "./src/styles.scss";
+
+$navBar : #102837;
+$section2 : #174345;
+$section1 : #CCA466;
+$whiteBackground : #f5f8eb;
+$btnColor2 : black;
+
+//sizes
+$inputBasicHeight : 75px;
+$inputFontSize : 25px;
+
+.form {
+  width: 420px;
+  @media screen and (max-width : 1000px) {
+    width: 90%;
+    margin-top: 10px;
+    margin-bottom: 75px;
+    font-size: 1.3rem;
+  }
+
+  height: 100%;
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: $section2;
+  border-radius: 20px;
+  padding: 20px;
+  align-items: center;
+  color: white;
+  margin-bottom: 20px;
+}

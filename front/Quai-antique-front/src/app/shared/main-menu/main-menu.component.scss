@@ -1,0 +1,64 @@
+$navBarSize : 65px;
+nav.navBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: black;
+  color: white;
+  z-index: 1;
+  height: $navBarSize;
+  @media screen and (max-width : 1000px) {
+    height: $navBarSize*1.5;
+  }
+  .title {
+    font-size: 3em;
+    display: flex;
+    width: 33%;
+    margin: 15px;
+    @media screen and (max-width : 1000px) {
+      width: 75%;
+      font-size: 3em;
+    }
+  }
+
+  li {
+    font-size: 1.75em;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 67%;
+    margin: 15px;
+    @media screen and (max-width : 1000px) {
+      width: 25%;
+      display: none;
+    }
+  }
+  .hamb{
+    display: none;
+    width: 25%;
+    width: $navBarSize*2 - 20;
+    height: $navBarSize*2 - 20;
+    @media screen and (max-width : 1000px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .hambline{
+      width: 80%;
+      height: 10px;
+      margin: 7px;
+      margin-right: 50px;
+      background-color: white;
+    }
+  }
+}
+
+
+
