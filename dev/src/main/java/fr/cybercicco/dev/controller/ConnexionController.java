@@ -3,12 +3,17 @@ package fr.cybercicco.dev.controller;
 import fr.cybercicco.dev.controller.message.AuthenticationRequest;
 import fr.cybercicco.dev.controller.message.AuthenticationResponse;
 import fr.cybercicco.dev.controller.message.RegisterRequest;
+import fr.cybercicco.dev.service.AuthenticationService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("connexion")
+@RequiredArgsConstructor
 public class ConnexionController {
+
+    private final AuthenticationService authenticationService;
 
     @GetMapping
     public ResponseEntity<?> getSession(){
@@ -17,12 +22,12 @@ public class ConnexionController {
 
     @PostMapping("register")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request){
-        return null;
+        return ResponseEntity.ok(authenticationService.register(request));
     }
 
     @PostMapping("authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request){
-        return null;
+        return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 
 }
