@@ -29,7 +29,6 @@ public class ConnexionController {
 
     @PostMapping("authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request){
-        log.info("post received");
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 

@@ -34,7 +34,7 @@ public class AuthenticationService {
                 .nom(request.getNom())
                 .mdp(passwordEncoder.encode(request.getPassword()))
                 .email(request.getEmail())
-                .isAdmin(false)
+                .isAdmin(true)
                 .allergenes(new ArrayList<>(0))
                 .build();
         utilisateurRepository.save(user);

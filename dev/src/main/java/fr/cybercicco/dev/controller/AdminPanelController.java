@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("admin")
+@RequestMapping("/admin/")
 public class AdminPanelController {
 
-    @GetMapping
+    @GetMapping("dashboard")
     public ResponseEntity<?> getAdminDashboard(){
         return ResponseEntity.ok("tu es authentifié admin");
     }
