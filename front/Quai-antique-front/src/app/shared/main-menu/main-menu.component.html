@@ -6,9 +6,8 @@
     <ul><a routerLink="/plat" routerLinkActive="active">Carte</a></ul>
     <ul><a routerLink="/contact" routerLinkActive="active">Contact</a></ul>
     <ul><a routerLink="/reserver" routerLinkActive="active">Réserver</a></ul>
-    <ul><button class="profile"><img src="assets/images/icons8-person-24.png"
-                                     alt="icon made by https://icons8.com/icon/86320/person"
-                                     routerLink="/profil/creation" routerLinkActive="active"></button></ul>
+    <ul><button class="profile" (click)="showProfileMenu()"><img src="assets/images/icons8-person-24.png"
+                                     alt="icon made by https://icons8.com/icon/86320/person"></button></ul>
   </li>
   <div (click)="showSubMenu()" class="hamb">
     <div class="hambline"></div>
@@ -16,11 +15,18 @@
     <div class="hambline"></div>
   </div>
 </nav>
-<li class="hidden-menu-phone" [hidden]="menuHidden">
-  <ul><a routerLink="/accueil" routerLinkActive="active">Accueil</a></ul>
-  <ul><a routerLink="/plat" routerLinkActive="active">Carte</a></ul>
-  <ul><a routerLink="/contact" routerLinkActive="active">Contact</a></ul>
-  <ul><a routerLink="/reserver" routerLinkActive="active">Réserver</a></ul>
-  <ul *ngIf="isConnected" ><a routerLink="/infos" routerLinkActive="active">Mon compte</a></ul>
-  <ul *ngIf="!isConnected"><a routerLink="/profil/connexion" routerLinkActive="active">Me connecter</a></ul>
+<li class="hidden-menu-phone" [hidden]="menuPhoneHidden">
+  <ul><a (click)="hideMenus()" routerLink="/accueil" routerLinkActive="active">Accueil</a></ul>
+  <ul><a (click)="hideMenus()" routerLink="/plat" routerLinkActive="active">Carte</a></ul>
+  <ul><a (click)="hideMenus()" routerLink="/contact" routerLinkActive="active">Contact</a></ul>
+  <ul><a (click)="hideMenus()" routerLink="/reserver" routerLinkActive="active">Réserver</a></ul>
+  <ul *ngIf="isConnected" ><a (click)="hideMenus()" routerLink="/infos" routerLinkActive="active">Mon compte</a></ul>
+  <ul *ngIf="isConnected" ><div (click)="disconnect()">Me déconnecter</div></ul>
+  <ul *ngIf="!isConnected"><a (click)="hideMenus()" routerLink="/profil/connexion" routerLinkActive="active">Me connecter</a></ul>
+</li>
+
+<li class="hidden-menu-phone" [hidden]="menuProfilHidden">
+  <ul *ngIf="isConnected" ><a  (click)="hideMenus()" routerLink="/infos" routerLinkActive="active">Mon compte</a></ul>
+  <ul *ngIf="isConnected" ><a (click)="disconnect()" class="disconnect">Me déconnecter</a></ul>
+  <ul *ngIf="!isConnected"><a (click)="hideMenus()" routerLink="/profil/connexion" routerLinkActive="active">Me connecter</a></ul>
 </li>

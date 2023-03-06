@@ -53,6 +53,7 @@ export class CreationCompteComponent {
       this.userServ.postToRegisterAPI(this.regRequest).subscribe({
         next:(value)=>{
           localStorage.setItem("token", value.token);
+          this.userServ.getIsConnectedSubject().next(true);
           this.router.navigate(['/profil/infos'])
         },
         error:()=>{

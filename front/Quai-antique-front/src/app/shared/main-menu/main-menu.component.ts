@@ -8,24 +8,51 @@ import {Router} from "@angular/router";
   styleUrls: ['./main-menu.component.scss']
 })
 export class MainMenuComponent {
-  menuHidden= true;
+  menuPhoneHidden= true;
   isConnected = false;
+  menuProfilHidden = true;
 
   constructor(private userSrv:UserService, private router:Router) {
     this.userSrv.getIsConnectedSubjectAsObservable().subscribe(value =>{
+      console.log(value);
       this.isConnected = value
-      console.log(this.isConnected);
     });
+    this.checkConnexion();
   }
 
   showSubMenu() {
-    this.menuHidden = !this.menuHidden;
+    this.menuPhoneHidden = !this.menuPhoneHidden;
     this.checkConnexion();
   }
   checkConnexion(){
     let token = localStorage.getItem('token');
     if(token){
-      this.userSrv.checkConnexion(token).subscribe();
+      this.userSrv.checkConnexion(token).subscribe({
+        next:()=>{
+          this.userSrv.getIsConnectedSubject().next(true);
+        },
+        error:()=>{
+          this.userSrv.getIsConnectedSubject().next(false);
+        }
+      });
+    } else {
+      this.userSrv.getIsConnectedSubject().next(false);
     }
+  }
+
+  disconnect() {
+    localStorage.clear();
+    this.userSrv.getIsConnectedSubject().next(false);
+    this.hideMenus();
+    this.router.navigate(['/accueil']);
+  }
+
+  showProfileMenu() {
+    this.menuProfilHidden = !this.menuProfilHidden;
+  }
+
+  hideMenus() {
+    this.menuProfilHidden = true;
+    this.menuPhoneHidden = true;
   }
 }

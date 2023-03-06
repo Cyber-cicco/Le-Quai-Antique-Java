@@ -49,6 +49,7 @@ export class ConnexionComponent {
       this.userServ.postToConnexionAPI(this.authReq).subscribe({
         next:(value)=>{
           localStorage.setItem("token", value.token);
+          this.userServ.getIsConnectedSubject().next(true);
           this.router.navigate(['/profil/infos'])
         },
         error:()=>{

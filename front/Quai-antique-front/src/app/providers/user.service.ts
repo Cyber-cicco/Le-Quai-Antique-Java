@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AuthenticationRequest} from "../models/authentication-request";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {AuthenticationResponse} from "../models/authentication-response";
 import {Subject} from "rxjs";
 
@@ -16,6 +16,7 @@ export class UserService {
   private URL_CHECK_CONNEXION = "http://localhost:8080/connexion/isconnected";
 
   private isConnectedSubject:Subject<boolean> = new Subject<boolean>();
+  isConnected = false;
   constructor(private http:HttpClient) {}
 
   postToConnexionAPI(authReq: Partial<AuthenticationRequest>) {
@@ -35,7 +36,7 @@ export class UserService {
   }
 
   checkConnexion(token:string){
-    return this.http.post<AuthenticationResponse>("http://localhost:8080/connexion/isconnected", {}, {headers:{
+    return this.http.post<AuthenticationResponse>(this.URL_CHECK_CONNEXION, {}, {headers:{
       "Authorization": "Bearer "+token,
       "Content-type": "text/plain"}});
   }
