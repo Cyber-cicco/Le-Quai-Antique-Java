@@ -7,6 +7,7 @@ import {FormsModule} from "@angular/forms";
 import {SharedModule} from "./shared/shared.module";
 import {PagesModule} from "./pages/pages.module";
 
+
 @NgModule({
   declarations: [
     AppComponent,

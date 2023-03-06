@@ -434,9 +434,15 @@ button {
   }
 }
 
-div.Carousel {
+div.carousel {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
   width: 50%;
+  img{
+    min-width: 250px;
+  }
   @media screen and (max-width : 1000px) {
     width: 100%;
   }
@@ -493,6 +499,10 @@ footer{
   color: yellow;
   margin-bottom: 5px;
 }
-
+.btn-carousel{
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';

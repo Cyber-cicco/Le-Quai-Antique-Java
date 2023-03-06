@@ -3,11 +3,24 @@
   <section class="headSection">
     <div class="title">Bienvenue au Quai Antique!</div>
   </section>
+  <c-carousel [interval]="0">
+    <c-carousel-inner>
+      <c-carousel-item *ngFor="let slide of plats">
+        <img
+          [src]="URL_API + '/photos/' + slide.photo+'.png'"
+          alt="{{slide.description}}"
+          class="d-block w-100"
+          loading="lazy"
+        />
+      </c-carousel-item>
+    </c-carousel-inner>
+    <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
+    <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
+  </c-carousel>
+
   <section class="menuSectionOne">
-    <div class="Carousel">
-      <div class="photoHandler">
-        <img src="{{URL_API + '/photos/plat1.png'}}" alt="savoureux">
-      </div>
+
+    <div class="carousel">
     </div>
     <div class="description">
       <h1 class="slogan">Les recettes de grand mère avec des ingrédients 100% locaux!</h1>

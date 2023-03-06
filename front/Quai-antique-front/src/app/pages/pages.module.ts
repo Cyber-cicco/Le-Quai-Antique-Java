@@ -7,6 +7,8 @@ import { InfosComponent } from './infos/infos.component';
 import { CreationCompteComponent } from './creation-compte/creation-compte.component';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import { AccueilComponent } from './accueil/accueil.component';
+import {CarouselModule} from "@coreui/angular";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 
@@ -17,13 +19,15 @@ import { AccueilComponent } from './accueil/accueil.component';
     CreationCompteComponent,
     AccueilComponent
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    RouterLink,
-    RouterLinkActive,
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        RouterLink,
+        RouterLinkActive,
+        CarouselModule,
+        BrowserAnimationsModule
+    ]
 })
 export class PagesModule { }
