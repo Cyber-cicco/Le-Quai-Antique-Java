@@ -37,7 +37,6 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         }
         token = authHeader.substring(7);
         email = jwtService.extractEmail(token);
-        log.info("jui dans le bendo");
         if(email != null && SecurityContextHolder.getContext().getAuthentication() == null){
             UserDetails utilisateur = this.userDetailsService.loadUserByUsername(email);
             if(jwtService.isTokenValid(token, utilisateur)){
@@ -46,7 +45,6 @@ public class AuthenticationFilter extends OncePerRequestFilter {
                         null,
                         utilisateur.getAuthorities()
                 );
-                log.info("matudi charo");
                 authenticationToken.setDetails(
                         new WebAuthenticationDetailsSource().buildDetails(request)
                 );

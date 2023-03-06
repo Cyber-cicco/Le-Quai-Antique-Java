@@ -5,6 +5,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { InfosComponent } from './infos/infos.component';
 import { CreationCompteComponent } from './creation-compte/creation-compte.component';
+import {RouterLink, RouterLinkActive} from "@angular/router";
 
 
 
@@ -18,7 +19,9 @@ import { CreationCompteComponent } from './creation-compte/creation-compte.compo
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterLink,
+    RouterLinkActive
   ]
 })
 export class PagesModule { }
