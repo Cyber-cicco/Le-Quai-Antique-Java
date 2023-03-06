@@ -67,7 +67,7 @@ nav.navBar {
   list-style: none;
   color: white;
   background-color: black;
-  position: absolute;
+  position: fixed;
   top: $navBarSize;
   @media screen and (max-width : 1000px) {
     top: $navBarSize*1.5;

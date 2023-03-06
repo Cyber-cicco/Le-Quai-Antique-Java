@@ -82,6 +82,7 @@ body {
 //mixin for the background of every section
 @mixin mainSection($color1, $color2, $flexDirection, $gradientDirection, $percentGradient) {
   display: flex;
+  padding-top: 40px;
   flex-direction: $flexDirection;
   background: linear-gradient(to $gradientDirection, $color1 $percentGradient, $color2);
 
@@ -112,11 +113,11 @@ body {
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  height: $height;
+  height: auto;
   margin-top: 40px;
   @media screen and (max-width : 1000px) {
     margin-top: 40px;
-    height: $height;
+    height: auto;
     font-size: 1em;
     width: 92%;
   }
@@ -338,6 +339,16 @@ a.link {
   color: $section1;
 }
 
+a.no-dec{
+  text-decoration: none;
+  color: white;
+  font-family: $montserat;
+  :hover{
+    text-decoration: none;
+    color: white;
+  }
+}
+
 
 .title {
   @include title(5.5rem);
@@ -480,6 +491,8 @@ footer{
 
 .form-error{
   color: yellow;
-  margin-top: 5px;
   margin-bottom: 5px;
 }
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';

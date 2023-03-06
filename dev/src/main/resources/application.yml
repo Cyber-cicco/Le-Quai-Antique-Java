@@ -7,4 +7,3 @@ spring:
   jpa:
     show-sql: true
     database: mysql
-    generate-ddl: true

@@ -6,6 +6,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { InfosComponent } from './infos/infos.component';
 import { CreationCompteComponent } from './creation-compte/creation-compte.component';
 import {RouterLink, RouterLinkActive} from "@angular/router";
+import { AccueilComponent } from './accueil/accueil.component';
 
 
 
@@ -13,7 +14,8 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
   declarations: [
     ConnexionComponent,
     InfosComponent,
-    CreationCompteComponent
+    CreationCompteComponent,
+    AccueilComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,7 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
     ReactiveFormsModule,
     HttpClientModule,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
   ]
 })
 export class PagesModule { }
