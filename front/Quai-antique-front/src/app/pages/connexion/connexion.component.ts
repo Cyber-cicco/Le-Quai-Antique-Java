@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AuthenticationRequest} from "../../models/authentication-request";
+import {UserService} from "../../providers/user.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -9,13 +12,13 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class ConnexionComponent {
   formConnexion: FormGroup;
+  authReq:Partial<AuthenticationRequest> = {};
+  errConnexion = "";
 
-  constructor(private fb:FormBuilder){
+  constructor(private fb:FormBuilder, private userServ:UserService, private router:Router){
     this.formConnexion = this.fb.group({
-      nom:["", [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
-      prenom:["",[Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
       email:["", [Validators.required, Validators.email]],
-      password:["", [Validators.required, Validators.minLength(8)]]
+      password:["", [Validators.required, Validators.minLength(4)]]
     })
   }
 
@@ -35,4 +38,20 @@ export class ConnexionComponent {
     return this.formConnexion.get("password")
   }
 
+  authenticate() {
+    this.authReq = {
+      email: this.formConnexion.get("email")?.value,
+      password: this.formConnexion.get("password")?.value
+    }
+    this.userServ.postToConnexionAPI(this.authReq).subscribe({
+      next:(value)=>{
+        localStorage.setItem("token", value.token);
+        this.router.navigate(['/profil/infos'])
+      },
+      error:()=>{
+        this.errConnexion = "Erreur dans le nom d'utilisateur ou le mot de passe";
+        this.formConnexion.get("password")?.setValue("");
+      }
+    })
+  }
 }

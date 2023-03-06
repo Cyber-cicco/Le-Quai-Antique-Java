@@ -15,6 +15,9 @@
   border-radius: $btnRadius;
   padding: $btnPadding;
   margin: $btnMargin;
+  :disabled{
+    background-color: lighten($btnColor, 5);
+  }
 }
 $btnColor : black;
 $btnBasicHeight : 50px;
@@ -473,4 +476,10 @@ footer{
   @media screen and (max-width : 1000px) {
     height: $navBarSize*1.5;
   }
+}
+
+.form-error{
+  color: yellow;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }

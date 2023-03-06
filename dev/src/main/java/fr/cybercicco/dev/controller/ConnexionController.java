@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/connexion/")
 @RequiredArgsConstructor
+@CrossOrigin
 @Slf4j
 public class ConnexionController {
 
