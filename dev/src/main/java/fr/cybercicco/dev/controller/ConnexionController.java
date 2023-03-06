@@ -18,10 +18,11 @@ public class ConnexionController {
 
     private final AuthenticationService authenticationService;
 
-    @GetMapping("ui")
-    public ResponseEntity<?> getSession(){
-        return ResponseEntity.ok("you are on the connexion page");
+    @PostMapping("isconnected")
+    public ResponseEntity<AuthenticationResponse> getSession(){
+        return ResponseEntity.ok(new AuthenticationResponse());
     }
+
 
     @PostMapping("register")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request){

@@ -60,5 +60,22 @@ nav.navBar {
   }
 }
 
+.hidden-menu-phone{
+  width: 100vw;
+  text-align: center;
+  font-size: 1.5em;
+  list-style: none;
+  color: white;
+  background-color: black;
+  position: absolute;
+  top: $navBarSize;
+  @media screen and (max-width : 1000px) {
+    top: $navBarSize*1.5;
+  }
+  ul:hover{
+    background-color: lighten(black, 10);
+  }
+}
+
 
 

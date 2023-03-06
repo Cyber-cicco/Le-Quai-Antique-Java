@@ -2,17 +2,25 @@
 <nav id="navBar" class="navBar">
   <div class="title">Le Quai Antique</div>
   <li id="navList" class="navBar">
-    <ul><a href="/accueil">Accueil</a></ul>
-    <ul><a href="/plat">Carte</a></ul>
-    <ul><a href="/contact">Contact</a></ul>
-    <ul><a href="/reservation">Réserver</a></ul>
+    <ul><a routerLink="/accueil" routerLinkActive="active">Accueil</a></ul>
+    <ul><a routerLink="/plat" routerLinkActive="active">Carte</a></ul>
+    <ul><a routerLink="/contact" routerLinkActive="active">Contact</a></ul>
+    <ul><a routerLink="/reserver" routerLinkActive="active">Réserver</a></ul>
     <ul><button class="profile"><img src="assets/images/icons8-person-24.png"
-                                     alt="icon made by https://icons8.com/icon/86320/person"></button></ul>
+                                     alt="icon made by https://icons8.com/icon/86320/person"
+                                     routerLink="/profil/creation" routerLinkActive="active"></button></ul>
   </li>
-  <div class="hamb">
+  <div (click)="showSubMenu()" class="hamb">
     <div class="hambline"></div>
     <div class="hambline"></div>
     <div class="hambline"></div>
   </div>
-
 </nav>
+<li class="hidden-menu-phone" [hidden]="menuHidden">
+  <ul><a routerLink="/accueil" routerLinkActive="active">Accueil</a></ul>
+  <ul><a routerLink="/plat" routerLinkActive="active">Carte</a></ul>
+  <ul><a routerLink="/contact" routerLinkActive="active">Contact</a></ul>
+  <ul><a routerLink="/reserver" routerLinkActive="active">Réserver</a></ul>
+  <ul *ngIf="isConnected" ><a routerLink="/infos" routerLinkActive="active">Mon compte</a></ul>
+  <ul *ngIf="!isConnected"><a routerLink="/profil/connexion" routerLinkActive="active">Me connecter</a></ul>
+</li>
