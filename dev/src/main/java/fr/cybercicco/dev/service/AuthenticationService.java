@@ -4,10 +4,12 @@ import fr.cybercicco.dev.controller.message.AuthenticationRequest;
 import fr.cybercicco.dev.controller.message.AuthenticationResponse;
 import fr.cybercicco.dev.controller.message.RegisterRequest;
 import fr.cybercicco.dev.entity.Utilisateur;
+import fr.cybercicco.dev.exception.DuplicateEntryException;
 import fr.cybercicco.dev.exception.EntityNotFoundException;
 import fr.cybercicco.dev.repository.UtilisateurRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthenticationService {
 
     private final UtilisateurRepository utilisateurRepository;
@@ -29,6 +32,8 @@ public class AuthenticationService {
 
     @Transactional
     public AuthenticationResponse register(RegisterRequest request) {
+        log.info("ui");
+        if(utilisateurRepository.existsByEmail(request.getEmail())) throw new DuplicateEntryException("Le mail existe déjà en base");
         Utilisateur user = Utilisateur.builder()
                 .prenom(request.getPrenom())
                 .nom(request.getNom())

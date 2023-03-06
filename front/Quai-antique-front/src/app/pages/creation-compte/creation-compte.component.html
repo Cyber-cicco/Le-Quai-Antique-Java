@@ -1,1 +1,43 @@
-<p>creation-compte works!</p>
+<main>
+  <div class="navBarBuffer"></div>
+  <section class="headSection">
+    <div class="title">Profil</div>
+  </section>
+  <section class="profilSection">
+    <ng-form [formGroup]="formCreation" class="form">
+      <div class="title">Créer un compte</div>
+      <div class="input-container ic1">
+        <label for="name">Votre nom :</label>
+        <input id="name" formControlName="nom" class="input" type="text" placeholder=" " />
+        <div *ngIf="nom?.invalid && formSubmitted" class="form-error">Le nom est invalide</div>
+        <div class="cut"></div>
+      </div>
+      <div class="input-container ic1">
+        <label for="first">Votre prénom :</label>
+        <input id="first" class="input" formControlName="prenom" type="text" placeholder=" " />
+        <div *ngIf="prenom?.invalid && formSubmitted" class="form-error">Le prénom est invalide</div>
+        <div class="cut"></div>
+      </div>
+      <div class="input-container ic1">
+        <label for="email">Votre mail :</label>
+        <input formControlName="email" id="email" class="input" type="text" placeholder=" " />
+        <div *ngIf="email?.invalid && formSubmitted" class="form-error">L'adresse mail est invalide</div>
+        <div class="cut"></div>
+      </div>
+      <div class="input-container ic1">
+        <label for="mdp">Votre mot de passe :</label>
+        <input formControlName="password" id="mdp" class="input" type="password" placeholder=" " />
+        <div *ngIf="password?.invalid && formSubmitted" class="form-error">Le mot de passe est invalide</div>
+        <div class="cut"></div>
+      </div>
+      <div class="btn-container icl">
+        <button class="btnProfile" (click)="register()">Créer</button>
+        <div class="cut"></div>
+      </div>
+      <div class="link-container">
+        Déjà un compte? <a href="/profil/creation-compte" class="link">Me connecter</a>
+      </div>
+      <div class="form-error">{{errConnexion}}</div>
+    </ng-form>
+  </section>
+</main>

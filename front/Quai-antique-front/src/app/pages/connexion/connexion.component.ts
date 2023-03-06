@@ -14,6 +14,7 @@ export class ConnexionComponent {
   formConnexion: FormGroup;
   authReq:Partial<AuthenticationRequest> = {};
   errConnexion = "";
+  formSubmitted=false;
 
   constructor(private fb:FormBuilder, private userServ:UserService, private router:Router){
     this.formConnexion = this.fb.group({
@@ -39,19 +40,22 @@ export class ConnexionComponent {
   }
 
   authenticate() {
-    this.authReq = {
-      email: this.formConnexion.get("email")?.value,
-      password: this.formConnexion.get("password")?.value
-    }
-    this.userServ.postToConnexionAPI(this.authReq).subscribe({
-      next:(value)=>{
-        localStorage.setItem("token", value.token);
-        this.router.navigate(['/profil/infos'])
-      },
-      error:()=>{
-        this.errConnexion = "Erreur dans le nom d'utilisateur ou le mot de passe";
-        this.formConnexion.get("password")?.setValue("");
+    this.formSubmitted = true;
+    if(this.formConnexion.valid){
+      this.authReq = {
+        email: this.formConnexion.get("email")?.value,
+        password: this.formConnexion.get("password")?.value
       }
-    })
+      this.userServ.postToConnexionAPI(this.authReq).subscribe({
+        next:(value)=>{
+          localStorage.setItem("token", value.token);
+          this.router.navigate(['/profil/infos'])
+        },
+        error:()=>{
+          this.errConnexion = "Erreur dans le nom d'utilisateur ou le mot de passe";
+          this.formConnexion.get("password")?.setValue("");
+        }
+      })
+    }
   }
 }

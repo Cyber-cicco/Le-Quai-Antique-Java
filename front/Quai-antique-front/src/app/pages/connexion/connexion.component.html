@@ -9,15 +9,17 @@
       <div class="input-container ic1">
         <label for="email">Votre mail :</label>
         <input formControlName="email" id="email" class="input" type="text" placeholder=" " />
+        <div *ngIf="email?.invalid && formSubmitted" class="form-error">L'adresse mail est invalide</div>
         <div class="cut"></div>
       </div>
       <div class="input-container ic1">
         <label for="mdp">Votre mot de passe :</label>
         <input formControlName="password" id="mdp" class="input" type="password" placeholder=" " />
+        <div *ngIf="password?.invalid && formSubmitted" class="form-error">Le mot de passe est invalide</div>
         <div class="cut"></div>
       </div>
       <div class="btn-container icl">
-        <button class="btnProfile" [disabled]="formConnexion.invalid" (click)="authenticate()">Se connecter</button>
+        <button class="btnProfile" (click)="authenticate()">Se connecter</button>
         <div class="cut"></div>
       </div>
       <div class="link-container">
