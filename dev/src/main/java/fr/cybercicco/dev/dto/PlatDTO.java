@@ -6,17 +6,20 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Validated
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class PlatDTO {
 
     @Column(unique = true)
@@ -39,5 +42,7 @@ public class PlatDTO {
 
     @NotBlank
     private String photo;
+
+    private List<String> allergenes;
 
 }

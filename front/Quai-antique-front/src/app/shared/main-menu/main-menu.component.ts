@@ -16,6 +16,7 @@ export class MainMenuComponent {
     this.userSrv.getIsConnectedSubjectAsObservable().subscribe(value =>{
       console.log(value);
       this.isConnected = value
+      this.userSrv.isConnected = value;
     });
     this.checkConnexion();
   }

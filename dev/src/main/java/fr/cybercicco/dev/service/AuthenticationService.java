@@ -32,7 +32,6 @@ public class AuthenticationService {
 
     @Transactional
     public AuthenticationResponse register(RegisterRequest request) {
-        log.info("ui");
         if(utilisateurRepository.existsByEmail(request.getEmail())) throw new DuplicateEntryException("Le mail existe déjà en base");
         Utilisateur user = Utilisateur.builder()
                 .prenom(request.getPrenom())

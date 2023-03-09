@@ -6,6 +6,7 @@ import {RestaurantService} from "../../providers/restaurant.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Menu} from "../../models/menu";
 import {MenuService} from "../../providers/menu.service";
+import {UserService} from "../../providers/user.service";
 
 @Component({
   selector: 'qa-carte',
@@ -24,19 +25,19 @@ export class CarteComponent{
   menu:Partial<Menu>={}
   autoSelectMenu= "";
   platsOfMenu: Set<string> = new Set();
+  isConnected;
 
   constructor(private env:EnvService,
               private platsSrv:PlatService,
               private restaurantService:RestaurantService,
               private fb:FormBuilder,
+              private userService:UserService,
               private menuService:MenuService) {
     this.URL_API = env.SERVER_URL;
     this.platsSrv.getAllPlatsAPI().subscribe(value => {
       this.plats = value;
       this.platsToDisplay = value;
     })
-
-
     this.menuService.getAllMenuAPI().subscribe(value => {
       this.menus =  value;
       this.autoSelectMenu = this.menus[0].nomMenu;
@@ -50,6 +51,10 @@ export class CarteComponent{
     this.formMenus = fb.group({
       menus:[]
     })
+    this.isConnected = this.userService.isConnected;
+    if(this.isConnected){
+      this.userService.getUserInfosAPI(localStorage.getItem('token'))
+    }
 
   }
 

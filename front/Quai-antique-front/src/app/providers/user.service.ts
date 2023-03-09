@@ -45,4 +45,8 @@ export class UserService {
       "Authorization": "Bearer "+token,
       "Content-type": "text/plain"}});
   }
+
+  getUserInfosAPI(token: string | null) {
+    return this.http.get
+  }
 }
