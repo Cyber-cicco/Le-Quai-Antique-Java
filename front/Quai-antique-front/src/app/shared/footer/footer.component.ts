@@ -14,7 +14,7 @@ export class FooterComponent {
     this.restaurantService.getHorairesCurrentDayAPI(this.jours[new Date().getDay()-1]).subscribe({
       next: value => {
         this.message = "Ouvert ce jour entre "
-          + value.fermetureDejeuner +
+          + value.ouvertureDejeuner +
           " - " +
           value.fermetureDejeuner +
           " et " +

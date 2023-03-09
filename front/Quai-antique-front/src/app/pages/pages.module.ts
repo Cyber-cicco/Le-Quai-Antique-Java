@@ -9,6 +9,7 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
 import { AccueilComponent } from './accueil/accueil.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NgbCarouselModule, NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import { CarteComponent } from './carte/carte.component';
 
 
 
@@ -18,6 +19,7 @@ import {NgbCarouselModule, NgbModule} from "@ng-bootstrap/ng-bootstrap";
     InfosComponent,
     CreationCompteComponent,
     AccueilComponent,
+    CarteComponent,
   ],
     imports: [
         CommonModule,

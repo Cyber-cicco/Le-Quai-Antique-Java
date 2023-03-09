@@ -1,0 +1,63 @@
+<main>
+  <div class="navBarBuffer"></div>
+  <section class="headSection">
+    <div class="title">Plats : </div>
+  </section>
+  <section class="menuSectionOne">
+    <ng-form class="form" [formGroup]="formCategorie">
+      <h1>Catégorie du plat:</h1>
+      <div class="input-container ic1">
+        <label for="categorie">Sélectionnez un choix : </label>
+        <select id="categorie" formControlName="categorie" class="input" (ngModelChange)="changeCarousel($event)">
+          <option value="">Tous</option>
+          <option value="ENTREE">Entrée</option>
+          <option value="PRINCIPAL">Plat principal</option>
+          <option value="DESSERT">Dessert</option>
+        </select>
+      </div>
+    </ng-form>
+    <ngb-carousel *ngIf="plats" class="carousel-accueil">
+      <ng-template *ngFor="let image of platsToDisplay" ngbSlide>
+        <div class="picsum-img-wrapper">
+          <img src="{{URL_API + '/photos/' + image.photo+'.png'}}" alt="c'est un plat" class="img-carousel" />
+        </div>
+        <div class="carousel-caption">
+          <h3>{{image.nomPlat}}</h3>
+          <p>{{image.description}}</p>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+    <div class="description">
+      <div class="slogan">Nos plats</div>
+      <div>
+        <p>
+          Ci dessus nos plats préparés avec passion et goût de la bonne chaire. Entrées, plats, desserts, poisson,
+          viande, recettes végétariennes, vegan, soyez certain de pouvoir trouver votre bonheur parmis la plétore
+          de plats concoctés par nos chefs cuistot!
+        </p>
+      </div>
+    </div>
+  </section>
+<div class="transition"></div>
+  <section class="headSection">
+    <div class="title">Menus : </div>
+  </section>
+  <section class="menuSectionOne">
+    <div class="Carousel">
+      <div class="photoHandler">
+        <img src="" alt="Savoureux burgers dans un plus grand burger">
+      </div>
+    </div>
+    <div class="description">
+      <div class="slogan">Titre</div>
+      <div>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras scelerisque id ligula ut viverra.
+          Aliquam a sem fringilla, porta sapien eget, condimentum mauris. Pellentesque habitant morbi
+          tristique senectus et netus et malesuada fames ac turpis egestas. Interdum et malesuada fames ac
+          ante ipsum primis in faucibus.
+        </p>
+      </div>
+    </div>
+  </section>
+</main>

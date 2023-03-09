@@ -509,6 +509,23 @@ footer{
 }
 
 
+.carousel-accueil{
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  width: 70%;
+  justify-content: center;
+  @media screen and (max-width: 800px){
+    width: 90%;
+  }
+}
+.img-carousel{
+  width: 100%;
+  justify-self: center;
+}
+
+
+
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';

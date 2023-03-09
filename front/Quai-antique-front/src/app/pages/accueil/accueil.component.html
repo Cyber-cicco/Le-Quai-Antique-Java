@@ -38,7 +38,7 @@
     <div class="description">
       <div class="openHours">
         <div *ngFor="let horaire of horaires" class="tabSquare">
-          <div class="weekDay">{{horaire.jourSemaine + " :"}}</div>
+          <div class="weekDay">{{horaire.jourSemaine.toLowerCase() + " :"}}</div>
           <div class="hours">
             <div class="lunch">{{horaire.ouvertureDejeuner}} - {{horaire.fermetureDejeuner}}</div>
             <div class="diner">{{horaire.ouvertureDiner}} - {{horaire.fermetureDiner}}</div>

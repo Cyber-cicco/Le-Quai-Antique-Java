@@ -4,12 +4,14 @@ import {ConnexionComponent} from "./pages/connexion/connexion.component";
 import {CreationCompteComponent} from "./pages/creation-compte/creation-compte.component";
 import {InfosComponent} from "./pages/infos/infos.component";
 import {AccueilComponent} from "./pages/accueil/accueil.component";
+import {CarteComponent} from "./pages/carte/carte.component";
 
 const routes: Routes = [
   {path : "profil/connexion", component: ConnexionComponent},
   {path: 'profil/creation', component: CreationCompteComponent},
   {path: 'profil/infos', component: InfosComponent},
   {path: 'accueil', component: AccueilComponent},
+  {path: 'carte', component: CarteComponent},
   {path: '', component: AccueilComponent},
 ];
 
