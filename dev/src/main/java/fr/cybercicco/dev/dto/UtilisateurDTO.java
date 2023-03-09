@@ -29,9 +29,6 @@ public class UtilisateurDTO {
     @NotBlank
     @Length(min = 1, max = 255)
     private String nom;
-    @NotBlank
-    @Length(min = 1, max = 255)
-    private String mdp;
 
     private Boolean isAdmin;
 
