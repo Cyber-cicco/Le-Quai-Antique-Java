@@ -8,4 +8,6 @@ export interface Plat {
    prix:number;
 
    photo:string;
+
+   allergenes:string[];
 }

@@ -18,15 +18,12 @@ public class MenuDTO {
 
     @NotBlank
     @Length(min = 2, max = 255)
-    @Column(unique = true)
     private String nomMenu;
 
     @NotBlank
     @Length(min = 12, max = 2000)
-    @Column(columnDefinition = "LONGTEXT")
     private String description;
 
-    private List<String> formules;
+    private List<FormuleDTO> formules;
 
-    private List<String> photos;
 }

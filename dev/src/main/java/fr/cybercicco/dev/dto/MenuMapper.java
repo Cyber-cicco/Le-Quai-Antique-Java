@@ -11,17 +11,11 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring")
 public interface MenuMapper {
 
-    default MenuDTO toMenuDTO(Menu menu){
+    default MenuDTO toMenuDTO(Menu menu, FormuleMapper formuleMapper, PlatMapper platMapper){
         return MenuDTO.builder()
                 .nomMenu(menu.getNomMenu())
                 .description(menu.getDescription())
-                .formules(menu.getFormules().stream().map(Formule::getNomFormule).toList())
-                .photos(menu.getFormules().stream()
-                        .map(formule -> formule.getPlats().stream()
-                                .map(Plat::getPhoto).toList())
-                        .flatMap(Collection::stream)
-                        .distinct()
-                        .collect(Collectors.toList()))
+                .formules(menu.getFormules().stream().map(formule -> formuleMapper.toFormuleDTO(formule, platMapper)).toList())
                 .build();
     }
 }
