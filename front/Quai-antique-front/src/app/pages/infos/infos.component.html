@@ -1,6 +1,45 @@
 <main>
   <div class="navBarBuffer"></div>
-  <p>infos works!</p>
-  <p>token : {{token}}</p>
+  <section class="profilSection">
+    <ng-form [formGroup]="formCompte" class="form">
+      <div class="title">Mon compte : </div>
+      <div class="input-container ic1">
+        <label for="email">Mon mail :</label>
+        <input formControlName="email" id="email" class="input" type="text" placeholder="{{user.email}}" />
+        <div *ngIf="email?.invalid && formSubmitted" class="form-error">L'adresse mail est invalide</div>
+        <div class="cut"></div>
+      </div>
+      <div class="input-container ic1">
+        <label for="name">Mon nom :</label>
+        <input id="name" formControlName="nom" class="input" type="text" placeholder="{{user.nom}}" />
+        <div *ngIf="nom?.invalid && formSubmitted" class="form-error">Le nom est invalide</div>
+        <div class="cut"></div>
+      </div>
+      <div class="input-container ic1">
+        <label for="first">Mon prénom :</label>
+        <input id="first" class="input" formControlName="prenom" type="text" placeholder="{{user.prenom}}" />
+        <div *ngIf="prenom?.invalid && formSubmitted" class="form-error">Le prénom est invalide</div>
+        <div class="cut"></div>
+      </div>
+      <div class="input-container ic1">
+        <label for="convives">Nombre de convives par défaut :</label>
+        <input formControlName="convives" id="convives" class="input" type="number" placeholder=" " min="0" max="20"/>
+        <div *ngIf="convives?.invalid && formSubmitted" class="form-error">Nombre de couverts invalide</div>
+        <div class="cut"></div>
+      </div>
+      <fieldset class="input-container ic1">
+        <legend>Précisez vos allergies (si vous en avez) : </legend>
+
+        <div *ngFor="let allergie of nomAllergies">
+          <input type="checkbox" [ngModelOptions]="{standalone:true}" [(ngModel)]="allergie.checked" (change)="changeAllergies($event)" id="{{ allergie.nomAllergie }}" name="{{ allergie.nomAllergie }}">
+          <label for="{{allergie.nomAllergie}}">{{allergie.nomAllergie}}</label>
+        </div>
+      </fieldset>
+      <div class="btn-container icl">
+        <button class="btnProfile" (click)="change()">Modifier</button>
+        <div class="cut"></div>
+      </div>
+    </ng-form>
+  </section>
 </main>
 
