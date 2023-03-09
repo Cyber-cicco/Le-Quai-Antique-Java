@@ -83,6 +83,8 @@ body {
 @mixin mainSection($color1, $color2, $flexDirection, $gradientDirection, $percentGradient) {
   display: flex;
   padding-top: 40px;
+  justify-content: center;
+  align-items: center;
   flex-direction: $flexDirection;
   background: linear-gradient(to $gradientDirection, $color1 $percentGradient, $color2);
 
@@ -152,7 +154,7 @@ main {
   }
 
   section.menuSectionOne {
-    @include mainSection($section1 , $whiteBackground, row, left, 45%);
+    @include mainSection($section1 , $whiteBackground, column, left, 45%);
     @media screen and (max-width : 1000px) {
       flex-direction: column;;
       width: 100%;
@@ -365,6 +367,7 @@ div.description {
   height: 100%;
   font-size: 1.5rem;
   flex-direction: column;
+  margin: 20px;
   justify-content: space-around;
   align-items: center;
   padding-right: 50px;
@@ -504,5 +507,8 @@ footer{
   height: 50px;
   width: 50px;
 }
+
+
+
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';

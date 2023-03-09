@@ -3,25 +3,18 @@
   <section class="headSection">
     <div class="title">Bienvenue au Quai Antique!</div>
   </section>
-  <c-carousel [interval]="0">
-    <c-carousel-inner>
-      <c-carousel-item *ngFor="let slide of plats">
-        <img
-          [src]="URL_API + '/photos/' + slide.photo+'.png'"
-          alt="{{slide.description}}"
-          class="d-block w-100"
-          loading="lazy"
-        />
-      </c-carousel-item>
-    </c-carousel-inner>
-    <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
-    <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
-  </c-carousel>
-
   <section class="menuSectionOne">
-
-    <div class="carousel">
-    </div>
+    <ngb-carousel *ngIf="plats" class="carousel-accueil">
+      <ng-template *ngFor="let image of plats" ngbSlide>
+        <div class="picsum-img-wrapper" (mouseenter)="showCaption()" (mouseleave)="hideCaption()">
+          <img src="{{URL_API + '/photos/' + image.photo+'.png'}}" alt="c'est un plat" class="img-carousel" />
+        </div>
+        <div class="carousel-caption" [hidden]="captionHidden">
+          <h3>{{image.nomPlat}}</h3>
+          <p>{{image.description}}</p>
+        </div>
+      </ng-template>
+    </ngb-carousel>
     <div class="description">
       <h1 class="slogan">Les recettes de grand mère avec des ingrédients 100% locaux!</h1>
       <div>
@@ -38,59 +31,17 @@
   <section class="menuSectionTwo">
     <div class="Carousel">
       <div class="photoHandler">
-        <img src=""
+        <img src="../../../assets/images/QAOutside.png"
              alt="Savoureux burgers dans un plus grand burger">
       </div>
     </div>
     <div class="description">
       <div class="openHours">
-        <div class="tabSquare">
-          <div class="weekDay">Lundi : </div>
+        <div *ngFor="let horaire of horaires" class="tabSquare">
+          <div class="weekDay">{{horaire.jourSemaine + " :"}}</div>
           <div class="hours">
-            <div class="lunch">12h00 - 14h00</div>
-            <div class="diner">19h00 - 22h30</div>
-          </div>
-        </div>
-        <div class="tabSquare">
-          <div class="weekDay">Mardi : </div>
-          <div class="hours">
-            <div class="lunch">12h00 - 14h00</div>
-            <div class="diner">19h00 - 22h30</div>
-          </div>
-        </div>
-        <div class="tabSquare">
-          <div class="weekDay">Mercredi : </div>
-          <div class="hours">
-            <div class="lunch">12h00 - 14h00</div>
-            <div class="diner">19h00 - 22h30</div>
-          </div>
-        </div>
-        <div class="tabSquare">
-          <div class="weekDay">Jeudi : </div>
-          <div class="hours">
-            <div class="lunch">12h00 - 14h00</div>
-            <div class="diner">19h00 - 22h30</div>
-          </div>
-        </div>
-        <div class="tabSquare">
-          <div class="weekDay">Vendredi : </div>
-          <div class="hours">
-            <div class="lunch">12h00 - 14h00</div>
-            <div class="diner">19h00 - 22h30</div>
-          </div>
-        </div>
-        <div class="tabSquare">
-          <div class="weekDay">Samedi : </div>
-          <div class="hours">
-            <div class="lunch">12h00 - 14h00</div>
-            <div class="diner">19h00 - 23h30</div>
-          </div>
-        </div>
-        <div class="tabSquare">
-          <div class="weekDay">Dimanche : </div>
-          <div class="hours">
-            <div class="lunch">fermé</div>
-            <div class="diner">fermé</div>
+            <div class="lunch">{{horaire.ouvertureDejeuner}} - {{horaire.fermetureDejeuner}}</div>
+            <div class="diner">{{horaire.ouvertureDiner}} - {{horaire.fermetureDiner}}</div>
           </div>
         </div>
       </div>

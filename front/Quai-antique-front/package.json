@@ -21,6 +21,7 @@
     "@coreui/angular": "^4.3.16",
     "@coreui/icons": "^3.0.0",
     "@coreui/icons-angular": "^4.3.16",
+    "@ng-bootstrap/ng-bootstrap": "^14.0.1",
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.3",
     "rxjs": "~7.8.0",

@@ -26,7 +26,7 @@ public class SecurityConfig {
                 .cors()
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/connexion/register", "/connexion/authenticate", "/photos/*", "/plats/list")
+                .requestMatchers("/connexion/register", "/connexion/authenticate", "/photos/*", "/plats/list", "/restaurant/*")
                 .permitAll()
                 .requestMatchers("/admin/**")
                 .hasAnyAuthority("ADMIN")

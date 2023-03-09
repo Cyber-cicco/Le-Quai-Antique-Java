@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import {FormsModule} from "@angular/forms";
 import {SharedModule} from "./shared/shared.module";
 import {PagesModule} from "./pages/pages.module";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import {PagesModule} from "./pages/pages.module";
     AppRoutingModule,
     FormsModule,
     SharedModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
