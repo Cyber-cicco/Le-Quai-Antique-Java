@@ -8,9 +8,16 @@ import {Horaire} from "../models/horaire";
 export class RestaurantService {
 
   private URL_RESTAURANT_HORAIRES = "http://localhost:8080/restaurant/horaires?restaurant=Le%20Quai%20Antique%20Chamberry";
+
+  private URL_RESTAURANT_HORAIRE_CE_JOUR = "http://localhost:8080/restaurant/horaires_jour?restaurant=Le%20Quai%20Antique%20Chamberry&day=";
+
   constructor(private http:HttpClient) { }
 
   getHorairesAPI(){
     return this.http.get<Horaire[]>(this.URL_RESTAURANT_HORAIRES);
+  }
+
+  getHorairesCurrentDayAPI(jourSemaine:string){
+    return this.http.get<Horaire>(this.URL_RESTAURANT_HORAIRE_CE_JOUR+jourSemaine)
   }
 }
