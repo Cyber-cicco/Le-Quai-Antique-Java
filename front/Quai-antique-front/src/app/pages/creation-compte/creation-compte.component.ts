@@ -15,6 +15,7 @@ export class CreationCompteComponent {
   formSubmitted = false;
   errConnexion = "";
   private regRequest:Partial<RegisterRequest> = {}
+  private isConnected: any;
 
   constructor(private fb:FormBuilder, private userServ:UserService, private router:Router){
     this.formCreation = this.fb.group({
@@ -23,6 +24,7 @@ export class CreationCompteComponent {
       email : ["", [Validators.required, Validators.email]],
       password : ["", [Validators.required, Validators.minLength(4)]]
     })
+    this.isConnected = userServ.isConnected;
   }
 
   get nom(){
@@ -54,6 +56,10 @@ export class CreationCompteComponent {
         next:(value)=>{
           localStorage.setItem("token", value.token);
           this.userServ.getIsConnectedSubject().next(true);
+          this.userServ.isConnected = true;
+          this.userServ.getUserInfosAPI(value.token).subscribe(value => {
+            this.userServ.getUserSubject().next(value);
+          })
           this.router.navigate(['/profil/infos'])
         },
         error:()=>{

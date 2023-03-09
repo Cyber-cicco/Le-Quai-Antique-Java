@@ -14,7 +14,6 @@ export class MainMenuComponent {
 
   constructor(private userSrv:UserService, private router:Router) {
     this.userSrv.getIsConnectedSubjectAsObservable().subscribe(value =>{
-      console.log(value);
       this.isConnected = value
       this.userSrv.isConnected = value;
     });
@@ -31,6 +30,8 @@ export class MainMenuComponent {
       this.userSrv.checkConnexion(token).subscribe({
         next:()=>{
           this.userSrv.getIsConnectedSubject().next(true);
+          if(Object.keys(this.userSrv.user).length == 0)this.userSrv.getUserInfosAPI(localStorage.getItem("token"))
+            .subscribe(value => this.userSrv.getUserSubject().next(value));
         },
         error:()=>{
           this.userSrv.getIsConnectedSubject().next(false);
@@ -45,6 +46,7 @@ export class MainMenuComponent {
     localStorage.clear();
     this.userSrv.getIsConnectedSubject().next(false);
     this.hideMenus();
+    this.userSrv.getUserSubject().next({});
     this.router.navigate(['/accueil']);
   }
 

@@ -17,13 +17,16 @@
       </div>
     </ng-form>
     <ngb-carousel *ngIf="plats" class="carousel-accueil">
-      <ng-template *ngFor="let image of platsToDisplay" ngbSlide>
+      <ng-template *ngFor="let plat of platsToDisplay" ngbSlide>
         <div class="picsum-img-wrapper">
-          <img src="{{URL_API + '/photos/' + image.photo+'.png'}}" alt="c'est un plat" class="img-carousel" />
+          <img src="{{URL_API + '/photos/' + plat.photo+'.png'}}" alt="c'est un plat" class="img-carousel" />
         </div>
         <div class="carousel-caption">
-          <h3>{{image.nomPlat}}</h3>
-          <p>{{image.description}}</p>
+          <h3>{{plat.nomPlat}}</h3>
+          <p>{{plat.description}}</p>
+          <p class="danger" *ngIf="checkAllergenes(plat)">
+            /!\ Vous avez indiqué être allergique à l'un de ces éléments dans ce plat : {{findAllergene(plat)}}
+          </p>
         </div>
       </ng-template>
     </ngb-carousel>
@@ -54,10 +57,16 @@
     </ng-form>
     <div class="description">
       <div class="slogan">{{menu.nomMenu?.toUpperCase()}}</div>
-      <div>
+      <div *ngIf="menu != undefined">
         <div *ngFor="let formule of menu.formules">
           <h3> - {{formule.nomFormule}} - </h3>
-          <p *ngFor="let plat of formule.plats">{{plat.nomPlat}}</p>
+          <div *ngFor="let plat of formule.plats">
+            <p>{{plat.nomPlat}}</p>
+            <p class="danger" *ngIf="checkAllergenes(plat)">
+              /!\ Vous avez indiqué être allergique à l'un de ces éléments dans ce plat : {{findAllergene(plat)}}
+            </p>
+          </div>
+
         </div>
       </div>
     </div>
@@ -68,6 +77,5 @@
         </div>
       </ng-template>
     </ngb-carousel>
-    <div *ngIf="isConnected">CACA</div>
   </section>
 </main>

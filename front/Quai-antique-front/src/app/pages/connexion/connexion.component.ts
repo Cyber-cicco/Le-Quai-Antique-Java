@@ -50,6 +50,9 @@ export class ConnexionComponent {
         next:(value)=>{
           localStorage.setItem("token", value.token);
           this.userServ.getIsConnectedSubject().next(true);
+          this.userServ.getUserInfosAPI(value.token).subscribe(value => {
+            this.userServ.getUserSubject().next(value);
+          })
           this.router.navigate(['/profil/infos'])
         },
         error:()=>{
@@ -57,6 +60,7 @@ export class ConnexionComponent {
           this.formConnexion.get("password")?.setValue("");
         }
       })
+
     }
   }
 }

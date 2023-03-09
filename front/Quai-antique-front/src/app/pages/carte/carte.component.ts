@@ -7,6 +7,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {Menu} from "../../models/menu";
 import {MenuService} from "../../providers/menu.service";
 import {UserService} from "../../providers/user.service";
+import {User} from "../../models/user";
 
 @Component({
   selector: 'qa-carte',
@@ -26,6 +27,8 @@ export class CarteComponent{
   autoSelectMenu= "";
   platsOfMenu: Set<string> = new Set();
   isConnected;
+
+  user:Partial<User> = {};
 
   constructor(private env:EnvService,
               private platsSrv:PlatService,
@@ -52,9 +55,9 @@ export class CarteComponent{
       menus:[]
     })
     this.isConnected = this.userService.isConnected;
-    if(this.isConnected){
-      this.userService.getUserInfosAPI(localStorage.getItem('token'))
-    }
+    this.userService.getUserSubject().asObservable().subscribe(value =>{
+      this.user = value
+    });
 
   }
 
@@ -63,8 +66,10 @@ export class CarteComponent{
   }
 
   changeCarouselMenus($event: any) {
-    this.menu = this.menus.filter(menu=>menu.nomMenu == $event)[0];
-    this.irrigatePlatsOfMenu();
+    if(this.menus.length > 0){
+      this.menu = this.menus.filter(menu=>menu.nomMenu == $event)[0];
+      this.irrigatePlatsOfMenu();
+    }
   }
 
   private irrigatePlatsOfMenu() {
@@ -72,5 +77,13 @@ export class CarteComponent{
       ?.map(formule=>formule.plats
         .map(plat => plat.photo))
       .flat());
+  }
+
+  checkAllergenes(plat:Plat) {
+    return plat.allergenes.filter(allergene=>this.user.allergenes?.includes(allergene)).length > 0;
+  }
+
+  findAllergene(plat: Plat) {
+    return [...plat.allergenes.filter(allergene=>this.user.allergenes?.includes(allergene))];
   }
 }
