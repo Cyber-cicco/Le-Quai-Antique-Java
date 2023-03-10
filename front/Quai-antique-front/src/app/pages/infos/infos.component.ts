@@ -32,6 +32,7 @@ export class InfosComponent {
   ]
 
   user:Partial<User>={};
+  modifMessage= "";
 
   constructor(private fb:FormBuilder, private userServ:UserService, private router:Router){
     if(!this.userServ.isConnected){
@@ -47,14 +48,18 @@ export class InfosComponent {
       }
     }
     this.formCompte = this.fb.group({
-      nom : ["", [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
-      prenom : ["", [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
-      email : ["", [Validators.required, Validators.email]],
-      convives: ["", [Validators.min(0), Validators.max(20)]]
+      nom : [this.userServ.user.nom, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
+      prenom : [this.userServ.user.prenom, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
+      email : [this.userServ.user.email, [Validators.required, Validators.email]],
+      convives: [this.userServ.user.nbConvives, [Validators.min(0), Validators.max(20)]]
     });
     this.userServ.getUserSubject().subscribe(value => this.user = value);
     this.user = this.userServ.getUserSubject().getValue();
     this.userServ.getUserSubject().asObservable().subscribe(value => {
+      this.formCompte.get("nom")?.setValue(value.nom);
+      this.formCompte.get("prenom")?.setValue(value.prenom);
+      this.formCompte.get("email")?.setValue(value.email);
+      this.formCompte.get("convives")?.setValue(value.nbConvives);
       this.nomAllergies.forEach(allergie=>{
         allergie.checked = this.user.allergenes?.includes(allergie.nomAllergie);
       })
@@ -79,9 +84,18 @@ export class InfosComponent {
   }
 
   change() {
+    this.formSubmitted = true;
+    if (this.formCompte.valid){
+      this.user.allergenes= this.nomAllergies.filter(allergie=>allergie.checked).map(allergie=>allergie.nomAllergie);
+      this.user.email=this.formCompte.get("email")?.value;
+      this.user.nom=this.formCompte.get("nom")?.value;
+      this.user.prenom=this.formCompte.get("prenom")?.value;
+      this.user.nbConvives=this.formCompte.get("convives")?.value;
+      this.userServ.updateUserAPI(this.user, localStorage.getItem("token")).subscribe(value => {
+        this.modifMessage = "Modifications bien prises en compte";
+        localStorage.setItem("token", value.token);
+      })
+    }
 
-  }
-
-  changeAllergies($event: Event) {
   }
 }

@@ -63,4 +63,10 @@ export class UserService {
         "Authorization": "Bearer "+token,
         "Content-type": "text/plain"}});
   }
+
+  updateUserAPI(user: Partial<User>, token: string | null) {
+    return this.http.patch<AuthenticationResponse>(this.URL_GET_INFOS, user,{headers:{
+        "Authorization": "Bearer "+token,
+        "Content-type": "application/json"}})
+  }
 }

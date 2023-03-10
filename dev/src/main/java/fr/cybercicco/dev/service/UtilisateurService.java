@@ -42,11 +42,10 @@ public class UtilisateurService {
         Utilisateur utilisateur =  utilisateurRepository.findByEmail(currentMail)
                 .orElseThrow(EntityNotFoundException::new);
         utilisateur.setEmail(utilisateurDTO.getEmail());
-        utilisateur.setAllergenes(utilisateurDTO.getAllergenes().stream()
-                .map(e->allergeneRepository
-                        .findByNomAllergene(e)
-                        .orElseThrow(EntityNotFoundException::new))
-                .toList());
+        utilisateur.getAllergenes().clear();
+        utilisateurDTO.getAllergenes()
+                .forEach(e->{utilisateur.getAllergenes().add(allergeneRepository.findByNomAllergene(e).
+                        orElseThrow(EntityNotFoundException::new));});
         utilisateur.setNbConvives(utilisateurDTO.getNbConvives());
         utilisateur.setNom(utilisateurDTO.getNom());
         utilisateur.setPrenom(utilisateurDTO.getPrenom());

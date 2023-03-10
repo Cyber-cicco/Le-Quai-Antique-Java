@@ -31,7 +31,7 @@
         <legend>Précisez vos allergies (si vous en avez) : </legend>
 
         <div *ngFor="let allergie of nomAllergies">
-          <input type="checkbox" [ngModelOptions]="{standalone:true}" [(ngModel)]="allergie.checked" (change)="changeAllergies($event)" id="{{ allergie.nomAllergie }}" name="{{ allergie.nomAllergie }}">
+          <input type="checkbox" [ngModelOptions]="{standalone:true}" [(ngModel)]="allergie.checked" id="{{ allergie.nomAllergie }}" name="{{ allergie.nomAllergie }}">
           <label for="{{allergie.nomAllergie}}">{{allergie.nomAllergie}}</label>
         </div>
       </fieldset>
@@ -39,6 +39,7 @@
         <button class="btnProfile" (click)="change()">Modifier</button>
         <div class="cut"></div>
       </div>
+      <div class="form-error">{{modifMessage}}</div>
     </ng-form>
   </section>
 </main>
