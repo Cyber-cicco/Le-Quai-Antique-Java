@@ -52,8 +52,8 @@ export class ConnexionComponent {
           this.userServ.getIsConnectedSubject().next(true);
           this.userServ.getUserInfosAPI(value.token).subscribe(value => {
             this.userServ.getUserSubject().next(value);
+            this.router.navigate(['/profil/infos'])
           })
-          this.router.navigate(['/profil/infos'])
         },
         error:()=>{
           this.errConnexion = "Erreur dans le nom d'utilisateur ou le mot de passe";

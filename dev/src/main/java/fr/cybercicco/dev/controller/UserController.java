@@ -1,5 +1,6 @@
 package fr.cybercicco.dev.controller;
 
+import fr.cybercicco.dev.controller.message.AuthenticationResponse;
 import fr.cybercicco.dev.dto.UtilisateurDTO;
 import fr.cybercicco.dev.service.JwtService;
 import fr.cybercicco.dev.service.UtilisateurService;
@@ -7,10 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,5 +29,10 @@ public class UserController {
     public ResponseEntity<UtilisateurDTO> getProfilUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization){
         return ResponseEntity.ok(utilisateurService.getUtilisateurByEmail(jwtService.extractEmail(authorization.substring(7))));
 
+    }
+
+    @PatchMapping("profil")
+    public ResponseEntity<AuthenticationResponse> changeProfilUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization, @RequestBody UtilisateurDTO utilisateurDTO   ){
+        return ResponseEntity.ok(utilisateurService.updateUtilisateur(authorization, utilisateurDTO));
     }
 }

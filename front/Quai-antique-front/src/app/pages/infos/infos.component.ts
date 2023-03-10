@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../providers/user.service";
 import {Router} from "@angular/router";
 import {User} from "../../models/user";
@@ -35,7 +35,16 @@ export class InfosComponent {
 
   constructor(private fb:FormBuilder, private userServ:UserService, private router:Router){
     if(!this.userServ.isConnected){
-      router.navigate(["profil/connexion"]);
+      let token = localStorage.getItem("token");
+      if(token == null){
+        router.navigate(["profil/connexion"]);
+      } else {
+        this.userServ.checkConnexion(token).subscribe({
+          error:()=>{
+            router.navigate(["profil/connexion"]);
+          }
+        })
+      }
     }
     this.formCompte = this.fb.group({
       nom : ["", [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
@@ -45,9 +54,12 @@ export class InfosComponent {
     });
     this.userServ.getUserSubject().subscribe(value => this.user = value);
     this.user = this.userServ.getUserSubject().getValue();
-    this.nomAllergies.forEach(allergie=>{
-      allergie.checked = this.user.allergenes?.includes(allergie.nomAllergie);
+    this.userServ.getUserSubject().asObservable().subscribe(value => {
+      this.nomAllergies.forEach(allergie=>{
+        allergie.checked = this.user.allergenes?.includes(allergie.nomAllergie);
+      })
     })
+
   }
 
   get nom(){
