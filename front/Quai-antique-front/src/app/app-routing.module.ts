@@ -5,6 +5,7 @@ import {CreationCompteComponent} from "./pages/creation-compte/creation-compte.c
 import {InfosComponent} from "./pages/infos/infos.component";
 import {AccueilComponent} from "./pages/accueil/accueil.component";
 import {CarteComponent} from "./pages/carte/carte.component";
+import {ReserverComponent} from "./pages/reserver/reserver.component";
 
 const routes: Routes = [
   {path : "profil/connexion", component: ConnexionComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'profil/infos', component: InfosComponent},
   {path: 'accueil', component: AccueilComponent},
   {path: 'carte', component: CarteComponent},
+  {path: 'reserver', component: ReserverComponent},
   {path: '', component: AccueilComponent},
 ];
 

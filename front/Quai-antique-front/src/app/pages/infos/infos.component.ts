@@ -14,22 +14,7 @@ export class InfosComponent {
 
   formSubmitted=false;
 
-  nomAllergies:{nomAllergie:string, checked:boolean|undefined}[] = [
-    {nomAllergie : "Anhydrides sulfureux", checked:false},
-    {nomAllergie : "Arachides", checked:false},
-    {nomAllergie : "Céleri", checked:false},
-    {nomAllergie : "Crustacés", checked:false},
-    {nomAllergie : "Fruits à coque", checked:false},
-    {nomAllergie : "Gluten", checked:false},
-    {nomAllergie : "Graines de sésame", checked:false},
-    {nomAllergie : "Lait", checked:false},
-    {nomAllergie : "Lupin", checked:false},
-    {nomAllergie : "Mollusques", checked:false},
-    {nomAllergie : "Moutarde", checked:false},
-    {nomAllergie : "Oeufs", checked:false},
-    {nomAllergie : "Poissons", checked:false},
-    {nomAllergie : "Soja", checked:false},
-  ]
+  nomAllergies:{nomAllergie:string, checked:boolean|undefined}[] = []
 
   user:Partial<User>={};
   modifMessage= "";
@@ -47,15 +32,15 @@ export class InfosComponent {
         })
       }
     }
+    this.nomAllergies = this.userServ.nomAllergies;
     this.formCompte = this.fb.group({
       nom : [this.userServ.user.nom, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
       prenom : [this.userServ.user.prenom, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
       email : [this.userServ.user.email, [Validators.required, Validators.email]],
       convives: [this.userServ.user.nbConvives, [Validators.min(0), Validators.max(20)]]
     });
-    this.userServ.getUserSubject().subscribe(value => this.user = value);
-    this.user = this.userServ.getUserSubject().getValue();
     this.userServ.getUserSubject().asObservable().subscribe(value => {
+      this.user = value
       this.formCompte.get("nom")?.setValue(value.nom);
       this.formCompte.get("prenom")?.setValue(value.prenom);
       this.formCompte.get("email")?.setValue(value.email);

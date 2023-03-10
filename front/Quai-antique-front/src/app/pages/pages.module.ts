@@ -10,6 +10,7 @@ import { AccueilComponent } from './accueil/accueil.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NgbCarouselModule, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { CarteComponent } from './carte/carte.component';
+import { ReserverComponent } from './reserver/reserver.component';
 
 
 
@@ -20,6 +21,7 @@ import { CarteComponent } from './carte/carte.component';
     CreationCompteComponent,
     AccueilComponent,
     CarteComponent,
+    ReserverComponent,
   ],
     imports: [
         CommonModule,

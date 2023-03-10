@@ -24,7 +24,27 @@ export class UserService {
   private isConnectedSubject:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private userSubject:BehaviorSubject<Partial<User>> = new BehaviorSubject<Partial<User>>({})
+
   isConnected = false;
+
+
+  nomAllergies:{nomAllergie:string, checked:boolean|undefined}[] = [
+    {nomAllergie : "Anhydrides sulfureux", checked:false},
+    {nomAllergie : "Arachides", checked:false},
+    {nomAllergie : "Céleri", checked:false},
+    {nomAllergie : "Crustacés", checked:false},
+    {nomAllergie : "Fruits à coque", checked:false},
+    {nomAllergie : "Gluten", checked:false},
+    {nomAllergie : "Graines de sésame", checked:false},
+    {nomAllergie : "Lait", checked:false},
+    {nomAllergie : "Lupin", checked:false},
+    {nomAllergie : "Mollusques", checked:false},
+    {nomAllergie : "Moutarde", checked:false},
+    {nomAllergie : "Oeufs", checked:false},
+    {nomAllergie : "Poissons", checked:false},
+    {nomAllergie : "Soja", checked:false},
+  ]
+
   constructor(private http:HttpClient, private env:EnvService) {
     this.URL_CHECK_CONNEXION = env.SERVER_URL + "/connexion/isconnected";
     this.URL_USER_AUTH = env.SERVER_URL + "/connexion/authenticate";
