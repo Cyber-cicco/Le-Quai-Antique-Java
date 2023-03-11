@@ -13,6 +13,6 @@ export class ReservationService {
   }
 
   getPlacesDispoAPI(soir:boolean, date:String){
-    this.http.get<{nbPlacesRestantes:number}>(this.URL_RESERVATION+"soir="+soir+"&date="+date)
+    return this.http.get<{nbPlacesRestantes:number}>(this.URL_RESERVATION+"soir="+soir+"&date="+date)
   }
 }

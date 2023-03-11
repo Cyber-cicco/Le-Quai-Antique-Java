@@ -2,40 +2,24 @@
   <div class="navBarBuffer"></div>
   <section class="headSection">
     <div class="title">Réserver</div>
+    <div *ngIf="nbPlacesDisponibles != undefined">Nombre de places displonibles : {{nbPlacesDisponibles}}</div>
   </section>
   <section class="profilSection">
     <ng-form [formGroup]="formReservation" class="form">
       <div class="title">Réserver : </div>
       <div class="input-container ic1">
         <label for="date">Date de la réservation :</label>
-        <input formControlName="date" id="date" class="input" type="date" (ngModelChange)="getHoraires()" [min]="today | date:'yyyy-MM-dd'" placeholder="{{user.email}}" />
+        <input formControlName="date" id="date" class="input" type="date" (ngModelChange)="getHoraires($event)" [min]="today | date:'yyyy-MM-dd'" placeholder="{{user.email}}" />
+        <div *ngIf="date?.invalid && formSubmitted" class="form-error">Vous devez préciser une date</div>
         <div class="cut"></div>
       </div>
       <div class="input-container ic1">
         <label for="repas">Déjeuner ou diner :</label>
-        <select formControlName="repas" id="repas" class="input">
+        <select formControlName="repas" id="repas" class="input" (ngModelChange)="showPlacesDisponibles($event)">
           <option [value]="false" [disabled]="!midiAvalaible">Déjeuner</option>
           <option [value]="true" [disabled]="!soirAvalaible">Diner</option>
         </select>
-        <div *ngIf="email?.invalid && formSubmitted" class="form-error">L'adresse mail est invalide</div>
-        <div class="cut"></div>
-      </div>
-      <div class="input-container ic1">
-        <label for="email">Mon mail :</label>
-        <input formControlName="email" id="email" class="input" type="text" placeholder="{{user.email}}" />
-        <div *ngIf="email?.invalid && formSubmitted" class="form-error">L'adresse mail est invalide</div>
-        <div class="cut"></div>
-      </div>
-      <div class="input-container ic1">
-        <label for="name">Mon nom :</label>
-        <input id="name" formControlName="nom" class="input" type="text" placeholder="{{user.nom}}" />
-        <div *ngIf="nom?.invalid && formSubmitted" class="form-error">Le nom est invalide</div>
-        <div class="cut"></div>
-      </div>
-      <div class="input-container ic1">
-        <label for="first">Mon prénom :</label>
-        <input id="first" class="input" formControlName="prenom" type="text" placeholder="{{user.prenom}}" />
-        <div *ngIf="prenom?.invalid && formSubmitted" class="form-error">Le prénom est invalide</div>
+        <div *ngIf="repas?.invalid && formSubmitted" class="form-error">Vous devez obligatoirement choisir une des deux options</div>
         <div class="cut"></div>
       </div>
       <div class="input-container ic1">
@@ -46,12 +30,15 @@
       </div>
       <fieldset class="input-container ic1">
         <legend>Précisez vos allergies (si vous en avez) : </legend>
-
         <div *ngFor="let allergie of nomAllergies">
           <input type="checkbox" [ngModelOptions]="{standalone:true}" [(ngModel)]="allergie.checked" id="{{ allergie.nomAllergie }}" name="{{ allergie.nomAllergie }}">
           <label for="{{allergie.nomAllergie}}">{{allergie.nomAllergie}}</label>
         </div>
       </fieldset>
+      <div class="btn-container icl">
+        <button class="btnProfile" (click)="openModalConfirmation()">Créer</button>
+        <div class="cut"></div>
+      </div>
       <div class="form-error">{{modifMessage}}</div>
     </ng-form>
   </section>

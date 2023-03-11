@@ -11,6 +11,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NgbCarouselModule, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { CarteComponent } from './carte/carte.component';
 import { ReserverComponent } from './reserver/reserver.component';
+import { ModalReservationComponent } from './reserver/modal-reservation/modal-reservation.component';
 
 
 
@@ -22,6 +23,7 @@ import { ReserverComponent } from './reserver/reserver.component';
     AccueilComponent,
     CarteComponent,
     ReserverComponent,
+    ModalReservationComponent,
   ],
     imports: [
         CommonModule,

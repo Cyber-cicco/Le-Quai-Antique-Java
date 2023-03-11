@@ -142,6 +142,8 @@ main {
 
   section.headSection {
     display: flex;
+    color : white;
+    padding-bottom: 10px;
     flex-direction: row;
     flex-wrap: wrap;
     background-color: $section2;

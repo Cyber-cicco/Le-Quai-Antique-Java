@@ -14,9 +14,6 @@ import java.time.LocalDateTime;
 @Validated
 public class ReservationDTO {
 
-    @NotBlank
-    @Email
-    private String email;
 
     @NotNull
     private LocalDateTime dateReservation;

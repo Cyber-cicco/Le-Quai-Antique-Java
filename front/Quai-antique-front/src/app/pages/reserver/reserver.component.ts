@@ -6,6 +6,10 @@ import {Horaire} from "../../models/horaire";
 import {RestaurantService} from "../../providers/restaurant.service";
 import {ReservationService} from "../../providers/reservation.service";
 import {Reservation} from "../../models/reservation";
+import {formatDate} from "@angular/common";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {ModalReservationComponent} from "./modal-reservation/modal-reservation.component";
+import {EnvService} from "../../providers/env.service";
 
 @Component({
   selector: 'qa-reserver',
@@ -22,19 +26,20 @@ export class ReserverComponent {
   nomAllergies:{nomAllergie:string, checked:boolean|undefined}[] = []
   modifMessage: any;
   today= new Date();
-  horaires:Horaire|undefined = undefined;
+  horaires:Horaire|undefined;
   midiAvalaible= false;
   soirAvalaible=false;
+  nbPlacesDisponibles: number | undefined;
+  private soir=false;
 
   constructor(private fb:FormBuilder,
               private userSrv:UserService,
               private restaurantService:RestaurantService,
-              private reservationService:ReservationService){
+              private reservationService:ReservationService,
+              private modalService:NgbModal,
+              private env:EnvService){
     this.formReservation = this.fb.group({
-      nom : [this.user.nom, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
-      prenom : [this.user.prenom, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
-      email : [this.user.email, [Validators.required, Validators.email]],
-      convives : [this.user.nbConvives, [Validators.min(0), Validators.max(20)]],
+      convives : [this.user.nbConvives, [Validators.min(0), Validators.max(20), Validators.required]],
       date : ["", [Validators.required]],
       repas : ["", [Validators.required]],
     })
@@ -54,22 +59,19 @@ export class ReserverComponent {
     return this.formReservation.get("repas");
   }
 
-  get nom(){
-    return this.formReservation.get("nom");
-  }
-  get prenom(){
-    return this.formReservation.get("prenom");
-  }
-
-  get email(){
-    return this.formReservation.get("email");
-  }
-
   get convives(){
     return this.formReservation.get("convives");
   }
 
   openModalConfirmation() {
+    this.formSubmitted = true;
+    if(this.formReservation.valid && this.horaires != undefined){
+      this.env.dataModalReservation = {
+        horaires : this.horaires,
+        soir : this.soir,
+      }
+      this.modalService.open(ModalReservationComponent);
+    }
 
   }
 
@@ -106,7 +108,21 @@ export class ReserverComponent {
     }
   }
 
-  getHoraires() {
+  getHoraires($event: any) {
+    this.reservation.dateReservation =  new Date($event);
+    this.formReservation.get("repas")?.setValue("");
+    this.nbPlacesDisponibles = undefined;
+    this.isMidiAvalaible();
+    this.isSoirAvalaible();
+  }
 
+  showPlacesDisponibles($event:boolean) {
+    if(this.reservation.dateReservation != undefined && $event){
+      this.soir = $event;
+      let date = formatDate(this.reservation.dateReservation, "yyyy-MM-dd", 'en-US');
+      this.reservationService.getPlacesDispoAPI($event, date).subscribe(value => {
+        this.nbPlacesDisponibles = value.nbPlacesRestantes;
+      })
+    }
   }
 }
