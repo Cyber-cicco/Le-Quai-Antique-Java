@@ -28,6 +28,6 @@ public class RestaurantService {
     }
 
     public HoraireDTO getHoraireForWeekDay(String restaurant, String weekDay) {
-        return horaireMapper.toHoraireDTO(horaireRepository.getHoraireForCurrentDay(weekDay, restaurant).orElseThrow(EntityNotFoundException::new).get(0));
+        return horaireMapper.toHoraireDTO(horaireRepository.getHoraireForCurrentDay(weekDay, restaurant).get(0));
     }
 }

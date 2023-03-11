@@ -32,7 +32,9 @@ public class UserController {
     }
 
     @PatchMapping("profil")
-    public ResponseEntity<AuthenticationResponse> changeProfilUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization, @RequestBody UtilisateurDTO utilisateurDTO   ){
+    public ResponseEntity<AuthenticationResponse> changeProfilUser(
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization,
+            @RequestBody UtilisateurDTO utilisateurDTO){
         return ResponseEntity.ok(utilisateurService.updateUtilisateur(authorization, utilisateurDTO));
     }
 }

@@ -211,8 +211,8 @@ main {
 
 .form {
   width: 420px;
-  @media screen and (max-width : 1000px) {
-    width: 90%;
+  @media screen and (max-width : 700px) {
+    width: 100%;
     margin-top: 50px;
     margin-bottom: 75px+50px;
     font-size: 1.3rem;
@@ -303,7 +303,7 @@ label {
   font-size: $inputFontSize;
   height: 100%;
   outline: 0;
-  padding: 4px 20px 0;
+  padding: 4px 20px 4px;
   width: 100%;
   @media screen and (max-width : 1000px) {
     font-size: $inputFontSize*0.75;

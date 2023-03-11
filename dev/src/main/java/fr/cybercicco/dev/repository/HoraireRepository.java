@@ -20,5 +20,5 @@ public interface HoraireRepository extends JpaRepository<Horaire, Integer> {
 """,
             nativeQuery=true
     )
-    Optional<List<Horaire>> getHoraireForCurrentDay(String jour, String nom);
+    List<Horaire> getHoraireForCurrentDay(String jour, String nom);
 }

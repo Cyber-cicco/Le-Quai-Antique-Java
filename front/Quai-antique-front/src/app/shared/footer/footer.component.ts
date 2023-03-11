@@ -9,9 +9,8 @@ import {RestaurantService} from "../../providers/restaurant.service";
 export class FooterComponent {
   message="";
 
-  private jours = ["LUNDI", "MARDI", "MERCREDI", "JEUDI", "VENDREDI", "SAMEDI", "DIMANCHE"]
   constructor(private restaurantService:RestaurantService) {
-    this.restaurantService.getHorairesCurrentDayAPI(this.jours[new Date().getDay()-1]).subscribe({
+    this.restaurantService.getHorairesCurrentDayAPI(this.restaurantService.jours[new Date().getDay()-1]).subscribe({
       next: value => {
         this.message = "Ouvert ce jour entre "
           + value.ouvertureDejeuner +

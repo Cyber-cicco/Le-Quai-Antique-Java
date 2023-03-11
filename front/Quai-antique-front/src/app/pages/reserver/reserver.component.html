@@ -8,7 +8,16 @@
       <div class="title">Réserver : </div>
       <div class="input-container ic1">
         <label for="date">Date de la réservation :</label>
-        <input formControlName="date" id="date" class="input" type="date" [min]="today | date:'yyyy-MM-dd'" placeholder="{{user.email}}" />
+        <input formControlName="date" id="date" class="input" type="date" (ngModelChange)="getHoraires()" [min]="today | date:'yyyy-MM-dd'" placeholder="{{user.email}}" />
+        <div class="cut"></div>
+      </div>
+      <div class="input-container ic1">
+        <label for="repas">Déjeuner ou diner :</label>
+        <select formControlName="repas" id="repas" class="input">
+          <option [value]="false" [disabled]="!midiAvalaible">Déjeuner</option>
+          <option [value]="true" [disabled]="!soirAvalaible">Diner</option>
+        </select>
+        <div *ngIf="email?.invalid && formSubmitted" class="form-error">L'adresse mail est invalide</div>
         <div class="cut"></div>
       </div>
       <div class="input-container ic1">
@@ -30,7 +39,7 @@
         <div class="cut"></div>
       </div>
       <div class="input-container ic1">
-        <label for="convives">Nombre de couverts à prévoir :</label>
+        <label for="convives">Nombre de personnes vous accompagnant :</label>
         <input formControlName="convives" id="convives" class="input" type="number" placeholder=" " min="0" max="20"/>
         <div *ngIf="convives?.invalid && formSubmitted" class="form-error">Nombre de couverts invalide</div>
         <div class="cut"></div>
@@ -43,10 +52,6 @@
           <label for="{{allergie.nomAllergie}}">{{allergie.nomAllergie}}</label>
         </div>
       </fieldset>
-      <div class="btn-container icl">
-        <button class="btnProfile" (click)="openModalConfirmation()">Modifier</button>
-        <div class="cut"></div>
-      </div>
       <div class="form-error">{{modifMessage}}</div>
     </ng-form>
   </section>
