@@ -7,6 +7,6 @@ import {Horaire} from "../models/horaire";
 export class EnvService {
 
   SERVER_URL = "http://localhost:8080"
-  dataModalReservation: { soir: boolean; horaires: Horaire } | undefined;
+  dataModalReservation: { soir: boolean; allergies: string[]; horaires: Horaire; nbPersonnes: number } | undefined;
   constructor() { }
 }

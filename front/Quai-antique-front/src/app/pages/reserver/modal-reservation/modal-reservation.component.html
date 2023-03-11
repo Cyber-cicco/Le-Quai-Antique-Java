@@ -1,5 +1,8 @@
 <div class="modal-header">
   <h4 class="modal-title" id="modal-basic-title">Détails du véhicule</h4>
 </div>
-<div class="modal-body">Je suis une modale qui fonctionne, et je vous emmerde</div>
+<div class="modal-body">
+  <p>{{dataReservation?.nbPersonnes}}</p>
+  <p>{{dataReservation?.allergies}}</p>
+</div>
 <div class="modal-footer"><button (click)="hideModal()" class="btn-danger">Annuler</button> </div>

@@ -25,6 +25,11 @@ nav.navBar {
       font-size: 3em;
     }
   }
+  .navList{
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+  }
 
   li {
     font-size: 1.75em;

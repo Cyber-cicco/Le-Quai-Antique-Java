@@ -10,12 +10,10 @@ import {Horaire} from "../../../models/horaire";
 })
 export class ModalReservationComponent {
 
-  soir:boolean =false
-  horaire:Horaire|undefined
+  dataReservation: { soir: boolean; allergies: string[]; horaires: Horaire; nbPersonnes: number } | undefined
   constructor(private modalService:NgbModal, private env:EnvService) {
     if(this.env.dataModalReservation != undefined){
-      this.soir  = this.env.dataModalReservation.soir;
-      this.horaire = this.env.dataModalReservation.horaires;
+      this.dataReservation  = this.env.dataModalReservation;
     }
   }
   hideModal() {

@@ -66,9 +66,12 @@ export class ReserverComponent {
   openModalConfirmation() {
     this.formSubmitted = true;
     if(this.formReservation.valid && this.horaires != undefined){
+      let allergies  = this.nomAllergies.filter(value => value.checked).map(value => value.nomAllergie);
       this.env.dataModalReservation = {
         horaires : this.horaires,
         soir : this.soir,
+        nbPersonnes: Number.parseInt(this.formReservation.get("convives")?.value),
+        allergies : allergies
       }
       this.modalService.open(ModalReservationComponent);
     }
