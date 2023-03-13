@@ -35,5 +35,11 @@ public class Allergene {
     )
     private List<Plat> plats;
 
+    @ManyToMany
+    @JoinTable(name="reservation_allergie",
+            joinColumns = @JoinColumn(name = "allergene_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "reservation_id", referencedColumnName = "id")
+    )
+    private List<Reservation> reservations;
 
 }

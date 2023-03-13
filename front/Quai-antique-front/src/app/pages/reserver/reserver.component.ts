@@ -10,6 +10,7 @@ import {formatDate} from "@angular/common";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ModalReservationComponent} from "./modal-reservation/modal-reservation.component";
 import {EnvService} from "../../providers/env.service";
+import {DateUtilService} from "../../providers/date-util.service";
 
 @Component({
   selector: 'qa-reserver',
@@ -37,7 +38,9 @@ export class ReserverComponent {
               private restaurantService:RestaurantService,
               private reservationService:ReservationService,
               private modalService:NgbModal,
-              private env:EnvService){
+              private env:EnvService,
+              private dateUtil:DateUtilService){
+    this.user = this.userSrv.user;
     this.formReservation = this.fb.group({
       convives : [this.user.nbConvives, [Validators.min(0), Validators.max(20), Validators.required]],
       date : ["", [Validators.required]],
@@ -65,14 +68,15 @@ export class ReserverComponent {
 
   openModalConfirmation() {
     this.formSubmitted = true;
-    if(this.formReservation.valid && this.horaires != undefined){
+    if(this.formReservation.valid && this.horaires != undefined && this.reservation.dateReservation != undefined){
       let allergies  = this.nomAllergies.filter(value => value.checked).map(value => value.nomAllergie);
-      this.env.dataModalReservation = {
+      this.env.dataModalReservation.next({
         horaires : this.horaires,
         soir : this.soir,
         nbPersonnes: Number.parseInt(this.formReservation.get("convives")?.value),
-        allergies : allergies
-      }
+        allergies : allergies,
+        date: this.reservation.dateReservation
+      })
       this.modalService.open(ModalReservationComponent);
     }
 
@@ -89,18 +93,12 @@ export class ReserverComponent {
   isTrancheHoraireAvalaible(horaires:string, lastHour:Date){
     let hourOfReservation = new Date();
     hourOfReservation.setHours(hourOfReservation.getHours()+1)
-    let convertedJSHours = this.changeJavaTimeToJSHour(horaires);
+    let convertedJSHours = this.dateUtil.changeJavaTimeToJSHour(horaires);
     lastHour.setHours(convertedJSHours[0], convertedJSHours[1], convertedJSHours[2])
     if (lastHour <= hourOfReservation){
       return false;
     }
     return true;
-  }
-
-
-  changeJavaTimeToJSHour(time:string){
-    return [time.substring(0, time.indexOf(":")), time.substring(time.indexOf(":")+1, time.lastIndexOf(":")), time.substring(time.lastIndexOf(":")+1)]
-      .map(value => Number.parseInt(value));
   }
 
   isSoirAvalaible() {
@@ -119,11 +117,11 @@ export class ReserverComponent {
     this.isSoirAvalaible();
   }
 
-  showPlacesDisponibles($event:boolean) {
+  showPlacesDisponibles($event:string) {
     if(this.reservation.dateReservation != undefined && $event){
-      this.soir = $event;
+      this.soir = $event == "true";
       let date = formatDate(this.reservation.dateReservation, "yyyy-MM-dd", 'en-US');
-      this.reservationService.getPlacesDispoAPI($event, date).subscribe(value => {
+      this.reservationService.getPlacesDispoAPI(this.soir, date).subscribe(value => {
         this.nbPlacesDisponibles = value.nbPlacesRestantes;
       })
     }

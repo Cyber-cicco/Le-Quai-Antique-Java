@@ -12,8 +12,8 @@
 
 @mixin button($btnColor, $btnPadding, $btnRadius, $btnMargin){
   background-color: $btnColor;
-  border-radius: $btnRadius;
   padding: $btnPadding;
+  border-radius: $btnRadius;
   margin: $btnMargin;
   :disabled{
     background-color: lighten($btnColor, 5);
@@ -414,7 +414,7 @@ div.description {
 }
 
 
-button {
+.button, button {
   display: flex;
   height: $btnBasicHeight;
   font-size: 1.2em;

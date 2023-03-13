@@ -1,8 +1,11 @@
 <div class="modal-header">
-  <h4 class="modal-title" id="modal-basic-title">Détails du véhicule</h4>
+  <h4 class="modal-title" id="modal-basic-title">Choisissez une horaire de réservation : </h4>
 </div>
 <div class="modal-body">
-  <p>{{dataReservation?.nbPersonnes}}</p>
-  <p>{{dataReservation?.allergies}}</p>
+  <div class="d-flex flex-column justify-content-center align-items-center">
+    <button class="button" *ngFor="let horaire of horairesReservation" (click)="postReservation(horaire)">{{horaire[0] + ":"+horaire[1] + (horaire[1] < 10 ? "0":"")}}</button>
+  </div>
 </div>
-<div class="modal-footer"><button (click)="hideModal()" class="btn-danger">Annuler</button> </div>
+<div class="modal-footer">
+  <button (click)="hideModal()" class="btn-danger">Annuler</button>
+</div>

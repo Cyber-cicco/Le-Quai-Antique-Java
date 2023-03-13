@@ -27,6 +27,6 @@ public class ReservationController {
     public ResponseEntity<ReservationResponse> postNewReservation(
             @RequestBody ReservationDTO reservationDTO,
             @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization){
-        return ResponseEntity.ok(reservationService.saveReservation(reservationDTO, authorization));
+        return ResponseEntity.ok(reservationService.saveReservations(reservationDTO, authorization));
     }
 }

@@ -1,8 +1,11 @@
 package fr.cybercicco.dev.repository;
 
 import fr.cybercicco.dev.entity.Place;
+import fr.cybercicco.dev.entity.Restaurant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 public interface PlaceRepository extends JpaRepository<Place, Integer> {
 
@@ -14,4 +17,6 @@ public interface PlaceRepository extends JpaRepository<Place, Integer> {
             nativeQuery=true
     )
     Integer countAllPlaces(String restaurant);
+
+    List<Place> findByRestaurant(Restaurant restaurant);
 }
