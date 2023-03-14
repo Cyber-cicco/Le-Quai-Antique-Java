@@ -92,11 +92,12 @@ public class ReservationService {
      */
     public List<Place> findBestPlaceToReserve(List<Place> places, Integer nbPlaces){
         Map<Integer, List<Place>> sizeToPlaces = new HashMap<>();
-        List<Place> placesForOneRow = new ArrayList<>();
+
         for(int i = 0; i < places.size(); i++){
             if(places.get(i).getNbPlaces().intValueExact() < nbPlaces+1){
                 for(int j = 0; j < places.size(); j++){
                     if(i != j){
+                        List<Place> placesForOneRow = new ArrayList<>();
                         placesForOneRow.add(places.get(i));
                         int k = 0;
                         while(placesForOneRow.stream().map(val-> val.getNbPlaces().intValueExact()).mapToInt(Integer::intValue).sum() < nbPlaces+1 && j+k < places.size()){
@@ -104,7 +105,6 @@ public class ReservationService {
                             k++;
                         }
                         sizeToPlaces.put(placesForOneRow.stream().map(val-> val.getNbPlaces().intValueExact()).mapToInt(Integer::intValue).sum(), placesForOneRow);
-                        placesForOneRow.clear();
                     }
                 }
             } else {
@@ -122,6 +122,7 @@ public class ReservationService {
 
     @Transactional
     public void saveOneReservation(ReservationDTO reservationDTO, Place place, String email){
+        log.info("inSave");
         Reservation reservation = Reservation.builder()
                 .dateReservation(reservationDTO.getDateReservation())
                 .allergenes(reservationDTO.getAllergenes().stream()
