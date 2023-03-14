@@ -73,24 +73,30 @@ public class ReservationService {
     }
 
     /**
-     * L'utilité et le fonctionnement de cette méthode est absolument évident, inutile donc de commenter
-     * Blague à part:
+     * @param places : Liste d'objet Place.
+     * @param nbPlaces : nombre de place souhaité par la personne faisant la réservation
+     * @return List de place : la liste des places permettant de répondre au mieux à la demande de places.
      * Parmis la liste des tables non réservées, va essayer de déterminer toutes les combinaisons de tables
      * pouvant contenir le nombre de personnes souhaitées.
      * Parmis ces combinaisons, il va retenir la dernière combinaison de tables permettant de contenir au mieux
      * ces personnes sans gacher de place, et va renvoyer la liste des tables qu'il faut donc réserver compte tenu
      * du nombre de personnes à réserver.
      * Cet algorithme fonctionne de la façon suivante :
-     * La magie noire.
-     * Cette méthode est donc dédiées à Bibine, la chèvre sacrifiée pour la mettre au point.
+     * Itère une première fois sur le tableau. S'il trouve une table suffisamment grande, il la met dans une map, avec
+     * pour clé le nombre de places disponibles grâce à cette table.
+     * Si la table n'est pas assez grande, il itère ensuite une nouvelle fois sur les autres tables, jusqu'à ce que la
+     * combinaison de toutes les tables possède suffisamment de place, ou qu'aucune combinaison n'ait été trouvée
+     * S'il y a suffisamment de place, met la liste des tables dans la map avec pour clé leur nombre de places.
+     * Une fois ceci fait, trie la liste des clés de la map de plus petite à la plus grande, et renvoie la liste de
+     * tables possédant le nombre de places le plus proche du nombre de places souhaité
      */
     public List<Place> findBestPlaceToReserve(List<Place> places, Integer nbPlaces){
         Map<Integer, List<Place>> sizeToPlaces = new HashMap<>();
+        List<Place> placesForOneRow = new ArrayList<>();
         for(int i = 0; i < places.size(); i++){
             if(places.get(i).getNbPlaces().intValueExact() < nbPlaces+1){
                 for(int j = 0; j < places.size(); j++){
                     if(i != j){
-                        List<Place> placesForOneRow = new ArrayList<>();
                         placesForOneRow.add(places.get(i));
                         int k = 0;
                         while(placesForOneRow.stream().map(val-> val.getNbPlaces().intValueExact()).mapToInt(Integer::intValue).sum() < nbPlaces+1 && j+k < places.size()){
@@ -98,6 +104,7 @@ public class ReservationService {
                             k++;
                         }
                         sizeToPlaces.put(placesForOneRow.stream().map(val-> val.getNbPlaces().intValueExact()).mapToInt(Integer::intValue).sum(), placesForOneRow);
+                        placesForOneRow.clear();
                     }
                 }
             } else {
