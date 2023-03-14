@@ -19,11 +19,6 @@ public class UserController {
     private final JwtService jwtService;
     private final UtilisateurService utilisateurService;
 
-    @GetMapping("test_admin")
-    public ResponseEntity<String> getInfoDashboard(){
-        return ResponseEntity.ok("tu es authentifié mais pas admin");
-    }
-
 
     @GetMapping("profil")
     public ResponseEntity<UtilisateurDTO> getProfilUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization){

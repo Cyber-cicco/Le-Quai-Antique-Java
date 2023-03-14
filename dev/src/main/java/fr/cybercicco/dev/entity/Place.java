@@ -30,4 +30,9 @@ public class Place {
 
     @OneToMany(mappedBy = "place")
     private List<Reservation> reservations;
+
+    @Override
+    public String toString(){
+        return id + " " + nbPlaces + " " + restaurant;
+    }
 }

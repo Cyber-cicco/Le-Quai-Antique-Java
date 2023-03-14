@@ -3,6 +3,8 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {EnvService} from "../../../providers/env.service";
 import {Horaire} from "../../../models/horaire";
 import {DateUtilService} from "../../../providers/date-util.service";
+import {Reservation} from "../../../models/reservation";
+import {ReservationService} from "../../../providers/reservation.service";
 
 @Component({
   selector: 'qa-modal-reservation',
@@ -13,7 +15,12 @@ export class ModalReservationComponent {
 
   dataReservation: { soir: boolean; allergies: string[]; horaires: Horaire; nbPersonnes: number, date:Date } | undefined
   horairesReservation: number[][] = [];
-  constructor(private modalService:NgbModal, private env:EnvService, private dateUtil:DateUtilService) {
+
+  private reservation:Reservation | undefined;
+  constructor(private modalService:NgbModal,
+              private env:EnvService,
+              private dateUtil:DateUtilService,
+              private reservationService:ReservationService) {
     this.dataReservation =  this.env.dataModalReservation.getValue();
     if(this.dataReservation != undefined){
       let debutReservation = this.dataReservation.soir ? this.dataReservation.horaires.ouvertureDiner : this.dataReservation.horaires.ouvertureDejeuner;
@@ -45,6 +52,18 @@ export class ModalReservationComponent {
     if(this.dataReservation != undefined){
       console.log(typeof this.dataReservation.date);
       this.dataReservation.date.setHours(horaire[0], horaire[1]);
+      this.reservation = {
+        dateReservation:this.dataReservation.date,
+        nbPlaces: this.dataReservation.nbPersonnes,
+        restaurant: "Le Quai Antique Chamberry",
+        soir: this.dataReservation.soir,
+        allergenes : this.dataReservation.allergies
+
+      }
+      this.reservationService.postReservation(this.reservation, localStorage.getItem("token")).subscribe(value => {
+        console.log(value);
+        }
+      )
     }
   }
 }

@@ -9,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @RequestMapping("/reservations")
 @RequiredArgsConstructor
@@ -26,7 +27,8 @@ public class ReservationController {
     @PostMapping
     public ResponseEntity<ReservationResponse> postNewReservation(
             @RequestBody ReservationDTO reservationDTO,
-            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization){
+            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization){
         return ResponseEntity.ok(reservationService.saveReservations(reservationDTO, authorization));
+
     }
 }

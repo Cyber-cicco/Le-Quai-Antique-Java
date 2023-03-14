@@ -24,4 +24,6 @@ public class ReservationDTO {
 
     private String restaurant;
 
+    private boolean soir;
+
 }

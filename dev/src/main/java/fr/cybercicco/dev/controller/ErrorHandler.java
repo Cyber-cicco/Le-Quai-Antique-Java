@@ -1,7 +1,9 @@
 package fr.cybercicco.dev.controller;
 
+import fr.cybercicco.dev.controller.message.ReservationResponse;
 import fr.cybercicco.dev.exception.DuplicateEntryException;
 import fr.cybercicco.dev.exception.EntityNotFoundException;
+import fr.cybercicco.dev.exception.UndefinedHorairesForWeekDayException;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
 import org.springframework.http.ResponseEntity;
@@ -27,5 +29,10 @@ public class ErrorHandler {
     @ExceptionHandler(DuplicateEntryException.class)
     public ResponseEntity<String> quandDuplicateEntryException(DuplicateEntryException ex){
         return ResponseEntity.badRequest().body(ex.getMessage());
+    }
+
+    @ExceptionHandler(UndefinedHorairesForWeekDayException.class)
+    public ResponseEntity<ReservationResponse> quandPasDHoraires(){
+        return ResponseEntity.ok(new ReservationResponse(0));
     }
 }
