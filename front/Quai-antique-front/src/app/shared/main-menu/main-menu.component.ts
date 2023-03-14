@@ -35,6 +35,7 @@ export class MainMenuComponent {
         },
         error:()=>{
           this.userSrv.getIsConnectedSubject().next(false);
+          localStorage.clear();
         }
       });
     } else {

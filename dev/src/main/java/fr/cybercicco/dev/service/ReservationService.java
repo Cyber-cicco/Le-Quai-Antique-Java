@@ -5,6 +5,7 @@ import fr.cybercicco.dev.dto.ReservationDTO;
 import fr.cybercicco.dev.entity.Horaire;
 import fr.cybercicco.dev.entity.Place;
 import fr.cybercicco.dev.entity.Reservation;
+import fr.cybercicco.dev.exception.InvalidReservationException;
 import fr.cybercicco.dev.exception.UndefinedHorairesForWeekDayException;
 import fr.cybercicco.dev.repository.*;
 import jakarta.persistence.EntityNotFoundException;
@@ -58,20 +59,31 @@ public class ReservationService {
         if(horaireForWeekDayList.isEmpty()) throw new UndefinedHorairesForWeekDayException();
         Horaire horaireForWeekDay = horaireForWeekDayList.get(0);
         LocalDateTime ldtDebut = currentDate.atTime((soir)? horaireForWeekDay.getOuvertureDiner() : horaireForWeekDay.getOuvertureDejeuner());
-        log.info(ldtDebut.toString());
         LocalDateTime ldtFin = currentDate.atTime((soir)? horaireForWeekDay.getFermetureDiner() : horaireForWeekDay.getFermetureDejeuner());
-        log.info(ldtFin.toString());
         return new LocalDateTime[]{ldtDebut, ldtFin};
     }
 
     @Transactional
     public ReservationResponse saveReservations(ReservationDTO reservationDTO, String authorization) {
         String email = authorization!=null ? jwtService.extractEmail(authorization.substring(7)):null;
+        if(!isDateValid(reservationDTO)) throw new InvalidReservationException("Réservation non valide");
         LocalDateTime[] rangeForCurrentDate = getHoraireRangeInCurrentDate(reservationDTO.getDateReservation().toLocalDate(), reservationDTO.isSoir(), reservationDTO.getRestaurant());
         List<Place> places = placeRepository.findAllFreePlaces(rangeForCurrentDate[0], rangeForCurrentDate[1], reservationDTO.getRestaurant());
         List<Place> chosenPlaces = findBestPlaceToReserve(places, reservationDTO.getNbPlaces());
         chosenPlaces.forEach((var)-> saveOneReservation(reservationDTO, var, email));
         return getReservationFromCurrentDate(reservationDTO.getDateReservation().toLocalDate(), reservationDTO.isSoir(), reservationDTO.getRestaurant());
+    }
+
+    private boolean isDateValid(ReservationDTO reservationDTO) {
+        LocalDateTime[] range = getHoraireRangeInCurrentDate(reservationDTO.getDateReservation().toLocalDate(), reservationDTO.isSoir(), reservationDTO.getRestaurant());
+        LocalDateTime upperLimit = range[1].minusHours(1);
+        int placesRestantes =  placeRepository.findAllFreePlaces(range[0], range[1], reservationDTO.getRestaurant()).stream()
+                .map(place -> place.getNbPlaces().intValueExact())
+                .mapToInt(Integer::intValue)
+                .sum();
+        return (!reservationDTO.getDateReservation().isBefore(range[0])
+                && !reservationDTO.getDateReservation().isAfter(upperLimit))
+                && ((reservationDTO.getNbPlaces()+1 < placesRestantes));
     }
 
     /**
