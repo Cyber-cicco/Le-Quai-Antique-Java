@@ -106,11 +106,11 @@ public class ReservationService {
                             placesForOneRow.add(places.get(j+k));
                             k++;
                         }
-                        sizeToPlaces.put(placesForOneRow.stream().map(val-> val.getNbPlaces().intValueExact()).mapToInt(Integer::intValue).sum(), placesForOneRow);
+                        sizeToPlaces.put(placesForOneRow.stream().map(val-> val.getNbPlaces().intValueExact()).mapToInt(Integer::intValue).sum()*100 +placesForOneRow.size(), placesForOneRow);
                     }
                 }
             } else {
-                sizeToPlaces.put(places.get(i).getNbPlaces().intValueExact(), List.of(places.get(i)));
+                sizeToPlaces.put(places.get(i).getNbPlaces().intValueExact()*100, List.of(places.get(i)));
             }
         }
         SortedSet<Integer> keys = new TreeSet<>(sizeToPlaces.keySet());
@@ -124,7 +124,6 @@ public class ReservationService {
 
     @Transactional
     public void saveOneReservation(ReservationDTO reservationDTO, Place place, String email){
-        log.info("inSave");
         Reservation reservation = Reservation.builder()
                 .dateReservation(reservationDTO.getDateReservation())
                 .allergenes(reservationDTO.getAllergenes().stream()
