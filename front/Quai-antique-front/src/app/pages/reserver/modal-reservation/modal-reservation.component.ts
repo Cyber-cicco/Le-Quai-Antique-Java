@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {EnvService} from "../../../providers/env.service";
-import {Horaire} from "../../../models/horaire";
 import {DateUtilService} from "../../../providers/date-util.service";
 import {Reservation} from "../../../models/reservation";
 import {ReservationService} from "../../../providers/reservation.service";
+import {DataReservation} from "../../../models/data-reservation";
 
 @Component({
   selector: 'qa-modal-reservation',
@@ -13,7 +13,7 @@ import {ReservationService} from "../../../providers/reservation.service";
 })
 export class ModalReservationComponent {
 
-  dataReservation: { soir: boolean; allergies: string[]; horaires: Horaire; nbPersonnes: number, date:Date } | undefined
+  dataReservation: DataReservation | undefined
   horairesReservation: number[][] = [];
 
   private reservation:Reservation | undefined;
@@ -51,17 +51,21 @@ export class ModalReservationComponent {
   postReservation(horaire: number[]) {
     if(this.dataReservation != undefined){
       console.log(typeof this.dataReservation.date);
-      this.dataReservation.date.setHours(horaire[0], horaire[1]);
+      this.dataReservation.date.setHours(horaire[0]+1, horaire[1]);
       this.reservation = {
         dateReservation:this.dataReservation.date,
         nbPlaces: this.dataReservation.nbPersonnes,
         restaurant: "Le Quai Antique Chamberry",
         soir: this.dataReservation.soir,
-        allergenes : this.dataReservation.allergies
+        allergenes : this.dataReservation.allergies,
+        nom: this.dataReservation.nom,
+        prenom: this.dataReservation.prenom
 
       }
       this.reservationService.postReservation(this.reservation, localStorage.getItem("token")).subscribe(value => {
-        console.log(value);
+          this.reservationService.nbPlacesRestanteSubject.next(value.nbPlacesRestantes);
+          this.modalService.dismissAll();
+          this.reservationService.reservationDoneSubject.next(true)
         }
       )
     }

@@ -58,7 +58,9 @@ public class ReservationService {
         if(horaireForWeekDayList.isEmpty()) throw new UndefinedHorairesForWeekDayException();
         Horaire horaireForWeekDay = horaireForWeekDayList.get(0);
         LocalDateTime ldtDebut = currentDate.atTime((soir)? horaireForWeekDay.getOuvertureDiner() : horaireForWeekDay.getOuvertureDejeuner());
+        log.info(ldtDebut.toString());
         LocalDateTime ldtFin = currentDate.atTime((soir)? horaireForWeekDay.getFermetureDiner() : horaireForWeekDay.getFermetureDejeuner());
+        log.info(ldtFin.toString());
         return new LocalDateTime[]{ldtDebut, ldtFin};
     }
 
@@ -130,6 +132,8 @@ public class ReservationService {
                         .toList())
                 .utilisateur((email == null) ? null : utilisateurRepository.findByEmail(email).orElseThrow(EntityNotFoundException::new))
                 .place(place)
+                .nom(reservationDTO.getNom())
+                .prenom(reservationDTO.getPrenom())
                 .build();
         reservationRepository.save(reservation);
     }

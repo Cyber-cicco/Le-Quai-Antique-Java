@@ -25,7 +25,7 @@ export class ReserverComponent {
   formSubmitted = false;
 
   nomAllergies:{nomAllergie:string, checked:boolean|undefined}[] = []
-  modifMessage: any;
+  modifMessage: string | undefined;
   today= new Date();
   horaires:Horaire|undefined;
   midiAvalaible= false;
@@ -43,6 +43,8 @@ export class ReserverComponent {
     this.user = this.userSrv.user;
     this.formReservation = this.fb.group({
       convives : [this.user.nbConvives, [Validators.min(0), Validators.max(20), Validators.required]],
+      nom : [this.userSrv.user.nom, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
+      prenom : [this.userSrv.user.prenom, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
       date : ["", [Validators.required]],
       repas : ["", [Validators.required]],
     })
@@ -51,11 +53,27 @@ export class ReserverComponent {
       this.isMidiAvalaible();
       this.isSoirAvalaible();
     })
+    this.reservationService.nbPlacesRestanteSubject.asObservable().subscribe(value =>{
+      this.nbPlacesDisponibles = value;
+    })
+    this.reservationService.reservationDoneSubject.asObservable().subscribe(() => {
+      this.modifMessage = "Réservation bien prise en compte";
+      this.formReservation.get("date")?.reset();
+      this.formReservation.get("repas")?.setValue("");
+    })
     this.nomAllergies = this.userSrv.nomAllergies;
   }
 
   get date(){
     return this.formReservation.get("date");
+  }
+
+  get nom(){
+    return this.formReservation.get("nom");
+  }
+
+  get prenom(){
+    return this.formReservation.get("prenom");
   }
 
   get repas(){
@@ -75,7 +93,9 @@ export class ReserverComponent {
         soir : this.soir,
         nbPersonnes: Number.parseInt(this.formReservation.get("convives")?.value),
         allergies : allergies,
-        date: this.reservation.dateReservation
+        date: this.reservation.dateReservation,
+        nom:this.formReservation.get("nom")?.value,
+        prenom:this.formReservation.get("prenom")?.value
       })
       this.modalService.open(ModalReservationComponent);
     }
@@ -95,10 +115,8 @@ export class ReserverComponent {
     hourOfReservation.setHours(hourOfReservation.getHours()+1)
     let convertedJSHours = this.dateUtil.changeJavaTimeToJSHour(horaires);
     lastHour.setHours(convertedJSHours[0], convertedJSHours[1], convertedJSHours[2])
-    if (lastHour <= hourOfReservation){
-      return false;
-    }
-    return true;
+    return lastHour > hourOfReservation;
+
   }
 
   isSoirAvalaible() {
@@ -122,7 +140,7 @@ export class ReserverComponent {
       this.soir = $event == "true";
       let date = formatDate(this.reservation.dateReservation, "yyyy-MM-dd", 'en-US');
       this.reservationService.getPlacesDispoAPI(this.soir, date).subscribe(value => {
-        this.nbPlacesDisponibles = value.nbPlacesRestantes;
+        this.reservationService.nbPlacesRestanteSubject.next(value.nbPlacesRestantes);
       })
     }
   }

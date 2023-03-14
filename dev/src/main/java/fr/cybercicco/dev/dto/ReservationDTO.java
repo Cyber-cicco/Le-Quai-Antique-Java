@@ -26,4 +26,8 @@ public class ReservationDTO {
 
     private boolean soir;
 
+    private String nom;
+
+    private String prenom;
+
 }

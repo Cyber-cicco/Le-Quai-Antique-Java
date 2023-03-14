@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {EnvService} from "./env.service";
 import {HttpClient} from "@angular/common/http";
 import {Reservation} from "../models/reservation";
+import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,8 @@ import {Reservation} from "../models/reservation";
 export class ReservationService {
 
   private URL_RESERVATION:string
+  nbPlacesRestanteSubject: Subject<number> = new Subject<number>();
+  reservationDoneSubject: Subject<boolean> = new Subject<boolean>();
   constructor(private env:EnvService, private http:HttpClient) {
     this.URL_RESERVATION = this.env.SERVER_URL + "/reservations"
   }
@@ -18,7 +21,7 @@ export class ReservationService {
   }
 
   postReservation(reservation: Reservation, token: string | null) {
-    return this.http.post(this.URL_RESERVATION, reservation, (token != null) ? {headers:{
+    return this.http.post<{nbPlacesRestantes:number}>(this.URL_RESERVATION, reservation, (token != null) ? {headers:{
       "Authorization": "Bearer "+token,
         "Content-type": "application/json"}}:{});
   }

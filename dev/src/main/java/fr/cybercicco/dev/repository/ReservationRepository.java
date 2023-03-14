@@ -10,8 +10,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
 
     @Query(
             value = """
-    SELECT SUM(p.nb_places) FROM reservation rn
-    JOIN place p ON rn.table_id = p.id 
+    SELECT SUM(p.nb_places) FROM place p
+    JOIN reservation rn ON rn.table_id = p.id
     JOIN restaurant rt ON p.restaurant_id = rt.id
     WHERE rt.nom_restaurant =:restaurant
     AND rn.date_reservation BETWEEN :debut AND :dateFin

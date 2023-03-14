@@ -23,6 +23,10 @@ public class Reservation {
     @NotNull
     private LocalDateTime dateReservation;
 
+    private String nom;
+
+    private String prenom;
+
     @NotNull
     @ManyToOne
     @JoinColumn(name = "table_id")

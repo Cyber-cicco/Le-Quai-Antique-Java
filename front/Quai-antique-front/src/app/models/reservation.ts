@@ -8,4 +8,8 @@ export interface Reservation {
   restaurant:string,
 
   nbPlaces:number
+
+  nom:string,
+
+  prenom:string
 }

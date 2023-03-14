@@ -23,6 +23,18 @@
         <div class="cut"></div>
       </div>
       <div class="input-container ic1">
+        <label for="name">Nom :</label>
+        <input id="name" formControlName="nom" class="input" type="text" placeholder="{{user.nom}}" />
+        <div *ngIf="nom?.invalid && formSubmitted" class="form-error">Le nom est invalide</div>
+        <div class="cut"></div>
+      </div>
+      <div class="input-container ic1">
+        <label for="first">Prénom :</label>
+        <input id="first" class="input" formControlName="prenom" type="text" placeholder="{{user.prenom}}" />
+        <div *ngIf="prenom?.invalid && formSubmitted" class="form-error">Le prénom est invalide</div>
+        <div class="cut"></div>
+      </div>
+      <div class="input-container ic1">
         <label for="convives">Nombre de personnes vous accompagnant :</label>
         <input formControlName="convives" id="convives" class="input" type="number" placeholder=" " min="0" max="20"/>
         <div *ngIf="convives?.invalid && formSubmitted" class="form-error">Nombre de couverts invalide</div>
