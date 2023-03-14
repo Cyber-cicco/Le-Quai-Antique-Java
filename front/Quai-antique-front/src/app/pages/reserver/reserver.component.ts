@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {User} from "../../models/user";
 import {UserService} from "../../providers/user.service";
 import {Horaire} from "../../models/horaire";
@@ -42,7 +42,7 @@ export class ReserverComponent {
               private dateUtil:DateUtilService){
     this.user = this.userSrv.user;
     this.formReservation = this.fb.group({
-      convives : [this.user.nbConvives, [Validators.min(0), Validators.max(20), Validators.required]],
+      convives : [this.user.nbConvives, [Validators.min(0), Validators.max(20), Validators.required, this.checkIfSufficientPlaces()]],
       nom : [this.userSrv.user.nom, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
       prenom : [this.userSrv.user.prenom, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
       date : ["", [Validators.required]],
@@ -58,8 +58,6 @@ export class ReserverComponent {
     })
     this.reservationService.reservationDoneSubject.asObservable().subscribe(() => {
       this.modifMessage = "Réservation bien prise en compte";
-      this.formReservation.get("date")?.reset();
-      this.formReservation.get("repas")?.setValue("");
     })
     this.nomAllergies = this.userSrv.nomAllergies;
   }
@@ -142,6 +140,13 @@ export class ReserverComponent {
       this.reservationService.getPlacesDispoAPI(this.soir, date).subscribe(value => {
         this.reservationService.nbPlacesRestanteSubject.next(value.nbPlacesRestantes);
       })
+    }
+  }
+
+  private checkIfSufficientPlaces():ValidatorFn {
+    return (control:AbstractControl) : ValidationErrors | null => {
+      if(this.nbPlacesDisponibles == undefined) return {ui:"ui"}
+      return control.value >= this.nbPlacesDisponibles  ? {ui:"ui"}:null;
     }
   }
 }

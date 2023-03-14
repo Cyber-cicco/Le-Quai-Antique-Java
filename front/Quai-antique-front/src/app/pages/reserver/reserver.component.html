@@ -37,7 +37,7 @@
       <div class="input-container ic1">
         <label for="convives">Nombre de personnes vous accompagnant :</label>
         <input formControlName="convives" id="convives" class="input" type="number" placeholder=" " min="0" max="20"/>
-        <div *ngIf="convives?.invalid && formSubmitted" class="form-error">Nombre de couverts invalide</div>
+        <div *ngIf="convives?.invalid && formSubmitted" class="form-error">champ invalide ou nombre de places insuffisant</div>
         <div class="cut"></div>
       </div>
       <fieldset class="input-container ic1">

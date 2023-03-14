@@ -66,7 +66,7 @@ public class ReservationService {
 
     @Transactional
     public ReservationResponse saveReservations(ReservationDTO reservationDTO, String authorization) {
-        String email = authorization!=null? jwtService.extractEmail(authorization.substring(7)):null;
+        String email = authorization!=null ? jwtService.extractEmail(authorization.substring(7)):null;
         LocalDateTime[] rangeForCurrentDate = getHoraireRangeInCurrentDate(reservationDTO.getDateReservation().toLocalDate(), reservationDTO.isSoir(), reservationDTO.getRestaurant());
         List<Place> places = placeRepository.findAllFreePlaces(rangeForCurrentDate[0], rangeForCurrentDate[1], reservationDTO.getRestaurant());
         List<Place> chosenPlaces = findBestPlaceToReserve(places, reservationDTO.getNbPlaces());
@@ -115,7 +115,7 @@ public class ReservationService {
         }
         SortedSet<Integer> keys = new TreeSet<>(sizeToPlaces.keySet());
         for(Integer key : keys){
-            if(key > nbPlaces){
+            if(key > nbPlaces*100){
                 return sizeToPlaces.get(key);
             }
         }
