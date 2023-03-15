@@ -1,0 +1,15 @@
+<ng-form class="col-md-12 col-6 text-dark" [formGroup]="formRestaurant">
+  <div class="card m-3">
+    <h5 class="card-header">{{restaurant.nomRestaurant}}</h5>
+    <div class="card-body">
+      <div class="form-group col" >
+        <label for="description" class="me-1">Description : </label>
+        <textarea name="description" id="description" class="form-control" formControlName="description" placeholder="{{restaurant.description}}"></textarea>
+      </div>
+      <div class="form-group col" >
+        <label for="convives" class="me-1">Prix : </label>
+        <input type="number" name="convives" id="convives" class="form-control" formControlName="convives" placeholder="{{restaurant.maxConvivesAutorises}}">
+      </div>
+    </div>
+  </div>
+</ng-form>

@@ -2,6 +2,8 @@ package fr.cybercicco.dev.service;
 
 import fr.cybercicco.dev.dto.HoraireDTO;
 import fr.cybercicco.dev.dto.HoraireMapper;
+import fr.cybercicco.dev.dto.RestaurantDTO;
+import fr.cybercicco.dev.dto.RestaurantMapper;
 import fr.cybercicco.dev.entity.Restaurant;
 import fr.cybercicco.dev.repository.HoraireRepository;
 import fr.cybercicco.dev.repository.RestaurantRepository;
@@ -18,6 +20,8 @@ import java.util.List;
 public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
+
+    private final RestaurantMapper restaurantMapper;
     private final HoraireRepository horaireRepository;
     private final HoraireMapper horaireMapper;
 
@@ -29,5 +33,9 @@ public class RestaurantService {
 
     public HoraireDTO getHoraireForWeekDay(String restaurant, String weekDay) {
         return horaireMapper.toHoraireDTO(horaireRepository.getHoraireForCurrentDay(weekDay, restaurant).get(0));
+    }
+
+    public RestaurantDTO getRestaurant(String restaurant) {
+        return restaurantMapper.toRestaurantDTO(restaurantRepository.findByNomRestaurant(restaurant).orElseThrow(EntityNotFoundException::new));
     }
 }

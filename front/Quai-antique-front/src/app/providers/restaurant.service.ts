@@ -1,19 +1,27 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Horaire} from "../models/horaire";
+import {EnvService} from "./env.service";
+import {Restaurant} from "../models/restaurant";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestaurantService {
 
-  private URL_RESTAURANT_HORAIRES = "http://localhost:8080/restaurant/horaires?restaurant=Le%20Quai%20Antique%20Chamberry";
+  private URL_RESTAURANT_HORAIRES:string;
 
-  private URL_RESTAURANT_HORAIRE_CE_JOUR = "http://localhost:8080/restaurant/horaires_jour?restaurant=Le%20Quai%20Antique%20Chamberry&day=";
+  private URL_RESTAURANT_HORAIRE_CE_JOUR:string;
+
+  private URL_RESTAURANT_INFOS:string;
 
   jours = [ "DIMANCHE","LUNDI", "MARDI", "MERCREDI", "JEUDI", "VENDREDI", "SAMEDI"];
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private env:EnvService) {
+    this.URL_RESTAURANT_HORAIRES = this.env.SERVER_URL + "/restaurant/horaires?restaurant=Le%20Quai%20Antique%20Chamberry";
+    this.URL_RESTAURANT_HORAIRE_CE_JOUR = this.env.SERVER_URL + "/restaurant/horaires_jour?restaurant=Le%20Quai%20Antique%20Chamberry&day=";
+    this.URL_RESTAURANT_INFOS = env.SERVER_URL + "/restaurant/infos?restaurant=Le%20Quai%20Antique%20Chamberry"
+  }
 
   getHorairesAPI(){
     return this.http.get<Horaire[]>(this.URL_RESTAURANT_HORAIRES);
@@ -21,5 +29,9 @@ export class RestaurantService {
 
   getHorairesCurrentDayAPI(jourSemaine:string){
     return this.http.get<Horaire>(this.URL_RESTAURANT_HORAIRE_CE_JOUR+jourSemaine)
+  }
+
+  getRestaurant() {
+    return this.http.get<Restaurant>(this.URL_RESTAURANT_INFOS)
   }
 }

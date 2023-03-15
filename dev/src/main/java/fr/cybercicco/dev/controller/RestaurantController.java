@@ -1,6 +1,7 @@
 package fr.cybercicco.dev.controller;
 
 import fr.cybercicco.dev.dto.HoraireDTO;
+import fr.cybercicco.dev.dto.RestaurantDTO;
 import fr.cybercicco.dev.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,11 @@ public class RestaurantController {
         log.info("restaurant : "+ restaurant);
         log.info("jour de la semaine : "+ day);
         return ResponseEntity.ok(restaurantService.getHoraireForWeekDay(restaurant, day));
+    }
+
+    @GetMapping("infos")
+    public ResponseEntity<RestaurantDTO> getRestaurant(@RequestParam String restaurant){
+        return ResponseEntity.ok(restaurantService.getRestaurant(restaurant));
     }
 
 }
