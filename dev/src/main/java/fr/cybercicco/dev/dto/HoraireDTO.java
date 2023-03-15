@@ -24,6 +24,10 @@ public class HoraireDTO {
     @NotNull
     private LocalTime fermetureDejeuner;
     @NotNull
+    private Boolean ouvertDejeuner;
+    @NotNull
+    private Boolean ouvertDiner;
+    @NotNull
     private LocalTime ouvertureDiner;
     @NotNull
     private LocalTime fermetureDiner;

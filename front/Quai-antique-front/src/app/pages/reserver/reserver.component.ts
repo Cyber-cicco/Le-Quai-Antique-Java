@@ -48,7 +48,7 @@ export class ReserverComponent {
       date : ["", [Validators.required]],
       repas : ["", [Validators.required]],
     })
-    this.restaurantService.getHorairesCurrentDayAPI(this.restaurantService.jours[this.today.getDay()-1]).subscribe(value => {
+    this.restaurantService.getHorairesCurrentDayAPI(this.restaurantService.jours[this.today.getDay()]).subscribe(value => {
       this.horaires = value;
       this.isMidiAvalaible();
       this.isSoirAvalaible();
@@ -104,7 +104,7 @@ export class ReserverComponent {
     if(this.horaires ==undefined || this.reservation.dateReservation == undefined){
       this.midiAvalaible = false;
     } else {
-      this.midiAvalaible =  this.isTrancheHoraireAvalaible(this.horaires?.fermetureDejeuner, this.reservation.dateReservation);
+      this.midiAvalaible =  this.isTrancheHoraireAvalaible(this.horaires?.fermetureDejeuner, this.reservation.dateReservation) && this.horaires.ouvertDejeuner;
     }
   }
 
@@ -121,7 +121,7 @@ export class ReserverComponent {
     if(this.horaires == undefined || this.reservation.dateReservation == undefined){
       this.soirAvalaible = false;
     } else {
-      this.soirAvalaible =  this.isTrancheHoraireAvalaible(this.horaires?.fermetureDiner, this.reservation.dateReservation);
+      this.soirAvalaible =  this.isTrancheHoraireAvalaible(this.horaires?.fermetureDiner, this.reservation.dateReservation) && this.horaires.ouvertDiner;
     }
   }
 
@@ -129,8 +129,11 @@ export class ReserverComponent {
     this.reservation.dateReservation =  new Date($event);
     this.formReservation.get("repas")?.setValue("");
     this.nbPlacesDisponibles = undefined;
-    this.isMidiAvalaible();
-    this.isSoirAvalaible();
+    this.restaurantService.getHorairesCurrentDayAPI(this.restaurantService.jours[this.reservation.dateReservation.getDay()]).subscribe(value => {
+      this.horaires = value;
+      this.isMidiAvalaible();
+      this.isSoirAvalaible();
+      })
   }
 
   showPlacesDisponibles($event:string) {

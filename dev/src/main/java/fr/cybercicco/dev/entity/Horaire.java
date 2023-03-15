@@ -21,12 +21,16 @@ public class Horaire {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NotBlank
-    @Pattern(regexp = "(lundi)|(mardi)|(mercredi)|(jeudi)|(vendredi)|(samedi)|(dimanche)")
+    @Pattern(regexp = "(LUNDI)|(MARDI)|(MERCREDI)|(JEUDI)|(VENDREDI)|(SAMEDI)|(DIMANCHE)")
     private String jourSemaine;
     @NotNull
     private LocalTime ouvertureDejeuner;
     @NotNull
     private LocalTime fermetureDejeuner;
+    @NotNull
+    private Boolean ouvertDejeuner;
+    @NotNull
+    private Boolean ouvertDiner;
     @NotNull
     private LocalTime ouvertureDiner;
     @NotNull

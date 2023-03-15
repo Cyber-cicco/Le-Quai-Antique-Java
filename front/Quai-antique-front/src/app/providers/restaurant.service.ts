@@ -11,7 +11,7 @@ export class RestaurantService {
 
   private URL_RESTAURANT_HORAIRE_CE_JOUR = "http://localhost:8080/restaurant/horaires_jour?restaurant=Le%20Quai%20Antique%20Chamberry&day=";
 
-  jours = ["LUNDI", "MARDI", "MERCREDI", "JEUDI", "VENDREDI", "SAMEDI", "DIMANCHE"];
+  jours = [ "DIMANCHE","LUNDI", "MARDI", "MERCREDI", "JEUDI", "VENDREDI", "SAMEDI"];
 
   constructor(private http:HttpClient) { }
 

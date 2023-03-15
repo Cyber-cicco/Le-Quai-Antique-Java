@@ -4,5 +4,7 @@ export interface Horaire {
   fermetureDejeuner: string
   ouvertureDiner: string
   fermetureDiner:string
+  ouvertDejeuner:boolean
+  ouvertDiner:boolean
 
 }

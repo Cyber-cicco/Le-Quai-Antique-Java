@@ -1,13 +1,14 @@
-INSERT INTO restaurant(description, nom_restaurant) VALUES
-('Restaurant gastronomique abordable pour toutes et tous', 'Le Quai Antique Chamberry');
+INSERT INTO restaurant(description, nom_restaurant, max_convives_autorises) VALUES
+('Restaurant gastronomique abordable pour toutes et tous', 'Le Quai Antique Chamberry', 20);
 
-INSERT INTO horaire(fermeture_dejeuner, fermeture_diner, jour_semaine, ouverture_dejeuner, ouverture_diner) VALUES
-('14:00:00', '22:00:00', 'LUNDI', '11:30:00', '19:00:00'),
-('14:00:00', '22:00:00', 'MARDI', '11:30:00', '19:00:00'),
-('14:00:00', '22:00:00', 'MERCREDI', '11:30:00', '19:00:00'),
-('14:00:00', '22:00:00', 'JEUDI', '11:30:00', '19:00:00'),
-('14:00:00', '23:00:00', 'VENDREDI', '11:30:00', '19:00:00'),
-('14:00:00', '23:00:00', 'SAMEDI', '11:30:00', '19:00:00');
+INSERT INTO horaire(fermeture_dejeuner, fermeture_diner, jour_semaine, ouverture_dejeuner, ouverture_diner, ouvert_dejeuner, ouvert_diner) VALUES
+('14:00:00', '22:00:00', 'LUNDI', '11:30:00', '19:00:00', true, true),
+('14:00:00', '22:00:00', 'MARDI', '11:30:00', '19:00:00', true, true),
+('14:00:00', '22:00:00', 'MERCREDI', '11:30:00', '19:00:00', true, true),
+('14:00:00', '22:00:00', 'JEUDI', '11:30:00', '19:00:00', true, true),
+('14:00:00', '23:00:00', 'VENDREDI', '11:30:00', '19:00:00', true, true),
+('14:00:00', '23:00:00', 'SAMEDI', '11:30:00', '19:00:00', true, true),
+('15:00:00', '23:00:00', 'DIMANCHE', '12:00:00', '19:00:00', true, false);
 
 INSERT INTO restaurant_horaires(restaurant_id, horaire_id) VALUES
 (1,1),
@@ -15,7 +16,8 @@ INSERT INTO restaurant_horaires(restaurant_id, horaire_id) VALUES
 (1,3),
 (1,4),
 (1,5),
-(1,6);
+(1,6),
+(1,7);
 
 INSERT INTO place(nb_places, restaurant_id) VALUES
 (8,1),

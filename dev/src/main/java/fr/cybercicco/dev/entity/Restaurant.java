@@ -2,11 +2,13 @@ package fr.cybercicco.dev.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @NoArgsConstructor
@@ -32,6 +34,9 @@ public class Restaurant {
     @Length(min = 12, max = 2000)
     @Column(columnDefinition = "LONGTEXT")
     private String description;
+
+    @NotNull
+    private BigDecimal maxConvivesAutorises;
 
     @OneToMany(mappedBy = "restaurant")
     private List<Place> tables;
