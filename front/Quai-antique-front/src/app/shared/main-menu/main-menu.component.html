@@ -18,13 +18,13 @@
   <ul><a class="no-dec" (click)="hideMenus()" routerLink="/accueil" routerLinkActive="active">Accueil</a></ul>
   <ul><a class="no-dec" (click)="hideMenus()" routerLink="/carte" routerLinkActive="active">Carte</a></ul>
   <ul><a class="no-dec" (click)="hideMenus()" routerLink="/reserver" routerLinkActive="active">Réserver</a></ul>
-  <ul *ngIf="isConnected" ><a class="no-dec" (click)="hideMenus()" routerLink="profil/infos" routerLinkActive="active">Mon compte</a></ul>
+  <ul *ngIf="isConnected" ><a class="no-dec" (click)="hideMenus()" routerLink="/profil/infos" routerLinkActive="active">Mon compte</a></ul>
   <ul *ngIf="isConnected" ><div (click)="disconnect()" class="disconnect no-dec">Me déconnecter</div></ul>
   <ul *ngIf="!isConnected"><a class="no-dec" (click)="hideMenus()" routerLink="/profil/connexion" routerLinkActive="active">Me connecter</a></ul>
 </li>
 
 <li class="hidden-menu-phone" [hidden]="menuProfilHidden">
-  <ul *ngIf="isConnected" ><a class="no-dec"  (click)="hideMenus()" routerLink="profil/infos" routerLinkActive="active">Mon compte</a></ul>
+  <ul *ngIf="isConnected" ><a class="no-dec"  (click)="hideMenus()" routerLink="/profil/infos" routerLinkActive="active">Mon compte</a></ul>
   <ul *ngIf="isConnected" ><a (click)="disconnect()" class="disconnect no-dec">Me déconnecter</a></ul>
   <ul *ngIf="!isConnected"><a class="no-dec" (click)="hideMenus()" routerLink="/profil/connexion" routerLinkActive="active">Me connecter</a></ul>
 </li>

@@ -19,6 +19,8 @@ export class UserService {
 
   private URL_GET_INFOS:string
 
+  private URL_GET_ADMIN:string
+
   user:Partial<User> = {};
 
   private isConnectedSubject:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -50,6 +52,7 @@ export class UserService {
     this.URL_USER_AUTH = env.SERVER_URL + "/connexion/authenticate";
     this.URL_USER_REGISTER = env.SERVER_URL + "/connexion/register";
     this.URL_GET_INFOS = env.SERVER_URL + "/user/profil";
+    this.URL_GET_ADMIN = env.SERVER_URL + "/admin/dashboard"
     this.userSubject.subscribe(value => this.user = value);
   }
 
@@ -88,5 +91,11 @@ export class UserService {
     return this.http.patch<AuthenticationResponse>(this.URL_GET_INFOS, user,{headers:{
         "Authorization": "Bearer "+token,
         "Content-type": "application/json"}})
+  }
+
+  checkIfAdmin(token: string | null) {
+    return this.http.get(this.URL_GET_ADMIN, {headers:{
+        "Authorization": "Bearer "+token,
+        "Content-type": "application/json"}});
   }
 }

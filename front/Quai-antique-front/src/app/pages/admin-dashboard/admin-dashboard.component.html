@@ -1,0 +1,40 @@
+<div class="container">
+  <h1 class="h1 display-1">Panel d'administration</h1>
+  <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+    <li [ngbNavItem]="1">
+      <a ngbNavLink>Menus</a>
+      <ng-template ngbNavContent>
+
+        <qa-menu></qa-menu>
+
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2">
+      <a ngbNavLink>Formules</a>
+      <ng-template ngbNavContent>
+
+        <qa-formules></qa-formules>
+
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="3">
+      <a ngbNavLink>Plats</a>
+      <ng-template ngbNavContent>
+
+        <qa-plat></qa-plat>
+
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="4">
+      <a ngbNavLink>Restaurant et horaires</a>
+      <ng-template ngbNavContent>
+
+        <qa-restaurant></qa-restaurant>
+
+      </ng-template>
+    </li>
+  </ul>
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+  <pre>Active: {{ active }}</pre>
+</div>

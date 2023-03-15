@@ -12,6 +12,13 @@ import {NgbCarouselModule, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { CarteComponent } from './carte/carte.component';
 import { ReserverComponent } from './reserver/reserver.component';
 import { ModalReservationComponent } from './reserver/modal-reservation/modal-reservation.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import {SharedModule} from "../shared/shared.module";
+import { MenuComponent } from './admin-dashboard/menu/menu.component';
+import { PlatComponent } from './admin-dashboard/plat/plat.component';
+import { RestaurantComponent } from './admin-dashboard/restaurant/restaurant.component';
+import { FormulesComponent } from './admin-dashboard/formules/formules.component';
+import { FormPlatComponent } from './admin-dashboard/plat/form-plat/form-plat.component';
 
 
 
@@ -24,6 +31,12 @@ import { ModalReservationComponent } from './reserver/modal-reservation/modal-re
     CarteComponent,
     ReserverComponent,
     ModalReservationComponent,
+    AdminDashboardComponent,
+    MenuComponent,
+    PlatComponent,
+    RestaurantComponent,
+    FormulesComponent,
+    FormPlatComponent,
   ],
     imports: [
         CommonModule,
@@ -34,7 +47,8 @@ import { ModalReservationComponent } from './reserver/modal-reservation/modal-re
         RouterLinkActive,
         BrowserAnimationsModule,
         NgbModule,
-        NgbCarouselModule
+        NgbCarouselModule,
+        SharedModule
     ]
 })
 export class PagesModule { }

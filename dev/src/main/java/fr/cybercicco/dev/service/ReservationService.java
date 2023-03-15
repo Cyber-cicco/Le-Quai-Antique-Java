@@ -81,10 +81,6 @@ public class ReservationService {
                 .map(place -> place.getNbPlaces().intValueExact())
                 .mapToInt(Integer::intValue)
                 .sum();
-        log.info("places restantes : " + placesRestantes);
-        log.info("limite basse : "+range[0]);
-        log.info("limite haute : "+upperLimit);
-        log.info("date choisie : "+reservationDTO.getDateReservation());
         return (!reservationDTO.getDateReservation().isBefore(range[0])
                 && !reservationDTO.getDateReservation().isAfter(upperLimit))
                 && ((reservationDTO.getNbPlaces()+1 < placesRestantes));

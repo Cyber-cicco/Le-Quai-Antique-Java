@@ -6,6 +6,7 @@ import {InfosComponent} from "./pages/infos/infos.component";
 import {AccueilComponent} from "./pages/accueil/accueil.component";
 import {CarteComponent} from "./pages/carte/carte.component";
 import {ReserverComponent} from "./pages/reserver/reserver.component";
+import {AdminDashboardComponent} from "./pages/admin-dashboard/admin-dashboard.component";
 
 const routes: Routes = [
   {path : "profil/connexion", component: ConnexionComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'accueil', component: AccueilComponent},
   {path: 'carte', component: CarteComponent},
   {path: 'reserver', component: ReserverComponent},
+    {path: '9fc561fbf4c7028b2c2ab3662b2602e78658eecba8a6bfacf50c3de57f66202a', component: AdminDashboardComponent},
   {path: '', component: AccueilComponent},
 ];
 
