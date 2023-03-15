@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {Plat} from "../../../../models/plat";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {EnvService} from "../../../../providers/env.service";
@@ -9,7 +9,7 @@ import {UserService} from "../../../../providers/user.service";
   templateUrl: './form-plat.component.html',
   styleUrls: ['./form-plat.component.scss']
 })
-export class FormPlatComponent {
+export class FormPlatComponent implements OnChanges{
 
   @Input() plat:Partial<Plat> = {};
   formChangementPlat: FormGroup;
@@ -31,5 +31,11 @@ export class FormPlatComponent {
   get nom(){
     return this.formChangementPlat.get("nom");
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+
+  }
+
+
 
 }

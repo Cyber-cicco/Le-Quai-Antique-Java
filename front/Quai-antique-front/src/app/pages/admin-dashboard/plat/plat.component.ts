@@ -11,9 +11,10 @@ export class PlatComponent {
 
   plats:Plat[] = []
 
+  allergies:string[] = []
+
   constructor(private platService:PlatService) {
     this.platService.getAllPlatsAPI().subscribe(value => {
       this.plats = value;
-    });
-  }
+    });}
 }

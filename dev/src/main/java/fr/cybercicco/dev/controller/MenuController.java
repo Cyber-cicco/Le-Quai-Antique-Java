@@ -1,7 +1,7 @@
 package fr.cybercicco.dev.controller;
 
 import fr.cybercicco.dev.dto.FormuleDTO;
-import fr.cybercicco.dev.dto.MenuDTO;
+import fr.cybercicco.dev.dto.MenuDTOGet;
 import fr.cybercicco.dev.service.MenuService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class MenuController {
     private final MenuService menuService;
 
     @GetMapping("list")
-    public ResponseEntity<List<MenuDTO>> getMenus(){
+    public ResponseEntity<List<MenuDTOGet>> getMenus(){
         return ResponseEntity.ok(menuService.listAll());
     }
 

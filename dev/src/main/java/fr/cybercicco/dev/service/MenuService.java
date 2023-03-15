@@ -24,11 +24,15 @@ public class MenuService {
 
     private final FormuleRepository formuleRepository;
 
-    public List<MenuDTO> listAll() {
-        return menuRepository.findAll().stream().map(menu -> menuMapper.toMenuDTO(menu, formuleMapper, platMapper)).toList();
+    public List<MenuDTOGet> listAll() {
+        return menuRepository.findAll().stream().map(menu -> menuMapper.toMenuDTOGet(menu, formuleMapper, platMapper)).toList();
     }
 
     public List<FormuleDTO> listFormules() {
         return formuleRepository.findAll().stream().map(formule -> formuleMapper.toFormuleDTO(formule, platMapper)).toList();
+    }
+
+    public String changeOneMenu(MenuDTOPost menuDTO) {
+        return null;
     }
 }
