@@ -19,6 +19,7 @@ import { PlatComponent } from './admin-dashboard/plat/plat.component';
 import { RestaurantComponent } from './admin-dashboard/restaurant/restaurant.component';
 import { FormulesComponent } from './admin-dashboard/formules/formules.component';
 import { FormPlatComponent } from './admin-dashboard/plat/form-plat/form-plat.component';
+import { FormMenuComponent } from './admin-dashboard/menu/form-menu/form-menu.component';
 
 
 
@@ -37,6 +38,7 @@ import { FormPlatComponent } from './admin-dashboard/plat/form-plat/form-plat.co
     RestaurantComponent,
     FormulesComponent,
     FormPlatComponent,
+    FormMenuComponent,
   ],
     imports: [
         CommonModule,

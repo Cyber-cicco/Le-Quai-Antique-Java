@@ -1,9 +1,7 @@
 package fr.cybercicco.dev.service;
 
-import fr.cybercicco.dev.dto.FormuleMapper;
-import fr.cybercicco.dev.dto.MenuDTO;
-import fr.cybercicco.dev.dto.MenuMapper;
-import fr.cybercicco.dev.dto.PlatMapper;
+import fr.cybercicco.dev.dto.*;
+import fr.cybercicco.dev.repository.FormuleRepository;
 import fr.cybercicco.dev.repository.MenuRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,7 +22,13 @@ public class MenuService {
 
     private final MenuRepository menuRepository;
 
+    private final FormuleRepository formuleRepository;
+
     public List<MenuDTO> listAll() {
         return menuRepository.findAll().stream().map(menu -> menuMapper.toMenuDTO(menu, formuleMapper, platMapper)).toList();
+    }
+
+    public List<FormuleDTO> listFormules() {
+        return formuleRepository.findAll().stream().map(formule -> formuleMapper.toFormuleDTO(formule, platMapper)).toList();
     }
 }

@@ -8,15 +8,15 @@
         <input type="text" autocomplete="off" name="nom" id="nom" class="form-control" formControlName="nom" placeholder="{{plat.nomPlat}}">
       </div>
       <div class="form-group col" >
-        <label for="description" class="me-1">Nom du plat : </label>
+        <label for="description" class="me-1">Description : </label>
         <textarea name="description" id="description" class="form-control" formControlName="description" placeholder="{{plat.description}}"></textarea>
       </div>
       <div class="form-group col" >
-        <label for="prix" class="me-1">Nom du plat : </label>
+        <label for="prix" class="me-1">Prix : </label>
         <input type="number" name="prix" id="prix" class="form-control" formControlName="prix" placeholder="{{plat.prix}}">
       </div>
       <div class="form-group col" >
-        <img [src]="URL + '/photos/' + plat.photo+'.png'" class="container-fluid m-2">
+        <img [src]="URL + '/photos/' + plat.photo+'.png'" class="container-fluid m-2" alt="une erreur est survenue dans le chargement de la photo. Contactez un développeur">
       </div>
       <legend>Précisez les allergenes (si présents) : </legend>
       <div *ngFor="let allergie of nomAllergies" class="form-check">

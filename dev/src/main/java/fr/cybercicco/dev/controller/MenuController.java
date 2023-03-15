@@ -1,5 +1,6 @@
 package fr.cybercicco.dev.controller;
 
+import fr.cybercicco.dev.dto.FormuleDTO;
 import fr.cybercicco.dev.dto.MenuDTO;
 import fr.cybercicco.dev.service.MenuService;
 import lombok.RequiredArgsConstructor;
@@ -22,5 +23,10 @@ public class MenuController {
     @GetMapping("list")
     public ResponseEntity<List<MenuDTO>> getMenus(){
         return ResponseEntity.ok(menuService.listAll());
+    }
+
+    @GetMapping("formules")
+    public ResponseEntity<List<FormuleDTO>> getFormules() {
+        return ResponseEntity.ok(menuService.listFormules());
     }
 }
