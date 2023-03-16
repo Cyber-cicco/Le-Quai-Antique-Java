@@ -4,7 +4,7 @@ import {EnvService} from "../../providers/env.service";
 import {PlatService} from "../../providers/plat.service";
 import {RestaurantService} from "../../providers/restaurant.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {Menu} from "../../models/menu";
+import {MenuGet} from "../../models/menu-get";
 import {MenuService} from "../../providers/menu.service";
 import {UserService} from "../../providers/user.service";
 import {User} from "../../models/user";
@@ -21,9 +21,9 @@ export class CarteComponent{
   plats:Plat[] = [];
   formCategorie:FormGroup;
   platsToDisplay: Plat[]=[];
-  menus:Menu[] = [];
+  menus:MenuGet[] = [];
   formMenus: FormGroup;
-  menu:Partial<Menu>={}
+  menu:Partial<MenuGet>={}
   autoSelectMenu= "";
   platsOfMenu: Set<string> = new Set();
   isConnected;

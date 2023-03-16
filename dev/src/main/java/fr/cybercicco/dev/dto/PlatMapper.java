@@ -9,6 +9,7 @@ public interface PlatMapper {
 
     default PlatDTO toPlatDto(Plat plat){
         return PlatDTO.builder()
+                .id(plat.getId())
                 .nomPlat(plat.getNomPlat())
                 .typePlat(plat.getTypePlat())
                 .photo(plat.getPhoto())
@@ -16,5 +17,5 @@ public interface PlatMapper {
                 .description(plat.getDescription())
                 .allergenes(plat.getAllergenes().stream().map(Allergene::getNomAllergene).toList())
                 .build();
-    };
+    }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Menu} from "../../../models/menu";
+import {MenuGet} from "../../../models/menu-get";
 import {Formule} from "../../../models/formule";
 import {MenuService} from "../../../providers/menu.service";
 
@@ -10,7 +10,7 @@ import {MenuService} from "../../../providers/menu.service";
 })
 export class MenuComponent {
 
-  menus:Menu[] = [];
+  menus:MenuGet[] = [];
 
   formules:Formule[] = [];
 

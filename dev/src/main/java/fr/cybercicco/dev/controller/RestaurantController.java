@@ -26,8 +26,6 @@ public class RestaurantController {
 
     @GetMapping("horaires_jour")
     public ResponseEntity<HoraireDTO> getHorairesCeJour(@RequestParam String restaurant, @RequestParam String day){
-        log.info("restaurant : "+ restaurant);
-        log.info("jour de la semaine : "+ day);
         return ResponseEntity.ok(restaurantService.getHoraireForWeekDay(restaurant, day));
     }
 

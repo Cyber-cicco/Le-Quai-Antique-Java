@@ -1,7 +1,8 @@
 import {Formule} from "./formule";
 
-export interface Menu {
+export interface MenuGet {
 
+  id:number
 
   nomMenu:string
 

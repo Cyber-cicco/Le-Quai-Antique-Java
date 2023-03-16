@@ -1,10 +1,5 @@
 package fr.cybercicco.dev.dto;
 
-import fr.cybercicco.dev.entity.Plat;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -20,6 +15,8 @@ import java.util.List;
 @Builder
 public class FormuleDTO {
 
+    @NotNull
+    private Integer id;
     @NotBlank
     @Length(max = 255)
     private String nomFormule;

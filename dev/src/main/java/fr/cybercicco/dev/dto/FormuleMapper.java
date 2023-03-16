@@ -8,10 +8,12 @@ public interface FormuleMapper {
 
     default FormuleDTO toFormuleDTO(Formule formule, PlatMapper platMapper){
         return FormuleDTO.builder()
+                .id(formule.getId())
                 .nomFormule(formule.getNomFormule())
                 .description(formule.getDescription())
                 .plats(formule.getPlats().stream().map(platMapper::toPlatDto).toList())
                 .prix(formule.getPrix())
                 .build();
     }
+
 }
