@@ -18,11 +18,14 @@ export class MenuService {
 
   private URL_API_CHECK_MENU:string
 
+  private URL_API_NOM_MENU:string
+
   constructor(private http:HttpClient, private env:EnvService) {
     this.URL_API_MENUS = this.env.SERVER_URL + "/menus/list";
     this.URL_API_FORMULES = this.env.SERVER_URL + "/menus/formules";
     this.URL_API_PATCH_MENU = this.env.SERVER_URL + "/admin/menu";
     this.URL_API_CHECK_MENU = this.env.SERVER_URL + "/admin/menu/check";
+    this.URL_API_NOM_MENU = this.env.SERVER_URL + "/menus/list_nom";
   }
 
 
@@ -44,5 +47,9 @@ export class MenuService {
     return this.http.get<{exists:boolean}>(this.URL_API_CHECK_MENU+"?nom="+value, {headers:{
         "Authorization": "Bearer "+token,
         "Content-type": "application/json"}});
+  }
+
+  getAllMenusNameAPI() {
+    return this.http.get<string[]>(this.URL_API_NOM_MENU);
   }
 }

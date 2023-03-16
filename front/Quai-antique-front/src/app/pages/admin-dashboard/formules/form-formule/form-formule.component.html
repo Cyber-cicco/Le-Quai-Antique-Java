@@ -18,6 +18,13 @@
           {{plat.plat.nomPlat}}
         </label>
       </div>
+      <div class="form-group col" >
+        <label for="menu" class="me-1">Menu associé : </label>
+        <select name="menu" id="menu" class="form-control" formControlName="menu">
+          <option value="">Aucun</option>
+          <option *ngFor="let menu of menus" [value]="menu">{{menu}}</option>
+        </select>
+      </div>
       <div class="text-center"><button class="button btn-primary">Changer</button></div>
     </div>
   </div>

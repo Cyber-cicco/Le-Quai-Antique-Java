@@ -6,4 +6,5 @@ export interface Formule {
   description:string,
   prix:number,
   plats:Plat[],
+  menu:string;
 }

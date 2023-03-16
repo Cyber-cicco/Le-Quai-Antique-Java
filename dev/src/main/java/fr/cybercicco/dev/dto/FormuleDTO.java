@@ -27,4 +27,5 @@ public class FormuleDTO {
     @NotNull
     private BigDecimal prix;
     private List<PlatDTO> plats;
+    private String menu;
 }

@@ -25,6 +25,11 @@ public class MenuController {
         return ResponseEntity.ok(menuService.listAll());
     }
 
+    @GetMapping("list_nom")
+    public ResponseEntity<List<String>>getNomMenus(){
+        return ResponseEntity.ok(menuService.getNomsMenus());
+    }
+
     @GetMapping("formules")
     public ResponseEntity<List<FormuleDTO>> getFormules() {
         return ResponseEntity.ok(menuService.listFormules());

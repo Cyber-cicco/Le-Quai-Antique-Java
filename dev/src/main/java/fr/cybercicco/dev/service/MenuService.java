@@ -52,4 +52,8 @@ public class MenuService {
         menuRepository.save(menu);
         return menuMapper.toMenuDTOGet(menu, formuleMapper, platMapper);
     }
+
+    public List<String> getNomsMenus() {
+        return menuRepository.findAll().stream().map(Menu::getNomMenu).toList();
+    }
 }

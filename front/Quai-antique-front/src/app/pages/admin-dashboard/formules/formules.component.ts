@@ -12,6 +12,7 @@ import {Plat} from "../../../models/plat";
 export class FormulesComponent {
   formules: Formule[] = [];
   plats: Plat[] = [];
+  menus:string[] = [];
 
   constructor(private menuService:MenuService, private platService:PlatService) {
     this.menuService.getAllFormulesAPI().subscribe(value => {
@@ -19,6 +20,9 @@ export class FormulesComponent {
     });
     this.platService.getAllPlatsAPI().subscribe(value => {
       this.plats = value;
+    })
+    this.menuService.getAllMenusNameAPI().subscribe(value => {
+      this.menus = value;
     })
   }
 

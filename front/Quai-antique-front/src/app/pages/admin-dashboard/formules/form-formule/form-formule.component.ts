@@ -11,6 +11,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class FormFormuleComponent implements OnChanges {
 
   @Input() formule : Partial<Formule> = {};
+  @Input() menus:string[] = [];
   @Input() plats : Plat[] = [];
   formChangementFormule: FormGroup;
   checkPlat: {checked:boolean, plat:Plat}[] = [];

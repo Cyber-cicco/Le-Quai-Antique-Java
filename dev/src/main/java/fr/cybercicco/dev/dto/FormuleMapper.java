@@ -13,6 +13,7 @@ public interface FormuleMapper {
                 .description(formule.getDescription())
                 .plats(formule.getPlats().stream().map(platMapper::toPlatDto).toList())
                 .prix(formule.getPrix())
+                .menu(formule.getMenu().getNomMenu())
                 .build();
     }
 
