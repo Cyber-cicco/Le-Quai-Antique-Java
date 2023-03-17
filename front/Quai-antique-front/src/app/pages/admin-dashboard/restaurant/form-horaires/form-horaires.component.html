@@ -1,1 +1,56 @@
-<p>form-horaires works!</p>
+<ng-form class="col-md-12 col-6 text-dark" [formGroup]="formHoraires">
+  <div class="card m-3">
+    <h5 class="card-header">Horaires</h5>
+    <div class="card-body">
+      <div class="form-group col">
+        <label for="jour" class="me-1">Jour de la semaine : </label>
+        <select name="jour" id="jour" class="form-control" formControlName="jour" (ngModelChange)="changeHoraireFromWeekDay($event)" [(ngModel)]="nrSelect">
+          <option *ngFor="let horaire of horaires" [value]="horaire.jourSemaine">{{horaire.jourSemaine}}</option>
+        </select>
+      </div>
+      <div class="card mt-2">
+      <h5 class="card-header">Déjeuner</h5>
+        <div class="card-body">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" formControlName="ouvertDejeuner" id="ouvert-dejeuner" name="ouvert-dejeuner">
+            <label class="form-check-label" for="ouvert-dejeuner">
+              Ouvert
+            </label>
+          </div>
+          <div class="form-group col" >
+            <label for="dejeuner-debut" class="me-1">Ouverture : </label>
+            <input type="time" name="dejeuner-debut" id="dejeuner-debut" class="form-control" formControlName="dejeunerDebut">
+            <div *ngIf="dejeunerDebut?.invalid" class="text-danger">heure de début invalide</div>
+          </div>
+          <div class="form-group col" >
+            <label for="dejeuner-fin" class="me-1">Fermeture : </label>
+            <input type="time" name="dejeuner-fin" id="dejeuner-fin" class="form-control" formControlName="dejeunerFin">
+            <div *ngIf="dejeunerFin?.invalid" class="text-danger">heure de fin invalide</div>
+          </div>
+        </div>
+      </div>
+      <div class="card mt-2">
+        <h5 class="card-header">Diner</h5>
+        <div class="card-body">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" formControlName="ouvertDiner" id="ouvert-diner" name="ouvert-diner">
+            <label class="form-check-label" for="ouvert-diner">
+              Ouvert
+            </label>
+          </div>ine     <div class="form-group col" >
+            <label for="diner-debut" class="me-1">Ouverture : </label>
+            <input type="time" name="diner-debut" id="diner-debut" class="form-control" formControlName="dinerDebut">
+            <div *ngIf="dinerDebut?.invalid" class="text-danger">heure de début invalide</div>
+          </div>
+          <div class="form-group col" >
+            <label for="diner-fin" class="me-1">Fermeture : </label>
+            <input type="time" name="diner-fin" id="diner-fin" class="form-control" formControlName="dinerFin">
+            <div *ngIf="dinerFin?.invalid" class="text-danger">heure de fin invalide</div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center"><button class="button btn-primary" (click)="patchHoraire()">Changer</button></div>
+      <div class="text-danger">{{feedbackMessage}}</div>
+    </div>
+  </div>
+</ng-form>
