@@ -11,6 +11,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ModalReservationComponent} from "./modal-reservation/modal-reservation.component";
 import {EnvService} from "../../providers/env.service";
 import {DateUtilService} from "../../providers/date-util.service";
+import {MaxConvivesService} from "../../validators/max-convives.service";
 
 @Component({
   selector: 'qa-reserver',
@@ -39,10 +40,11 @@ export class ReserverComponent {
               private reservationService:ReservationService,
               private modalService:NgbModal,
               private env:EnvService,
-              private dateUtil:DateUtilService){
+              private dateUtil:DateUtilService,
+              private convivesValidator:MaxConvivesService){
     this.user = this.userSrv.user;
     this.formReservation = this.fb.group({
-      convives : [this.user.nbConvives, [Validators.min(0), Validators.max(20), Validators.required, this.checkIfSufficientPlaces()]],
+      convives : [this.user.nbConvives, [Validators.min(0), Validators.required, this.checkIfSufficientPlaces()], [convivesValidator.validate.bind(this.convivesValidator)]],
       nom : [this.userSrv.user.nom, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
       prenom : [this.userSrv.user.prenom, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
       date : ["", [Validators.required]],
@@ -148,8 +150,10 @@ export class ReserverComponent {
 
   private checkIfSufficientPlaces():ValidatorFn {
     return (control:AbstractControl) : ValidationErrors | null => {
-      if(this.nbPlacesDisponibles == undefined) return {ui:"ui"}
-      return control.value >= this.nbPlacesDisponibles  ? {ui:"ui"}:null;
+      if(this.nbPlacesDisponibles == undefined) return null;
+      return control.value >= this.nbPlacesDisponibles
+        ? {error:"Le montant de convives invités dépasse le montant de personnes autorisées"}
+        :null;
     }
   }
 }

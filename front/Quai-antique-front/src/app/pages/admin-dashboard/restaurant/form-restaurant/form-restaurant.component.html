@@ -5,12 +5,15 @@
       <div class="form-group col" >
         <label for="description" class="me-1">Description : </label>
         <textarea name="description" id="description" class="form-control" formControlName="description" placeholder="{{restaurant.description}}"></textarea>
+        <div *ngIf="description?.invalid" class="text-danger">La description n'est pas valide</div>
       </div>
       <div class="form-group col" >
         <label for="convives" class="me-1">Maximum de convives autorisés : </label>
         <input type="number" name="convives" id="convives" class="form-control" formControlName="convives" placeholder="{{restaurant.maxConvivesAutorises}}">
+        <div *ngIf="description?.invalid" class="text-danger">Le nombre de convives n'est pas valide</div>
       </div>
-      <div class="text-center"><button class="button btn-primary">Changer</button></div>
+      <div class="text-center"><button class="button btn-primary" (click)="changeRestaurant()">Changer</button></div>
+      <div class="text-danger">{{feedbackMessage}}</div>
     </div>
   </div>
 </ng-form>

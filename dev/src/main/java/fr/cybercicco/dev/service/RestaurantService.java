@@ -51,6 +51,7 @@ public class RestaurantService {
         }
         restaurant.setDescription(restaurantDTO.getDescription());
         restaurant.setMaxConvivesAutorises(restaurantDTO.getMaxConvivesAutorises());
+        restaurantRepository.save(restaurant);
         return restaurantMapper.toRestaurantDTO(restaurant);
     }
 }

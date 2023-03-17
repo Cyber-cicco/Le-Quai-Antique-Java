@@ -21,7 +21,6 @@ export class ReservationService {
   }
 
   postReservation(reservation: Reservation, token: string | null) {
-    console.log(reservation);
     return this.http.post<{nbPlacesRestantes:number}>(this.URL_RESERVATION, reservation, (token != null) ? {headers:{
       "Authorization": "Bearer "+token,
         "Content-type": "application/json"}}:{});
