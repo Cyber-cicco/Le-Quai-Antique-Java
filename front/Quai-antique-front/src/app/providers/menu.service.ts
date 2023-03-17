@@ -24,7 +24,7 @@ export class MenuService {
     this.URL_API_MENUS = this.env.SERVER_URL + "/menus/list";
     this.URL_API_FORMULES = this.env.SERVER_URL + "/menus/formules";
     this.URL_API_PATCH_MENU = this.env.SERVER_URL + "/admin/menu";
-    this.URL_API_CHECK_MENU = this.env.SERVER_URL + "/admin/menu/check";
+    this.URL_API_CHECK_MENU = this.env.SERVER_URL + "/admin/menu/exists";
     this.URL_API_NOM_MENU = this.env.SERVER_URL + "/menus/list_nom";
   }
 
