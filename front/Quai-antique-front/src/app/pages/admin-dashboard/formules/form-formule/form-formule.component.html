@@ -25,7 +25,8 @@
           <option *ngFor="let menu of menus" [value]="menu">{{menu}}</option>
         </select>
       </div>
-      <div class="text-center"><button class="button btn-primary">Changer</button></div>
+      <div class="text-center"><button class="button btn-primary" (click)="changeFormule()">Changer</button></div>
+      <div class="text-danger">{{feedbackMessage}}</div>
     </div>
   </div>
 </ng-form>

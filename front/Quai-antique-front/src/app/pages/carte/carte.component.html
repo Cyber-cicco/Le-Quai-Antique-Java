@@ -8,7 +8,6 @@
     <ng-form class="form" [formGroup]="formCategorie">
       <h2>Catégorie du plat:</h2>
       <div class="input-container ic1">
-        <label for="categorie">Sélectionnez un choix : </label>
         <select id="categorie" formControlName="categorie" class="input" (ngModelChange)="changeCarouselPlats($event)">
           <option value="">Tous</option>
           <option value="ENTREE">Entrée</option>
@@ -50,7 +49,6 @@
     <ng-form class="form" [formGroup]="formMenus">
       <h2>Votre choix de menu :</h2>
       <div class="input-container ic1">
-        <label for="menus">Nom du menu désiré : </label>
         <select id="menus" [(ngModel)]="autoSelectMenu" formControlName="menus" class="input" (ngModelChange)="changeCarouselMenus($event)">
           <option *ngFor="let menu of menus" value="{{menu.nomMenu}}">{{menu.nomMenu}}</option>
         </select>

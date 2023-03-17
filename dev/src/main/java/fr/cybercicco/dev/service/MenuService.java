@@ -68,9 +68,9 @@ public class MenuService {
             throw new DuplicateEntryException("Le nom de la formule doit être unique");
         }
         formule.setNomFormule(formuleDTO.getNomFormule());
-        formule.setDescription(formule.getDescription());
+        formule.setDescription(formuleDTO.getDescription());
         formule.setPrix(formuleDTO.getPrix());
-        formule.setMenu(menuRepository.findByNomMenu(formuleDTO.getMenu()).orElseThrow(EntityNotFoundException::new));
+        formule.setMenu(menuRepository.findByNomMenu(formuleDTO.getMenu()).orElse(null));
         formule.getPlats().clear();
         formuleDTO.getPlats().forEach(plat-> formule.getPlats().add(platRepository.findByNomPlat(plat.getNomPlat()).orElseThrow(EntityNotFoundException::new)));
         formuleRepository.save(formule);
