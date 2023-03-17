@@ -3,11 +3,13 @@ package fr.cybercicco.dev.controller;
 import fr.cybercicco.dev.dto.FormuleDTO;
 import fr.cybercicco.dev.dto.MenuDTOPost;
 import fr.cybercicco.dev.dto.PlatDTO;
+import fr.cybercicco.dev.dto.RestaurantDTO;
 import fr.cybercicco.dev.repository.FormuleRepository;
 import fr.cybercicco.dev.repository.MenuRepository;
 import fr.cybercicco.dev.repository.PlatRepository;
 import fr.cybercicco.dev.service.MenuService;
 import fr.cybercicco.dev.service.PlatService;
+import fr.cybercicco.dev.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,8 @@ public class AdminPanelController {
     private final MenuService menuService;
 
     private final PlatService platService;
+
+    private final RestaurantService restaurantService;
 
     private final MenuRepository menuRepository;
 
@@ -61,6 +65,14 @@ public class AdminPanelController {
         Map<String, Object> response = new HashMap<>();
         response.put("message", "plat bien insérée en base");
         response.put("formule", platService.changeOnePlat(platDTO));
+        return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("restaurant")
+    public ResponseEntity<Map<String, Object>> changeRestaurant(@RequestBody RestaurantDTO restaurantDTO){
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "plat bien insérée en base");
+        response.put("formule", restaurantService.changeOneRestaurant(restaurantDTO));
         return ResponseEntity.ok(response);
     }
 

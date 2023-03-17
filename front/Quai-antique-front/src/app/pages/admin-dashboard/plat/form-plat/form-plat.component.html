@@ -6,14 +6,25 @@
       <div class="form-group col" >
         <label for="nom" class="me-1">Nom du plat : </label>
         <input type="text" autocomplete="off" name="nom" id="nom" class="form-control" formControlName="nom" placeholder="{{plat.nomPlat}}">
+        <div *ngIf="nom?.invalid" class="text-danger">Le nom n'est pas valide</div>
       </div>
       <div class="form-group col" >
         <label for="description" class="me-1">Description : </label>
         <textarea name="description" id="description" class="form-control" formControlName="description" placeholder="{{plat.description}}"></textarea>
+        <div *ngIf="description?.invalid" class="text-danger">La description n'est pas valide</div>
+      </div>
+      <div class="form-group col" >
+        <label for="type" class="me-1">Description : </label>
+        <select name="type" id="type" class="form-control" formControlName="type" [(ngModel)]="nrSelect">
+          <option value="ENTREE">Entrée</option>
+          <option value="PRINCIPAL">Plat principal</option>
+          <option value="DESSERT">Dessert</option>
+        </select>
       </div>
       <div class="form-group col" >
         <label for="prix" class="me-1">Prix : </label>
         <input type="number" name="prix" id="prix" class="form-control" formControlName="prix" placeholder="{{plat.prix}}">
+        <div *ngIf="prix?.invalid" class="text-danger">Le prix n'est pas valide</div>
       </div>
       <div class="form-group col" >
         <img [src]="URL + '/photos/' + plat.photo+'.png'" class="container-fluid m-2" alt="une erreur est survenue dans le chargement de la photo. Contactez un développeur">
@@ -25,7 +36,8 @@
           {{allergie.nomAllergie}}
         </label>
       </div>
-      <div class="text-center"><button class="button btn-primary">Changer</button></div>
+      <div class="text-center"><button class="button btn-primary" (click)="changePlat()">Changer</button></div>
+      <div class="text-danger">{{feedbackMessage}}</div>
     </div>
   </div>
 </ng-form>

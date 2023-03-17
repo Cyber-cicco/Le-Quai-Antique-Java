@@ -5,6 +5,7 @@ import fr.cybercicco.dev.dto.HoraireMapper;
 import fr.cybercicco.dev.dto.RestaurantDTO;
 import fr.cybercicco.dev.dto.RestaurantMapper;
 import fr.cybercicco.dev.entity.Restaurant;
+import fr.cybercicco.dev.exception.DuplicateEntryException;
 import fr.cybercicco.dev.repository.HoraireRepository;
 import fr.cybercicco.dev.repository.RestaurantRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -38,5 +40,17 @@ public class RestaurantService {
     public RestaurantDTO getRestaurant(String restaurant) {
         return restaurantMapper.toRestaurantDTO(
                 restaurantRepository.findByNomRestaurant(restaurant).orElseThrow(EntityNotFoundException::new));
+    }
+
+    public RestaurantDTO changeOneRestaurant(RestaurantDTO restaurantDTO) {
+        Restaurant restaurant = restaurantRepository.findByNomRestaurant(restaurantDTO.getNomRestaurant()).orElseThrow(EntityNotFoundException::new);
+        if(restaurantRepository.existsByNomRestaurant(restaurantDTO.getNomRestaurant())
+                &&
+                !Objects.equals(restaurantDTO.getNomRestaurant(), restaurant.getNomRestaurant())){
+            throw new DuplicateEntryException("Le nom de la formule doit être unique");
+        }
+        restaurant.setDescription(restaurantDTO.getDescription());
+        restaurant.setMaxConvivesAutorises(restaurantDTO.getMaxConvivesAutorises());
+        return restaurantMapper.toRestaurantDTO(restaurant);
     }
 }

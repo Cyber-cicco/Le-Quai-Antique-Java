@@ -36,6 +36,7 @@ public class PlatService {
         }
         plat.setNomPlat(platDTO.getNomPlat());
         plat.setTypePlat(platDTO.getTypePlat());
+        plat.setPrix(platDTO.getPrix());
         plat.setDescription(platDTO.getDescription());
         plat.getAllergenes().clear();
         platDTO.getAllergenes().forEach(val -> plat.getAllergenes().add(allergeneRepository.findByNomAllergene(val).orElseThrow(EntityNotFoundException::new)));
