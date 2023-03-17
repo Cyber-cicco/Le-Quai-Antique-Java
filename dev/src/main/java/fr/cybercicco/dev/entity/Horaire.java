@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalTime;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,10 +35,6 @@ public class Horaire {
     @NotNull
     private LocalTime fermetureDiner;
 
-    @ManyToMany
-    @JoinTable(name="restaurant_horaires",
-            joinColumns = @JoinColumn(name = "horaire_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
-    )
-    private List<Restaurant> restaurants;
+    @ManyToOne
+    private Restaurant restaurant;
 }

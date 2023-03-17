@@ -22,6 +22,7 @@ import { FormPlatComponent } from './admin-dashboard/plat/form-plat/form-plat.co
 import { FormMenuComponent } from './admin-dashboard/menu/form-menu/form-menu.component';
 import { FormFormuleComponent } from './admin-dashboard/formules/form-formule/form-formule.component';
 import {FormRestaurantComponent} from "./admin-dashboard/restaurant/form-restaurant/form-restaurant.component";
+import { FormHorairesComponent } from './admin-dashboard/restaurant/form-horaires/form-horaires.component';
 
 
 
@@ -43,6 +44,7 @@ import {FormRestaurantComponent} from "./admin-dashboard/restaurant/form-restaur
     FormMenuComponent,
     FormFormuleComponent,
     FormRestaurantComponent,
+    FormHorairesComponent,
   ],
     imports: [
         CommonModule,

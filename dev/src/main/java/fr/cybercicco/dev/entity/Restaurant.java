@@ -24,11 +24,7 @@ public class Restaurant {
     @NotBlank
     @Length(min = 2, max = 255)
     private String nomRestaurant;
-    @ManyToMany
-    @JoinTable(name="restaurant_horaires",
-            joinColumns = @JoinColumn(name = "restaurant_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "horaire_id", referencedColumnName = "id")
-    )
+    @OneToMany(mappedBy = "restaurant")
     private List<Horaire> horaires;
     @NotBlank
     @Length(min = 12, max = 2000)
