@@ -1,6 +1,7 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {Horaire} from "../../../../models/horaire";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {RestaurantService} from "../../../../providers/restaurant.service";
 
 @Component({
   selector: 'qa-form-horaires',
@@ -18,7 +19,7 @@ export class FormHorairesComponent implements OnChanges{
   feedbackMessage = "";
 
 
-  constructor(private fb:FormBuilder) {
+  constructor(private fb:FormBuilder, private restaurantService:RestaurantService) {
     this.formHoraires = this.fb.group({
       jour:['',[]],
       dejeunerDebut: [this.horaire.ouvertureDejeuner,[Validators.required]],
@@ -71,6 +72,23 @@ export class FormHorairesComponent implements OnChanges{
   }
 
   patchHoraire() {
-
+    if(this.formHoraires.valid){
+      this.horaire.ouvertDejeuner = this.ouvertDejeuner?.value;
+      this.horaire.ouvertureDejeuner = this.dejeunerDebut?.value;
+      this.horaire.fermetureDejeuner = this.dejeunerFin?.value;
+      this.horaire.ouvertDiner = this.ouvertDiner?.value;
+      this.horaire.ouvertureDiner = this.dinerDebut?.value;
+      this.horaire.fermetureDiner = this.dinerFin?.value;
+      this.restaurantService.patchHoraireAPI(this.horaire, localStorage.getItem("token")).subscribe({
+        next : value => {
+          this.feedbackMessage = value.message
+        },
+        error : ()=>{
+          this.feedbackMessage = "une erreur est survenue";
+        }
+      })
+    } else {
+      this.feedbackMessage = "formulaire invalide";
+    }
   }
 }

@@ -10,7 +10,7 @@ export class FooterComponent {
   message="";
 
   constructor(private restaurantService:RestaurantService) {
-    this.restaurantService.getHorairesCurrentDayAPI(this.restaurantService.jours[new Date().getDay()-1]).subscribe({
+    this.restaurantService.getHorairesCurrentDayAPI(this.restaurantService.jours[new Date().getDay()]).subscribe({
       next: value => {
         this.message = "Ouvert ce jour entre "
           + value.ouvertureDejeuner +

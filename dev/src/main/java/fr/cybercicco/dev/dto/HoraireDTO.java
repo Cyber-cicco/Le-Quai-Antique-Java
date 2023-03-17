@@ -16,6 +16,7 @@ import java.time.LocalTime;
 @Data
 public class HoraireDTO {
 
+    private Integer id;
     @NotBlank
     @Pattern(regexp = "(lundi)|(mardi)|(mercredi)|(jeudi)|(vendredi)|(samedi)|(dimanche)")
     private String jourSemaine;

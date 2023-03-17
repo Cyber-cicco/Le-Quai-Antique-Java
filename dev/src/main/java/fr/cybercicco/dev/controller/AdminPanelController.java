@@ -1,9 +1,6 @@
 package fr.cybercicco.dev.controller;
 
-import fr.cybercicco.dev.dto.FormuleDTO;
-import fr.cybercicco.dev.dto.MenuDTOPost;
-import fr.cybercicco.dev.dto.PlatDTO;
-import fr.cybercicco.dev.dto.RestaurantDTO;
+import fr.cybercicco.dev.dto.*;
 import fr.cybercicco.dev.repository.FormuleRepository;
 import fr.cybercicco.dev.repository.MenuRepository;
 import fr.cybercicco.dev.repository.PlatRepository;
@@ -73,6 +70,14 @@ public class AdminPanelController {
         Map<String, Object> response = new HashMap<>();
         response.put("message", "plat bien insérée en base");
         response.put("formule", restaurantService.changeOneRestaurant(restaurantDTO));
+        return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("horaire")
+    public ResponseEntity<Map<String, Object>> changeRestaurant(@RequestBody HoraireDTO horaireDTO){
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "plat bien insérée en base");
+        response.put("formule", restaurantService.changeOnehoraire(horaireDTO));
         return ResponseEntity.ok(response);
     }
 
