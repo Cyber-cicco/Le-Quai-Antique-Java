@@ -21,8 +21,10 @@ public class AdminPanelController {
     private final MenuRepository menuRepository;
 
     @GetMapping("dashboard")
-    public ResponseEntity<?> getAdminDashboard(){
-        return ResponseEntity.ok(new HashMap<>().put("message", "tu es authentifié admin"));
+    public ResponseEntity<Map<String, String>> getAdminDashboard(){
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "tu es authentifié admin");
+        return ResponseEntity.ok(response);
     }
 
     @PatchMapping("menu")

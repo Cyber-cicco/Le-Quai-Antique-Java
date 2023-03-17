@@ -11,15 +11,17 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class FormFormuleComponent implements OnChanges {
 
   @Input() formule : Partial<Formule> = {};
-  @Input() menus:string[] = [];
+  @Input() menus:string[] | undefined;
   @Input() plats : Plat[] = [];
   formChangementFormule: FormGroup;
   checkPlat: {checked:boolean, plat:Plat}[] = [];
+  nrSelect: string = "";
 
   constructor(private fb:FormBuilder) {
     this.formChangementFormule = this.fb.group({
       nom: ["", [Validators.required]],
       description: ["", [Validators.required]],
+      menu:["",[]]
     })
   }
 
@@ -30,6 +32,9 @@ export class FormFormuleComponent implements OnChanges {
           checked: (this.formule.plats.filter(value => value.nomPlat == plat.nomPlat).length > 0),
           plat:plat})
       }
+    }
+    if(this.menus != undefined){
+      this.nrSelect =  this.menus.filter(menu=> this.formule.menu == menu)[0];
     }
   }
 }
