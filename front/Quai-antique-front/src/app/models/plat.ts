@@ -1,13 +1,16 @@
 export interface Plat {
-   nomPlat:string
 
-   description:string;
+  id:number
 
-   typePlat:string;
+  nomPlat:string
 
-   prix:number;
+  description:string;
 
-   photo:string;
+  typePlat:string;
 
-   allergenes:string[];
+  prix:number;
+
+  photo:string;
+
+  allergenes:string[];
 }

@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -100,5 +101,11 @@ public class AdminPanelController {
         Map<String, Boolean> response = new HashMap<>();
         response.put("exists", platRepository.existsByNomPlat(nom));
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("photo")
+    public ResponseEntity<?> postNewPhoto(@RequestParam Integer id, @RequestParam("file") MultipartFile file){
+        log.info(file.getContentType());
+        return ResponseEntity.ok(file.getContentType());
     }
 }

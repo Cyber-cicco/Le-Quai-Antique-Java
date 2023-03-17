@@ -29,6 +29,9 @@
       <div class="form-group col" >
         <img [src]="URL + '/photos/' + plat.photo+'.png'" class="container-fluid m-2" alt="une erreur est survenue dans le chargement de la photo. Contactez un développeur">
       </div>
+      <div class="mb-3">
+        <input class="form-control" type="file" id="formFile" (change)="onFileSelected($event)">
+      </div>
       <legend>Précisez les allergenes (si présents) : </legend>
       <div *ngFor="let allergie of nomAllergies" class="form-check">
         <input class="form-check-input" type="checkbox" [ngModelOptions]="{standalone:true}" [(ngModel)]="allergie.checked" id="{{ allergie.nomAllergie }}" name="{{ allergie.nomAllergie }}">

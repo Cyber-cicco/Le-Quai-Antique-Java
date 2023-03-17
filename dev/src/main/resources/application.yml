@@ -8,3 +8,8 @@ spring:
     show-sql: false
     database: mysql
     generate-ddl: true
+
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
