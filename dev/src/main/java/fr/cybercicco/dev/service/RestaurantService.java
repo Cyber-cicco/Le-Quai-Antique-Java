@@ -36,6 +36,7 @@ public class RestaurantService {
     }
 
     public RestaurantDTO getRestaurant(String restaurant) {
-        return restaurantMapper.toRestaurantDTO(restaurantRepository.findByNomRestaurant(restaurant).orElseThrow(EntityNotFoundException::new));
+        return restaurantMapper.toRestaurantDTO(
+                restaurantRepository.findByNomRestaurant(restaurant).orElseThrow(EntityNotFoundException::new));
     }
 }

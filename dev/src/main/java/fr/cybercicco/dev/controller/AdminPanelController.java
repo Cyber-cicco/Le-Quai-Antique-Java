@@ -28,7 +28,7 @@ public class AdminPanelController {
 
     private final MenuRepository menuRepository;
 
-    private final FormuleRepository formuleRespository;
+    private final FormuleRepository formuleRepository;
 
     private final PlatRepository platRepository;
 
@@ -74,7 +74,7 @@ public class AdminPanelController {
     @GetMapping("formule/exists")
     public ResponseEntity<Map<String, Boolean>> checkIfNomFormuleExists(@RequestParam String nom){
         Map<String, Boolean> response = new HashMap<>();
-        response.put("exists", formuleRespository.existsByNomFormule(nom));
+        response.put("exists", formuleRepository.existsByNomFormule(nom));
         return ResponseEntity.ok(response);
     }
 

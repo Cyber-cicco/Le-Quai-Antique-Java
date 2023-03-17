@@ -3,6 +3,7 @@ import {Formule} from "../../../../models/formule";
 import {Plat} from "../../../../models/plat";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MenuService} from "../../../../providers/menu.service";
+import {FormuleNotTakenService} from "../../../../validators/formule-not-taken.service";
 
 @Component({
   selector: 'qa-form-formule',
@@ -22,9 +23,9 @@ export class FormFormuleComponent implements OnChanges {
   nrSelect: string = "";
   feedbackMessage = "";
 
-  constructor(private fb:FormBuilder, private menuService:MenuService) {
+  constructor(private fb:FormBuilder, private menuService:MenuService, private nomFormuleValidator:FormuleNotTakenService) {
     this.formChangementFormule = this.fb.group({
-      nom: ["", [Validators.minLength(2), Validators.maxLength(255)]],
+      nom: ["", [Validators.minLength(2), Validators.maxLength(255)], [this.nomFormuleValidator.validate.bind(this.nomFormuleValidator)]],
       description: ["", [Validators.minLength(12), Validators.maxLength(2000)]],
       menu:["",[]]
     })
@@ -42,6 +43,14 @@ export class FormFormuleComponent implements OnChanges {
     if(this.menus != undefined){
       this.nrSelect =  this.menus.filter(menu=> this.formule.menu == menu)[0];
     }
+  }
+
+  get nom(){
+    return this.formChangementFormule.get("nom")
+  }
+
+  get description(){
+    return this.formChangementFormule.get("description")
   }
 
   changeFormule() {

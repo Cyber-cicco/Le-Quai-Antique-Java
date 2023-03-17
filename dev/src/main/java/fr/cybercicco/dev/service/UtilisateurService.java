@@ -13,13 +13,11 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-@Validated
 public class UtilisateurService {
     private final UtilisateurRepository utilisateurRepository;
 
@@ -44,8 +42,8 @@ public class UtilisateurService {
         utilisateur.setEmail(utilisateurDTO.getEmail());
         utilisateur.getAllergenes().clear();
         utilisateurDTO.getAllergenes()
-                .forEach(e->{utilisateur.getAllergenes().add(allergeneRepository.findByNomAllergene(e).
-                        orElseThrow(EntityNotFoundException::new));});
+                .forEach(e-> utilisateur.getAllergenes().add(allergeneRepository.findByNomAllergene(e).
+                        orElseThrow(EntityNotFoundException::new)));
         utilisateur.setNbConvives(utilisateurDTO.getNbConvives());
         utilisateur.setNom(utilisateurDTO.getNom());
         utilisateur.setPrenom(utilisateurDTO.getPrenom());

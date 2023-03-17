@@ -41,7 +41,9 @@ public class ReservationService {
     private String[] weekdays = {"LUNDI","MARDI","MERCREDI", "JEUDI", "VENDREDI", "SAMEDI", "DIMANCHE"};
 
     public ReservationResponse getReservationsForCurrentDay(String date, boolean soir, String restaurant) {
-        LocalDate ldDebut = (date.charAt(4)!='-')? LocalDate.now() : LocalDate.parse(date.trim(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate ldDebut = (date.charAt(4)!='-')
+                ?LocalDate.now()
+                : LocalDate.parse(date.trim(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         return getReservationFromCurrentDate(ldDebut, soir, restaurant);
     }
 
@@ -58,8 +60,14 @@ public class ReservationService {
         List<Horaire> horaireForWeekDayList = horaireRepository.getHoraireForCurrentDay(weekDay, restaurant);
         if(horaireForWeekDayList.isEmpty()) throw new UndefinedHorairesForWeekDayException();
         Horaire horaireForWeekDay = horaireForWeekDayList.get(0);
-        LocalDateTime ldtDebut = currentDate.atTime((soir)? horaireForWeekDay.getOuvertureDiner() : horaireForWeekDay.getOuvertureDejeuner());
-        LocalDateTime ldtFin = currentDate.atTime((soir)? horaireForWeekDay.getFermetureDiner() : horaireForWeekDay.getFermetureDejeuner());
+        LocalDateTime ldtDebut = currentDate.atTime(
+                (soir)
+                        ? horaireForWeekDay.getOuvertureDiner()
+                        : horaireForWeekDay.getOuvertureDejeuner());
+        LocalDateTime ldtFin = currentDate.atTime(
+                (soir)
+                        ? horaireForWeekDay.getFermetureDiner()
+                        : horaireForWeekDay.getFermetureDejeuner());
         return new LocalDateTime[]{ldtDebut, ldtFin};
     }
 
@@ -67,15 +75,27 @@ public class ReservationService {
     public ReservationResponse saveReservations(ReservationDTO reservationDTO, String authorization) {
         String email = authorization!=null ? jwtService.extractEmail(authorization.substring(7)):null;
         if(!isDateValid(reservationDTO)) throw new InvalidReservationException("Réservation non valide");
-        LocalDateTime[] rangeForCurrentDate = getHoraireRangeInCurrentDate(reservationDTO.getDateReservation().toLocalDate(), reservationDTO.isSoir(), reservationDTO.getRestaurant());
-        List<Place> places = placeRepository.findAllFreePlaces(rangeForCurrentDate[0], rangeForCurrentDate[1], reservationDTO.getRestaurant());
+        LocalDateTime[] rangeForCurrentDate = getHoraireRangeInCurrentDate(
+                reservationDTO.getDateReservation().toLocalDate(),
+                reservationDTO.isSoir(),
+                reservationDTO.getRestaurant());
+        List<Place> places = placeRepository.findAllFreePlaces(
+                rangeForCurrentDate[0],
+                rangeForCurrentDate[1],
+                reservationDTO.getRestaurant());
         List<Place> chosenPlaces = findBestPlaceToReserve(places, reservationDTO.getNbPlaces());
         chosenPlaces.forEach((var)-> saveOneReservation(reservationDTO, var, email));
-        return getReservationFromCurrentDate(reservationDTO.getDateReservation().toLocalDate(), reservationDTO.isSoir(), reservationDTO.getRestaurant());
+        return getReservationFromCurrentDate(
+                reservationDTO.getDateReservation().toLocalDate(),
+                reservationDTO.isSoir(),
+                reservationDTO.getRestaurant());
     }
 
     private boolean isDateValid(ReservationDTO reservationDTO) {
-        LocalDateTime[] range = getHoraireRangeInCurrentDate(reservationDTO.getDateReservation().toLocalDate(), reservationDTO.isSoir(), reservationDTO.getRestaurant());
+        LocalDateTime[] range = getHoraireRangeInCurrentDate(
+                reservationDTO.getDateReservation().toLocalDate(),
+                reservationDTO.isSoir(),
+                reservationDTO.getRestaurant());
         LocalDateTime upperLimit = range[1].minusHours(1);
         int placesRestantes =  placeRepository.findAllFreePlaces(range[0], range[1], reservationDTO.getRestaurant()).stream()
                 .map(place -> place.getNbPlaces().intValueExact())
@@ -114,11 +134,19 @@ public class ReservationService {
                         List<Place> placesForOneRow = new ArrayList<>();
                         placesForOneRow.add(places.get(i));
                         int k = 0;
-                        while(placesForOneRow.stream().map(val-> val.getNbPlaces().intValueExact()).mapToInt(Integer::intValue).sum() < nbPlaces+1 && j+k < places.size()){
+                        while(placesForOneRow.stream()
+                                .map(val-> val.getNbPlaces().intValueExact())
+                                .mapToInt(Integer::intValue)
+                                .sum() < nbPlaces+1
+                                &&
+                                j+k < places.size()){
                             placesForOneRow.add(places.get(j+k));
                             k++;
                         }
-                        sizeToPlaces.put(placesForOneRow.stream().map(val-> val.getNbPlaces().intValueExact()).mapToInt(Integer::intValue).sum()*100 +placesForOneRow.size(), placesForOneRow);
+                        sizeToPlaces.put(placesForOneRow.stream()
+                                .map(val-> val.getNbPlaces().intValueExact()).mapToInt(Integer::intValue)
+                                .sum()*100 +placesForOneRow.size(),
+                                placesForOneRow);
                     }
                 }
             } else {

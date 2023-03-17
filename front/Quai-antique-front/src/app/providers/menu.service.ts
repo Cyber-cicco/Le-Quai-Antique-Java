@@ -21,6 +21,7 @@ export class MenuService {
   private URL_API_NOM_MENU:string
 
   private URL_API_PATCH_FORMULE:string
+  private URL_API_CHECK_FORMULE: string;
 
   constructor(private http:HttpClient, private env:EnvService) {
     this.URL_API_MENUS = this.env.SERVER_URL + "/menus/list";
@@ -29,6 +30,7 @@ export class MenuService {
     this.URL_API_CHECK_MENU = this.env.SERVER_URL + "/admin/menu/exists";
     this.URL_API_NOM_MENU = this.env.SERVER_URL + "/menus/list_nom";
     this.URL_API_PATCH_FORMULE = this.env.SERVER_URL + "/admin/formule";
+    this.URL_API_CHECK_FORMULE = this.env.SERVER_URL + "/admin/formule/exists"
   }
 
 
@@ -60,5 +62,11 @@ export class MenuService {
     return this.http.patch<{message:string, formule:Formule}>(this.URL_API_PATCH_FORMULE + "?nom=" + token, formule,{headers:{
         "Authorization": "Bearer "+token,
         "Content-type": "application/json"}});
+  }
+
+  isNomFormuleTaken(value: string, token: string | null) {
+    return this.http.get<{exists:boolean}>(this.URL_API_CHECK_FORMULE+"?nom="+value, {headers:{
+        "Authorization": "Bearer "+token,
+        "Content-type": "application/json"}})
   }
 }
