@@ -73,6 +73,7 @@ public class ReservationService {
 
     @Transactional
     public ReservationResponse saveReservations(ReservationDTO reservationDTO, String authorization) {
+        reservationDTO.setNbPlaces(reservationDTO.getNbPlaces()+1);
         String email = authorization!=null ? jwtService.extractEmail(authorization.substring(7)):null;
         if(!isDateValid(reservationDTO)) throw new InvalidReservationException("Réservation non valide");
         LocalDateTime[] rangeForCurrentDate = getHoraireRangeInCurrentDate(
@@ -103,7 +104,7 @@ public class ReservationService {
                 .sum();
         return (!reservationDTO.getDateReservation().isBefore(range[0])
                 && !reservationDTO.getDateReservation().isAfter(upperLimit))
-                && ((reservationDTO.getNbPlaces()+1 < placesRestantes));
+                && ((reservationDTO.getNbPlaces() < placesRestantes));
     }
 
     /**
@@ -128,7 +129,7 @@ public class ReservationService {
         Map<Integer, List<Place>> sizeToPlaces = new HashMap<>();
 
         for(int i = 0; i < places.size(); i++){
-            if(places.get(i).getNbPlaces().intValueExact() < nbPlaces+1){
+            if(places.get(i).getNbPlaces().intValueExact() < nbPlaces){
                 for(int j = 0; j < places.size(); j++){
                     if(i != j){
                         List<Place> placesForOneRow = new ArrayList<>();
@@ -137,7 +138,7 @@ public class ReservationService {
                         while(placesForOneRow.stream()
                                 .map(val-> val.getNbPlaces().intValueExact())
                                 .mapToInt(Integer::intValue)
-                                .sum() < nbPlaces+1
+                                .sum() < nbPlaces
                                 &&
                                 j+k < places.size()){
                             placesForOneRow.add(places.get(j+k));

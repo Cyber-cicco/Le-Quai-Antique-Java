@@ -439,21 +439,7 @@ div.description {
   }
 }
 
-div.carousel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  width: 50%;
-  img{
-    min-width: 250px;
-  }
-  @media screen and (max-width : 1000px) {
-    width: 100%;
-  }
 
-  //gonna be filled with the carousel animation
-}
 div.photoHandler {
   display: flex;
   width: 100%;
@@ -515,7 +501,7 @@ footer{
   margin: 20px;
   display: flex;
   align-items: center;
-  width: 70%;
+  width: 50%;
   justify-content: center;
   @media screen and (max-width: 800px){
     width: 90%;
