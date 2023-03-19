@@ -7,16 +7,25 @@ import fr.cybercicco.dev.exception.DuplicateEntryException;
 import fr.cybercicco.dev.repository.AllergeneRepository;
 import fr.cybercicco.dev.repository.PlatRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
 @Validated
+@Slf4j
 public class PlatService {
 
     private final PlatRepository platRepository;
@@ -46,5 +55,13 @@ public class PlatService {
 
     public Object changePhoto(String photo){
         return null;
+    }
+
+    @Transactional
+    public void uploadPhoto(Integer id, MultipartFile file) throws IOException {
+        Plat plat = platRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        plat.setPhoto(file.getOriginalFilename());
+        file.transferTo(new File("/home/hijokaidan/Documents/Studi/Projets/ECF/Le-Quai-Antique-Java/dev/images/"+file.getOriginalFilename()));
+        platRepository.save(plat);
     }
 }

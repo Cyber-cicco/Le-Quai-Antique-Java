@@ -27,7 +27,7 @@
         <div *ngIf="prix?.invalid" class="text-danger">Le prix n'est pas valide</div>
       </div>
       <div class="form-group col" >
-        <img [src]="URL + '/photos/' + plat.photo+'.png'" class="container-fluid m-2" alt="une erreur est survenue dans le chargement de la photo. Contactez un développeur">
+        <img [src]="URL + '/photos/' + plat.photo" class="container-fluid m-2" alt="une erreur est survenue dans le chargement de la photo. Contactez un développeur">
       </div>
       <div class="mb-3">
         <input class="form-control" type="file" id="formFile" (change)="onFileSelected($event)">

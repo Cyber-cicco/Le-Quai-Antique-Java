@@ -5,6 +5,7 @@ import fr.cybercicco.dev.repository.FormuleRepository;
 import fr.cybercicco.dev.repository.MenuRepository;
 import fr.cybercicco.dev.repository.PlatRepository;
 import fr.cybercicco.dev.service.MenuService;
+import fr.cybercicco.dev.service.PhotoService;
 import fr.cybercicco.dev.service.PlatService;
 import fr.cybercicco.dev.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,6 +35,8 @@ public class AdminPanelController {
     private final FormuleRepository formuleRepository;
 
     private final PlatRepository platRepository;
+
+    private final PhotoService photoService;
 
     @GetMapping("dashboard")
     public ResponseEntity<Map<String, String>> getAdminDashboard(){
@@ -77,7 +81,7 @@ public class AdminPanelController {
     @PatchMapping("horaire")
     public ResponseEntity<Map<String, Object>> changeRestaurant(@RequestBody HoraireDTO horaireDTO){
         Map<String, Object> response = new HashMap<>();
-        response.put("message", "plat bien insérée en base");
+        response.put("message", "horaire bien insérée en base");
         response.put("formule", restaurantService.changeOnehoraire(horaireDTO));
         return ResponseEntity.ok(response);
     }
@@ -104,8 +108,8 @@ public class AdminPanelController {
     }
 
     @PostMapping("photo")
-    public ResponseEntity<?> postNewPhoto(@RequestParam Integer id, @RequestParam("file") MultipartFile file){
-        log.info(file.getContentType());
-        return ResponseEntity.ok(file.getContentType());
+    public ResponseEntity<?> postNewPhoto(@RequestParam Integer id, @RequestParam("file") MultipartFile file) throws IOException {
+        platService.uploadPhoto(id, file);
+        return ResponseEntity.ok(null);
     }
 }

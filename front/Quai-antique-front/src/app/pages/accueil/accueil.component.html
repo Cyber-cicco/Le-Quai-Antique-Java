@@ -8,7 +8,7 @@
     <ngb-carousel *ngIf="plats" class="carousel-accueil">
       <ng-template *ngFor="let image of plats" ngbSlide>
         <div class="picsum-img-wrapper" (mouseenter)="showCaption()" (mouseleave)="hideCaption()">
-          <img src="{{URL_API + '/photos/' + image.photo+'.png'}}" alt="c'est un plat" class="img-carousel" />
+          <img src="{{URL_API + '/photos/' + image.photo}}" alt="c'est un plat" class="img-carousel" />
         </div>
         <div class="carousel-caption" [hidden]="captionHidden">
           <h3>{{image.nomPlat}}</h3>
