@@ -36,8 +36,6 @@ public class AdminPanelController {
 
     private final PlatRepository platRepository;
 
-    private final PhotoService photoService;
-
     @GetMapping("dashboard")
     public ResponseEntity<Map<String, String>> getAdminDashboard(){
         Map<String, String> response = new HashMap<>();
@@ -66,7 +64,7 @@ public class AdminPanelController {
     public ResponseEntity<Map<String, Object>> changePlat(@RequestBody PlatDTO platDTO){
         Map<String, Object> response = new HashMap<>();
         response.put("message", "plat bien insérée en base");
-        response.put("formule", platService.changeOnePlat(platDTO));
+        response.put("plat", platService.changeOnePlat(platDTO));
         return ResponseEntity.ok(response);
     }
 
@@ -108,8 +106,9 @@ public class AdminPanelController {
     }
 
     @PostMapping("photo")
-    public ResponseEntity<?> postNewPhoto(@RequestParam Integer id, @RequestParam("file") MultipartFile file) throws IOException {
-        platService.uploadPhoto(id, file);
-        return ResponseEntity.ok(null);
+    public ResponseEntity<Map<String, String>> postNewPhoto(@RequestParam Integer id, @RequestParam("file") MultipartFile file) throws IOException {
+        Map<String, String> response = new HashMap<>();
+        response.put("photo", platService.uploadPhoto(id, file));
+        return ResponseEntity.ok(response);
     }
 }

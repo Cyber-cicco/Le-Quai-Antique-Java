@@ -64,7 +64,8 @@ export class FormFormuleComponent implements OnChanges {
       this.formule.plats = this.checkPlat.filter(plat => plat.checked).map(plat => plat.plat);
       this.menuService.patchFormuleAPI(this.formule, localStorage.getItem("token")).subscribe({
         next : value => {
-          this.feedbackMessage = value.message
+          this.formule = value.formule;
+          this.feedbackMessage = value.message;
         },
         error : ()=>{
           this.feedbackMessage = "une erreur est survenue";

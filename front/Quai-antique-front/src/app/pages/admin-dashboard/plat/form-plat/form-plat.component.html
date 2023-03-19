@@ -14,7 +14,7 @@
         <div *ngIf="description?.invalid" class="text-danger">La description n'est pas valide</div>
       </div>
       <div class="form-group col" >
-        <label for="type" class="me-1">Description : </label>
+        <label for="type" class="me-1">Type de plat : </label>
         <select name="type" id="type" class="form-control" formControlName="type" [(ngModel)]="nrSelect">
           <option value="ENTREE">Entrée</option>
           <option value="PRINCIPAL">Plat principal</option>

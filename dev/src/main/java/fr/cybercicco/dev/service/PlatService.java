@@ -16,9 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 
@@ -53,15 +50,12 @@ public class PlatService {
         return platMapper.toPlatDto(plat);
     }
 
-    public Object changePhoto(String photo){
-        return null;
-    }
-
     @Transactional
-    public void uploadPhoto(Integer id, MultipartFile file) throws IOException {
+    public String uploadPhoto(Integer id, MultipartFile file) throws IOException {
         Plat plat = platRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         plat.setPhoto(file.getOriginalFilename());
         file.transferTo(new File("/home/hijokaidan/Documents/Studi/Projets/ECF/Le-Quai-Antique-Java/dev/images/"+file.getOriginalFilename()));
         platRepository.save(plat);
+        return plat.getPhoto();
     }
 }

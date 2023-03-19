@@ -87,13 +87,16 @@ export class FormPlatComponent implements OnChanges{
       if(newType != "") this.plat.typePlat = newType;
       if(newNomPlat != "") this.plat.nomPlat = newNomPlat;
       if(newDescription != "") this.plat.description = newDescription;
-      if(newPrix != "") this.plat.prix = newPrix;
+      if(newPrix != undefined) this.plat.prix = newPrix;
       this.plat.allergenes = this.nomAllergies.filter(value => value.checked).map(value => value.nomAllergie);
 
       this.platService.patchPlatAPI(this.plat, token).subscribe({
         next : value => {
+          if (this.formData.get("file")) this.platService.postPhotoAPI(this.formData, this.plat.id, token).subscribe(value => {
+            this.plat.photo = value.photo;
+          });
+          this.plat = value.plat;
           this.feedbackMessage = value.message;
-          this.platService.postPhotoAPI(this.formData, this.plat.id, token).subscribe();
         },
         error : ()=>{
           this.feedbackMessage = "une erreur est survenue";

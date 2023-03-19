@@ -19,7 +19,7 @@
     <ngb-carousel *ngIf="plats" class="carousel-accueil">
       <ng-template *ngFor="let plat of platsToDisplay" ngbSlide>
         <div class="picsum-img-wrapper">
-          <img src="{{URL_API + '/photos/' + plat.photo+'.png'}}" alt="c'est un plat" class="img-carousel" />
+          <img src="{{URL_API + '/photos/' + plat.photo}}" alt="c'est un plat" class="img-carousel" />
         </div>
         <div class="carousel-caption">
           <h3>{{plat.nomPlat}}</h3>
@@ -72,7 +72,7 @@
     <ngb-carousel *ngIf="plats" class="carousel-accueil">
       <ng-template *ngFor="let image of platsOfMenu" ngbSlide>
         <div class="picsum-img-wrapper">
-          <img src="{{URL_API + '/photos/' + image+'.png'}}" alt="c'est un plat" class="img-carousel" />
+          <img src="{{URL_API + '/photos/' + image}}" alt="c'est un plat" class="img-carousel" />
         </div>
       </ng-template>
     </ngb-carousel>

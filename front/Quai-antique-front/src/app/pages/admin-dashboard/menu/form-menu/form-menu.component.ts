@@ -61,6 +61,7 @@ export class FormMenuComponent implements OnChanges {
       this.menuService.patchMenuAPI(this.menuPost, localStorage.getItem("token")).subscribe({
         next : value => {
           this.feedbackMessage = value.message
+          this.menu = value.menu;
         },
         error : ()=>{
           this.feedbackMessage = "une erreur est survenue";
