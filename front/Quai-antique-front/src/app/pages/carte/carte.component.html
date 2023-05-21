@@ -56,6 +56,7 @@
     </ng-form>
     <div class="description">
       <div class="slogan">{{menu.nomMenu?.toUpperCase()}}</div>
+      <p>{{menu.description}}</p>
       <div *ngIf="menu != undefined">
         <div *ngFor="let formule of menu.formules">
           <h3> - {{formule.nomFormule}} - </h3>

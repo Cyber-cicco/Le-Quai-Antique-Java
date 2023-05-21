@@ -22,9 +22,9 @@ INSERT INTO place(nb_places, restaurant_id) VALUES
 (2,1);
 
 INSERT INTO utilisateur(email, is_admin, mdp, nb_convives, nom, prenom) VALUES
-('vincent@vincent.fr', false, '$2a$10$n4ccMU75RXqGzGtnb0lEUuh9bgOMuogvzVv3XbDO6FssfOGd', 0, 'Vincent', 'Vincent'),
-('abelcoli@outlook.fr', true, '$2a$10$n4ccMU75RXqGzGtnb0lEUuh9bgOMuogvzVv3XbDO6FssfOGd', 0, 'Abel', 'Abel'),
-('vincent@antoine.fr', false, '$2a$10$n4ccMU75RXqGzGtnb0lEUuh9bgOMuogvzVv3XbDO6FssfOGd', 0, 'Toine', 'Vincent');
+('vincent@vincent.fr', false, '$2a$10$41Ekuu/63Kwt.jWCMD2OY.FL0/kHYx3.wA4t2P7vgXW/dBcaNIf1y', 0, 'Vincent', 'Vincent'),
+('abelcoli@outlook.fr', true, '$2a$10$41Ekuu/63Kwt.jWCMD2OY.FL0/kHYx3.wA4t2P7vgXW/dBcaNIf1y', 0, 'Abel', 'Abel'),
+('vincent@antoine.fr', false, '$2a$10$41Ekuu/63Kwt.jWCMD2OY.FL0/kHYx3.wA4t2P7vgXW/dBcaNIf1y', 0, 'Toine', 'Vincent');
 
 INSERT INTO allergene(nom_allergene) VALUES
                                          ('Gluten'),

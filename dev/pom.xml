@@ -8,14 +8,15 @@
         <version>3.0.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+    <packaging>jar</packaging>
     <groupId>fr.cyber-cicco</groupId>
     <artifactId>dev</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>dev</name>
     <description>dev</description>
     <properties>
-        <java.version.source>19</java.version.source>
-        <java.version.target>19</java.version.target>
+        <java.version.source>17</java.version.source>
+        <java.version.target>17</java.version.target>
         <org.mapstruct.version>1.5.2.Final</org.mapstruct.version>
         <jjwt.version>0.11.5</jjwt.version>
     </properties>
@@ -71,17 +72,17 @@
             <artifactId>jjwt-api</artifactId>
             <version>${jjwt.version}</version>
         </dependency>
-
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-impl</artifactId>
             <version>${jjwt.version}</version>
+            <scope>runtime</scope>
         </dependency>
-
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId>
+            <artifactId>jjwt-jackson</artifactId> <!-- or jjwt-gson if Gson is preferred -->
             <version>${jjwt.version}</version>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>
@@ -137,6 +138,23 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>spring-boot</classifier>
+                            <mainClass>
+                                fr.cybercicco.dev.DevApplication
+                            </mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

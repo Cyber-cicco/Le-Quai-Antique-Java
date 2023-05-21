@@ -71,7 +71,7 @@ public class AdminPanelController {
     @PatchMapping("restaurant")
     public ResponseEntity<Map<String, Object>> changeRestaurant(@RequestBody RestaurantDTO restaurantDTO){
         Map<String, Object> response = new HashMap<>();
-        response.put("message", "plat bien insérée en base");
+        response.put("message", "informations du restaurant bien insérées en base");
         response.put("formule", restaurantService.changeOneRestaurant(restaurantDTO));
         return ResponseEntity.ok(response);
     }

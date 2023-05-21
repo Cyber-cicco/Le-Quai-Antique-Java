@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpStatusCode} from "@angular/common/http";
 import {Horaire} from "../models/horaire";
 import {EnvService} from "./env.service";
 import {Restaurant} from "../models/restaurant";

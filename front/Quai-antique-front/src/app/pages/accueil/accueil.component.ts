@@ -5,6 +5,7 @@ import {PlatService} from "../../providers/plat.service";
 import {RestaurantService} from "../../providers/restaurant.service";
 import {Horaire} from "../../models/horaire";
 import {Router} from "@angular/router";
+import {Restaurant} from "../../models/restaurant";
 
 @Component({
   selector: 'qa-accueil',
@@ -19,9 +20,9 @@ export class AccueilComponent  implements OnInit{
   horaires:Horaire[] = [];
   currentPlatIdx = 0;
   captionHidden=true;
+  restaurant: Partial<Restaurant> = {};
   constructor(private env:EnvService, private platsSrv:PlatService, private restaurantService:RestaurantService, private router:Router) {
     this.URL_API = env.SERVER_URL;
-
   }
 
   showCaption(){
@@ -45,6 +46,9 @@ export class AccueilComponent  implements OnInit{
     })
     this.restaurantService.getHorairesAPI().subscribe(value => {
       this.horaires = value;
+    })
+    this.restaurantService.getRestaurant().subscribe(value => {
+      this.restaurant = value;
     })
   }
 
