@@ -15,12 +15,12 @@ const routes: Routes = [
   {path: 'accueil', component: AccueilComponent},
   {path: 'carte', component: CarteComponent},
   {path: 'reserver', component: ReserverComponent},
-    {path: '9fc561fbf4c7028b2c2ab3662b2602e78658eecba8a6bfacf50c3de57f66202a', component: AdminDashboardComponent},
+  {path: '9fc561fbf4c7028b2c2ab3662b2602e78658eecba8a6bfacf50c3de57f66202a', component: AdminDashboardComponent},
   {path: '', component: AccueilComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash:true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

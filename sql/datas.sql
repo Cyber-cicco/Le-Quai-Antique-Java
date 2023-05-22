@@ -69,15 +69,15 @@ INSERT INTO formule(description, nom_formule, prix, menu_id) VALUES
 ('une bonne formule', 'formule9', 10, 4);
 
 INSERT INTO plat(description, nom_plat, type_plat, prix, photo) VALUES
-('un bon petit plat', 'plat1', 'ENTREE', 5, 'plat1'),
-('un bon petit plat', 'plat2', 'ENTREE', 5, 'plat2'),
-('un bon petit plat', 'plat3', 'ENTREE', 5, 'plat3'),
-('un bon petit plat', 'plat4', 'PRINCIPAL', 5, 'plat4'),
-('un bon petit plat', 'plat5', 'PRINCIPAL', 5, 'plat5'),
-('un bon petit plat', 'plat6', 'PRINCIPAL', 5, 'plat5'),
-('un bon petit plat', 'plat7', 'DESSERT', 5, 'plat6'),
-('un bon petit plat', 'plat8', 'DESSERT', 5, 'plat7'),
-('un bon petit plat', 'plat9', 'DESSERT', 5, 'plat8');
+('un bon petit plat', 'plat1', 'ENTREE', 5, 'plat1.png'),
+('un bon petit plat', 'plat2', 'ENTREE', 5, 'plat2.png'),
+('un bon petit plat', 'plat3', 'ENTREE', 5, 'plat3.png'),
+('un bon petit plat', 'plat4', 'PRINCIPAL', 5, 'plat4.png'),
+('un bon petit plat', 'plat5', 'PRINCIPAL', 5, 'plat5.png'),
+('un bon petit plat', 'plat6', 'PRINCIPAL', 5, 'plat5.png'),
+('un bon petit plat', 'plat7', 'DESSERT', 5, 'plat6.png'),
+('un bon petit plat', 'plat8', 'DESSERT', 5, 'plat7.png'),
+('un bon petit plat', 'plat9', 'DESSERT', 5, 'plat8.png');
 
 INSERT INTO composition_formule(plat_id, formule_id) VALUES
                                                          (1, 1),
