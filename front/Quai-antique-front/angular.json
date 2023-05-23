@@ -10,7 +10,7 @@
           "style": "scss"
         }
       },
-      "root": "",
+      "root": "/Le-Quai-Antique-Java",
       "sourceRoot": "src",
       "prefix": "qa",
       "architect": {
