@@ -8,7 +8,7 @@ import {DataReservation} from "../models/data-reservation";
 })
 export class EnvService {
 
-  SERVER_URL = "http://35.180.137.15:8080/"
+  SERVER_URL = "http://35.180.231.223:8080/"
   dataModalReservation = new BehaviorSubject<DataReservation | undefined>(undefined);
   constructor() { }
 }
